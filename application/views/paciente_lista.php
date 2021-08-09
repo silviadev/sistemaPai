@@ -8,8 +8,7 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Pacientes</li>
+            <li class="breadcrumb-item"><a href="<?php echo base_url() ?>usuario" class="nav-link">Inicio</a></li>
           </ol>
         </div>
       </div>
@@ -32,7 +31,7 @@
               echo form_open_multipart('paciente/agregar');
               ?>
               <div class="form-group">
-                <button type="submit" class="btn btn-success btn-xs">Agregar Paciente</button>
+                <button type="submit" class="btn btn-secondary btn-xs">Agregar Paciente</button>
               </div>
               <?php
               echo form_close();

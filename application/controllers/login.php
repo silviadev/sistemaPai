@@ -19,8 +19,8 @@ class Login extends CI_Controller
     public function validarUsuario()
     {
         $nombreUsuario = $_POST['nombreUsuario'];
-        //$contrasena = md5($_POST['contrasena']);
-        $contrasena = $_POST['contrasena'];
+        $contrasena = md5($_POST['contrasena']);
+        //$contrasena = $_POST['contrasena'];
 
         $consulta = $this->usuario_model->validar($nombreUsuario, $contrasena);
         if ($consulta->num_rows() > 0) {

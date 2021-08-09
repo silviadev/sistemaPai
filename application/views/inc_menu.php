@@ -6,10 +6,7 @@
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="../../index3.html" class="nav-link">Home</a>
-    </li>
-    <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link">Contact</a>
+      <a href="<?php echo base_url() ?>usuario" class="nav-link">Inicio</a>
     </li>
   </ul>
 
@@ -53,13 +50,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?php echo base_url() ?>index.php/usuario/modificarDatosPersonales" class="nav-link">
+              <a href="<?php echo base_url() ?>usuario/modificarDatosPersonales" class="nav-link">
                 <i class="fas fa-user nav-icon"></i>
                 <p>Cambiar Datos</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url() ?>index.php/login/logout" class="nav-link">
+              <a href="<?php echo base_url() ?>login/logout" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p>Cerrar Session</p>
               </a>
@@ -72,7 +69,7 @@
         </li>
         <li class="nav-header">Administrar</li>
         <li class="nav-item">
-          <a href="<?php echo base_url() ?>index.php/usuario" class="nav-link">
+          <a href="<?php echo base_url() ?>usuario" class="nav-link">
             <i class="nav-icon fas fa-users"></i>
             <p>
               Usuarios
@@ -80,7 +77,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url() ?>index.php/paciente" class="nav-link">
+          <a href="<?php echo base_url() ?>paciente" class="nav-link">
             <i class="nav-icon fas fa-child"></i>
             <p>
               Pacientes

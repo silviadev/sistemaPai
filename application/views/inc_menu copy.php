@@ -157,8 +157,8 @@
               ?>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="<?php echo base_url() ?>index.php/usuario/modificarDatosPersonales">Cambiar Datos Personales</a>
-              <a class="dropdown-item" href="<?php echo base_url() ?>index.php/login/logout">Cerrar Session</a>
+              <a class="dropdown-item" href="<?php echo base_url() ?>usuario/modificarDatosPersonales">Cambiar Datos Personales</a>
+              <a class="dropdown-item" href="<?php echo base_url() ?>login/logout">Cerrar Session</a>
             </div>
           </li>
         </ul>

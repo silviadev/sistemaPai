@@ -22,7 +22,14 @@ class Usuario extends CI_Controller
 
     public function agregar()
     {
+        $data['tipoUsuario']  = $this->session->userdata('tipoUsuario');
+        $data['nombre']  = $this->session->userdata('nombre');
+        $data['primerApellido']  = $this->session->userdata('primerApellido');
+        $data['segundoApellido']  = $this->session->userdata('segundoApellido');
+        
+
         $this->load->view('inc_header');
+        $this->load->view('inc_menu', $data);
         $this->load->view('usuario/usuario_agregar');
         $this->load->view('inc_footer');
     }
@@ -50,7 +57,15 @@ class Usuario extends CI_Controller
     {
         $idUsuario = $_POST['idUsuario'];
         $data['infoUsuario'] = $this->usuario_model->recuperarUsuario($idUsuario);
+
+        $data['tipoUsuario']  = $this->session->userdata('tipoUsuario');
+        $data['nombre']  = $this->session->userdata('nombre');
+        $data['primerApellido']  = $this->session->userdata('primerApellido');
+        $data['segundoApellido']  = $this->session->userdata('segundoApellido');
+        
+
         $this->load->view('inc_header');
+        $this->load->view('inc_menu', $data);
         $this->load->view('usuario/usuario_modificar', $data);
         $this->load->view('inc_footer');
     }
@@ -84,11 +99,19 @@ class Usuario extends CI_Controller
 
     public function buscarPorNombre()
     {
+         //datos de session
+         $data['tipoUsuario']  = $this->session->userdata('tipoUsuario');
+         $data['nombre']  = $this->session->userdata('nombre');
+         $data['primerApellido']  = $this->session->userdata('primerApellido');
+         $data['segundoApellido']  = $this->session->userdata('segundoApellido');
+
         $nombre = $_POST['nombre'];
+
 
         if (isset($nombre) && !empty($nombre) && !is_null($nombre)) {
             $data['infoUsuario'] = $this->usuario_model->buscarPorNombre($nombre);
             $this->load->view('inc_header');
+            $this->load->view('inc_menu', $data);
             $this->load->view('paciente_agregar', $data);
             $this->load->view('inc_footer');
         }
@@ -125,5 +148,15 @@ class Usuario extends CI_Controller
         $this->usuario_model->modificarUsuario($idUsuario, $data);
         redirect('usuario/index', 'refresh');
 
+    }
+
+    public function obtenerDatosSession()
+    {
+        $data['tipoUsuario']  = $this->session->userdata('tipoUsuario');
+        $data['nombre']  = $this->session->userdata('nombre');
+        $data['primerApellido']  = $this->session->userdata('primerApellido');
+        $data['segundoApellido']  = $this->session->userdata('segundoApellido');
+        
+        return $data;
     }
 }

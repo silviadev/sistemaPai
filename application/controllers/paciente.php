@@ -6,6 +6,7 @@ class Paciente extends CI_Controller
 
     public function index()
     {
+
         $lista = $this->paciente_model->lista();
         $data['paciente'] = $lista;
 
@@ -25,7 +26,14 @@ class Paciente extends CI_Controller
     {
         $idPaciente = $_POST['idPaciente'];
         $data['infoPaciente'] = $this->paciente_model->recuperarPaciente($idPaciente);
+
+        $data['tipoUsuario']  = $this->session->userdata('tipoUsuario');
+        $data['nombre']  = $this->session->userdata('nombre');
+        $data['primerApellido']  = $this->session->userdata('primerApellido');
+        $data['segundoApellido']  = $this->session->userdata('segundoApellido');
+
         $this->load->view('inc_header');
+        $this->load->view('inc_menu', $data);
         $this->load->view('paciente_modificar', $data);
         $this->load->view('inc_footer');
     }
@@ -48,13 +56,21 @@ class Paciente extends CI_Controller
     }
     public function agregar()
     {
+        
+        $data['tipoUsuario']  = $this->session->userdata('tipoUsuario');
+        $data['nombre']  = $this->session->userdata('nombre');
+        $data['primerApellido']  = $this->session->userdata('primerApellido');
+        $data['segundoApellido']  = $this->session->userdata('segundoApellido');
+
         $this->load->view('inc_header');
+        $this->load->view('inc_menu', $data);
         $this->load->view('paciente_agregar');
         $this->load->view('inc_footer');
     }
 
     public function crearPaciente()
     {
+        $this->load->helper('funciones');
         $data['nombre'] = $_POST['nombre'];
         $data['primerApellido'] = $_POST['primerApellido'];
         $data['segundoApellido'] = $_POST['segundoApellido'];
@@ -63,10 +79,11 @@ class Paciente extends CI_Controller
         $data['sexo'] = $_POST['sexo'];
         $data['estatura'] = $_POST['estatura'];
         $data['peso'] = $_POST['peso'];
-
         $this->paciente_model->agregarPaciente($data);
         redirect('paciente/index', 'refresh');
     }
+
+    
 
     public function eliminarbd()
     {
