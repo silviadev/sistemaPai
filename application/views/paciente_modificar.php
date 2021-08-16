@@ -12,6 +12,12 @@ foreach ($infoPaciente->result() as $row) {
           echo form_open_multipart('paciente/modificarbd');
           ?>
           <form>
+
+            <div class="form-group">
+              <label>CI del usuario tutor *</label>
+              <input type="text" name="ci" class="form-control" placeholder="Escriba su numero de carnet de identidad" value="<?php echo $row->ci; ?>" required>
+            </div>
+
             <div class="form-group">
               <label>Nombre *</label>
               <input type="text" name="nombre" class="form-control" value="<?php echo $row->nombre; ?>" required>
@@ -34,13 +40,8 @@ foreach ($infoPaciente->result() as $row) {
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                 </div>
-                <input type="text" name="fechaNacimiento" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                <input type="text" name="fechaNacimiento" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask value="<?php echo $row->fechaNacimiento; ?>">
               </div>
-            </div>
-
-            <div class="form-group">
-              <label>Edad *</label>
-              <input type="text" name="edad" class="form-control" placeholder="Escriba la edad" value="<?php echo $row->edad; ?>" required>
             </div>
 
             <div class="form-group">

@@ -28,7 +28,7 @@ class Login extends REST_Controller
         $json = file_get_contents('php://input');
         $data = json_decode($json, true);
         $nombreUsuario = $data['nombreUsuario'];
-        $contrasena = $data['contrasena'];
+        $contrasena = md5($data['contrasena']);
         $consulta = $this->usuario_model->validar($nombreUsuario, $contrasena);
         $result = [];
         if ($consulta->num_rows() > 0) {

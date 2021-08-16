@@ -2,47 +2,14 @@
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col col-lg-6">
-        <h3>Buscar usuario Padre de familia o tutor</h3>
-        <form method="post" id="agregarBd" name="agregarBd" action="<?= site_url('usuario/buscarPorNombre') ?>">
-          <div class="form-group">
-            <label>Nombre del Tutor *</label>
-            <input type="text" name="nombre" class="form-control" placeholder="Escriba el nombre del Padre o tutor" required pattern="[A-Za-z0-9]{1,20}">
-          </div>
-
-          <?php
-          if (isset($infoUsuario)) {
-            foreach ($infoUsuario->result() as $row) {
-          ?>
-              <div class="form-group alert alert-success ">
-                <label>Nombre del Tutor</label>
-
-                <?php echo "Nombre Completo: " . $row->nombre . " " . $row->primerApellido . " " . $row->segundoApellido ?>
-                <input type="hidden" name="idUsuario" class="form-control" value="<?php echo $row->idUsuario; ?>">
-
-              </div>
-
-            <?php } // fin IF
-            ?>
-          <?php } //Fin info usuario 
-          ?>
-
-
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block">Buscar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-
-
-
-  <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="col col-lg-6">
         <h3>Formulario Paciente</h3>
         <form method="post" id="crearPaciente" name="crearPaciente" action="<?= site_url('paciente/crearPaciente') ?>">
+
+          <div class="form-group">
+            <label>CI del usuario tutor</label>
+            <input type="text" name="ci" class="form-control" placeholder="Escriba su numero de carnet de identidad" required>
+          </div>
+
           <div class="form-group">
             <label>Nombre *</label>
             <input type="text" name="nombre" class="form-control" placeholder="Ingrese el Nombre" required>
@@ -67,11 +34,6 @@
           </div>
 
           <div class="form-group">
-            <label>edad *</label>
-            <input type="text" name="edad" class="form-control" placeholder="Ingrese la edad" required>
-          </div>
-
-          <div class="form-group">
             <label>Sexo *</label>
             <div class="form-group clearfix">
               <div class="icheck-primary d-inline">
@@ -90,12 +52,12 @@
           </div>
 
           <div class="form-group">
-            <label>estatura (Cm) *</label>
+            <label>Estatura (Cm) *</label>
             <input type="number" name="estatura" class="form-control" placeholder="Ingrese la estatura" min="0" max="100" step="0.25" value="0.00" required>
           </div>
 
           <div class="form-group">
-            <label>peso (Kg) *</label>
+            <label>Peso (Kg) *</label>
             <input type="number" name="peso" class="form-control" min="0" max="5" step="0.25" value="0.00" placeholder="Ingrese el peso" required>
           </div>
 

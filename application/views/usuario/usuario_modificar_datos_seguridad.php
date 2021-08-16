@@ -9,30 +9,30 @@ foreach ($infoUsuario->result() as $row) {
 
           <div class="card mt-3">
             <div class="card-header">
-              <h3 class="card-title">Actualizar datos usuario</h3>
+              <h3 class="card-title">Cambiar contraseña</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
 
-              <form method="post" id="add_create" name="add_create" action="<?= site_url('usuario/modificarbdDatosPersonales') ?>">
+              <form method="post" id="add_create" name="add_create" action="<?= site_url('usuario/modificarbdDatosSeguridad') ?>">
                 <div class="form-group">
                   <input type="hidden" name="idUsuario" class="form-control" value="<?php echo $row->idUsuario; ?>">
                   <input type="hidden" name="tipoUsuario" class="form-control" value="<?php echo $row->tipoUsuario; ?>">
                 </div>
 
                 <div class="form-group">
-                  <label>Direccion</label>
-                  <input type="text" name="direccion" class="form-control" value="<?php echo $row->direccion; ?>">
+                  <label>Contraseña antiguo</label>
+                  <input type="text" name="antiguaContrasena" class="form-control" required>
                 </div>
 
                 <div class="form-group">
-                  <label>correo</label>
-                  <input type="email" name="correo" class="form-control" value="<?php echo $row->correo; ?>">
+                  <label>Nueva contraseña</label>
+                  <input type="text" name="nuevaContrasena" class="form-control" required>
                 </div>
 
                 <div class="form-group">
-                  <label>Nombre usuario</label>
-                  <input type="text" name="nombreUsuario" class="form-control" value="<?php echo $row->nombreUsuario; ?>">
+                  <label>Confirmar nueva contraseña</label>
+                  <input type="text" name="confirmarContrasena" class="form-control" required>
                 </div>
 
                 <div class="form-group">

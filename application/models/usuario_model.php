@@ -25,7 +25,15 @@ class Usuario_model extends CI_Model {
         $this->db->from('usuario'); 
         $this->db->where('idUsuario', $idUsuario);
         return $this->db->get();
-	} 
+	}
+
+    public function recuperarUsuarioPorCi($ci)
+    {
+        $this->db->select('*');
+        $this->db->from('usuario'); 
+        $this->db->where('ci', $ci);
+        return $this->db->get();
+    }
 
     public function modificarUsuario($idUsuario, $data)
     {
@@ -33,10 +41,20 @@ class Usuario_model extends CI_Model {
         $this->db->where('idUsuario', $idUsuario);
         $this->db->update('usuario', $data); 
     }
+
+    public function modificarUsuarioContrasena($idUsuario, $data)
+    {
+        var_dump($data);
+        $data['fechaActualzacion'] = date("Y-m-d H:i:s");
+        $this->db->where('idUsuario', $idUsuario);
+        $this->db->where('contrasena', $data["contrasena"]);
+        return $this->db->update('usuario', $data);
+    }
+
     public function agregarUsuario($data) {
 
-        $data['nombreUsuario'] = strtolower($data['nombre'].".".$data['primerApellido']);
-        $data['contrasena'] = md5(strtolower($data['nombre'].".".$data['primerApellido']."!.."));
+        $data['nombreUsuario'] = strtolower($data['ci']);
+        $data['contrasena'] = md5(strtolower($data['ci']));
         //$data['contrasena'] = strtolower($data['nombre'].".".$data['primerApellido']."!..");
         $data['fechaCreacion'] = date("Y-m-d H:i:s");
         $this->db->insert('usuario', $data); 

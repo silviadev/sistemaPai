@@ -56,12 +56,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url() ?>usuario/modificarContrasena" class="nav-link">
-                <i class="fas fa-user nav-icon"></i>
-                <p>Seguridad de cuenta</p>
-              </a>
-            </li>
-            <li class="nav-item">
               <a href="<?php echo base_url() ?>login/logout" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p>Cerrar Session</p>
@@ -72,23 +66,6 @@
 
         <li>
         <div class="brand-link"></div>
-        </li>
-        <li class="nav-header">Administrar</li>
-        <li class="nav-item">
-          <a href="<?php echo base_url() ?>usuario" class="nav-link">
-            <i class="nav-icon fas fa-users"></i>
-            <p>
-              Usuarios
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="<?php echo base_url() ?>paciente" class="nav-link">
-            <i class="nav-icon fas fa-child"></i>
-            <p>
-              Pacientes
-            </p>
-          </a>
         </li>
       </ul>
     </nav>

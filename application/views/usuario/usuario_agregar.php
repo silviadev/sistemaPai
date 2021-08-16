@@ -23,8 +23,13 @@
               </div>
 
               <div class="form-group">
-                <label>Segundo Apellido *</label>
-                <input type="text" name="segundoApellido" class="form-control" placeholder="Escriba el segundo apellido" required>
+                <label>Segundo Apellido (Opcional)</label>
+                <input type="text" name="segundoApellido" class="form-control" placeholder="Escriba el segundo apellido">
+              </div>
+
+              <div class="form-group">
+                <label>CI *</label>
+                <input type="text" name="ci" class="form-control" placeholder="Escriba su numero de carnet de identidad" required>
               </div>
 
               <div class="form-group">
@@ -34,7 +39,7 @@
 
               <div class="form-group">
                 <label>Tipo de usuario</label>
-                <select class="form-select" name="tipoUsuario" aria-label="Default select example">
+                <select class="form-select" name="tipoUsuario" aria-label="seleccionar por defecto">
                   <option selected>Seleccionar tipo de usuario</option>
                   <option value="admin" selected="selected">admin</option>
                   <option value="tutor">tutor</option>
@@ -43,7 +48,7 @@
 
               <div class="form-group">
                 <label>Correo</label>
-                <input type="text" name="correo" class="form-control" placeholder="Escriba la dirección">
+                <input type="email" name="correo" class="form-control" placeholder="Escriba la dirección">
               </div>
               <div class="form-group form-check">
                 <input type="checkbox" name="habilitado" class="form-check-input" id="habilitado">

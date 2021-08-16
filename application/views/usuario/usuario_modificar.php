@@ -1,4 +1,12 @@
 <?php
+function set_selected($desired_value, $new_value)
+{
+    if($desired_value==$new_value)
+    {
+        echo ' selected="selected"';
+    }
+}
+
 foreach ($infoUsuario->result() as $row) {
 ?>
 
@@ -25,17 +33,31 @@ foreach ($infoUsuario->result() as $row) {
                   <input type="text" name="primerApellido" class="form-control" value="<?php echo $row->primerApellido; ?>" required>
                 </div>
                 <div class="form-group">
-                  <label>Segundo Apellido *</label>
-                  <input type="text" name="segundoApellido" class="form-control" value="<?php echo $row->segundoApellido; ?>" required>
+                  <label>Segundo Apellido (Opcional)</label>
+                  <input type="text" name="segundoApellido" class="form-control" value="<?php echo $row->segundoApellido; ?>">
                 </div>
+
+                <div class="form-group">
+                  <label>CI *</label>
+                  <input type="text" name="ci" class="form-control" placeholder="Escriba su numero de carnet de identidad" value="<?php echo $row->ci; ?>">
+                </div>
+
                 <div class="form-group">
                   <label>Direccion</label>
                   <input type="text" name="direccion" class="form-control" value="<?php echo $row->direccion; ?>">
                 </div>
 
                 <div class="form-group">
+                  <label>Tipo de usuario</label>
+                  <select class="form-select" name="tipoUsuario" aria-label="seleccionar por defecto" >
+                    <option value="admin" <?php set_selected('admin', $row->tipoUsuario); ?>>admin</option>
+                    <option value="tutor" <?php set_selected('tutor', $row->tipoUsuario); ?>>tutor</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
                   <label>Correo</label>
-                  <input type="text" name="correo" class="form-control" value="<?php echo $row->direccion; ?>">
+                  <input type="email" name="correo" class="form-control" value="<?php echo $row->correo; ?>">
                 </div>
 
                 <div class="form-group form-check">

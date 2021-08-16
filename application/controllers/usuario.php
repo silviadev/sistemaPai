@@ -39,6 +39,7 @@ class Usuario extends CI_Controller
         $data['nombre'] = $_POST['nombre'];
         $data['primerApellido'] = $_POST['primerApellido'];
         $data['segundoApellido'] = $_POST['segundoApellido'];
+        $data['ci'] = $_POST['ci'];
         $data['direccion'] = $_POST['direccion'];
         $data['tipoUsuario'] = $_POST['tipoUsuario'];
         $data['correo'] = $_POST['correo'];
@@ -76,8 +77,9 @@ class Usuario extends CI_Controller
         $data['nombre'] = $_POST['nombre'];
         $data['primerApellido'] = $_POST['primerApellido'];
         $data['segundoApellido'] = $_POST['segundoApellido'];
+        $data['ci'] = $_POST['ci'];
         $data['direccion'] = $_POST['direccion'];
-
+        $data['tipoUsuario'] = $_POST['tipoUsuario'];
         $data['correo'] = $_POST['correo'];
 
         if (isset($_POST['habilitado'])) {
@@ -134,20 +136,58 @@ class Usuario extends CI_Controller
         $this->load->view('inc_footer');
     }
 
+    public function modificarContrasena()
+    {
+        $idUsuario = $this->session->userdata('idUsuario');
+        $data['infoUsuario'] = $this->usuario_model->recuperarUsuario($idUsuario);
+
+        //datos de session
+        $data['tipoUsuario']  = $this->session->userdata('tipoUsuario');
+        $data['nombre']  = $this->session->userdata('nombre');
+        $data['primerApellido']  = $this->session->userdata('primerApellido');
+        $data['segundoApellido']  = $this->session->userdata('segundoApellido');
+
+        $this->load->view('inc_header');
+        $this->load->view('inc_menu', $data);
+        $this->load->view('usuario/usuario_modificar_datos_seguridad', $data);
+        $this->load->view('inc_footer');
+
+    }
     public function modificarbdDatosPersonales()
     {
         $idUsuario = $_POST['idUsuario'];
-        $data['nombre'] = $_POST['nombre'];
-        $data['primerApellido'] = $_POST['primerApellido'];
-        $data['segundoApellido'] = $_POST['segundoApellido'];
         $data['direccion'] = $_POST['direccion'];
         $data['correo'] = $_POST['correo'];
         $data['nombreUsuario'] = $_POST['nombreUsuario'];
-        $data['contrasena'] = $_POST['contrasena'];
 
         $this->usuario_model->modificarUsuario($idUsuario, $data);
-        redirect('usuario/index', 'refresh');
+        if ($_POST["tipoUsuario"]== "admin") {
+            redirect('usuario', 'refresh');
+        }
+        else {
+            redirect('tutor', 'refresh');
+        }
+    }
 
+    public function modificarbdDatosSeguridad()
+    {
+        $idUsuario = $_POST['idUsuario'];
+
+        if (isset($_POST['nuevaContrasena']) && isset($_POST['confirmarContrasena'])
+        && $_POST['nuevaContrasena'] == $_POST['confirmarContrasena'])
+        { 
+            $data['contrasena'] = md5($_POST['nuevaContrasena']);
+        }
+        else {
+            return;
+        }
+        $this->usuario_model->modificarUsuarioContrasena($idUsuario, $data);
+        if ($_POST["tipoUsuario"] == "admin") {
+            //redirect('usuario', 'refresh');
+        }
+        else {
+            //redirect('tutor', 'refresh');
+        }
     }
 
     public function obtenerDatosSession()

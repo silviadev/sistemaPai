@@ -40,12 +40,13 @@ class Paciente extends CI_Controller
 
     public function modificarbd()
     {
+        $this->load->helper('funciones');
         $idPaciente = $_POST['idPaciente'];
         $data['nombre'] = $_POST['nombre'];
         $data['primerApellido'] = $_POST['primerApellido'];
         $data['segundoApellido'] = $_POST['segundoApellido'];
         $data['fechaNacimiento'] = $_POST['fechaNacimiento'];
-        $data['edad'] = $_POST['edad'];
+        $data['edad'] = calculaEdad($data['fechaNacimiento']);
         $data['sexo'] = $_POST['sexo'];
         $data['estatura'] = $_POST['estatura'];
         $data['peso'] = $_POST['peso'];
@@ -71,19 +72,25 @@ class Paciente extends CI_Controller
     public function crearPaciente()
     {
         $this->load->helper('funciones');
+        $ci = $_POST['ci'];
         $data['nombre'] = $_POST['nombre'];
         $data['primerApellido'] = $_POST['primerApellido'];
         $data['segundoApellido'] = $_POST['segundoApellido'];
         $data['fechaNacimiento'] = $_POST['fechaNacimiento'];
-        $data['edad'] = $_POST['edad'];
+        $data['edad'] = calculaEdad($data['fechaNacimiento']);
         $data['sexo'] = $_POST['sexo'];
         $data['estatura'] = $_POST['estatura'];
         $data['peso'] = $_POST['peso'];
-        $this->paciente_model->agregarPaciente($data);
-        redirect('paciente/index', 'refresh');
-    }
+        $this->load->model('usuario_model');
+        $usuario = $this->usuario_model->recuperarUsuarioPorCi($ci);
+        $result = $usuario->result();
 
-    
+        if (count($result) > 0)
+        {   $data['idUsuario'] = $result[0]->idUsuario;
+            $this->paciente_model->agregarPaciente($data);
+            redirect('paciente/index', 'refresh');
+        }
+    }
 
     public function eliminarbd()
     {
