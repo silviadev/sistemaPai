@@ -30,8 +30,8 @@ foreach ($infoPaciente->result() as $row) {
             </div>
 
             <div class="form-group">
-              <label>Segundo Apellido *</label>
-              <input type="text" name="segundoApellido" class="form-control" value="<?php echo $row->segundoApellido; ?>" required>
+              <label>Segundo Apellido</label>
+              <input type="text" name="segundoApellido" class="form-control" value="<?php echo $row->segundoApellido; ?>">
             </div>
 
             <div class="form-group">
@@ -40,7 +40,7 @@ foreach ($infoPaciente->result() as $row) {
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                 </div>
-                <input type="text" name="fechaNacimiento" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask value="<?php echo $row->fechaNacimiento; ?>">
+                <input type="text" name="fechaNacimiento" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask value="<?php echo $row->fechaNacimiento; ?>" required>
               </div>
             </div>
 
@@ -48,13 +48,13 @@ foreach ($infoPaciente->result() as $row) {
               <label>Sexo</label>
               <div class="form-group clearfix">
                 <div class="icheck-primary d-inline">
-                  <input type="radio" id="radioFemenino" name="sexo" value="femenino" checked>
+                  <input type="radio" id="radioFemenino" name="sexo" value="femenino" <?php echo ($row->sexo == "femenino")? "checked":"" ?>>
                   <label for="radioFemenino">
                     Femenino
                   </label>
                 </div>
                 <div class="icheck-primary d-inline">
-                  <input type="radio" id="radioMasculino" name="sexo" value="masculino">
+                  <input type="radio" id="radioMasculino" name="sexo" value="masculino" <?php echo ($row->sexo == "masculino")? "checked":"" ?>>
                   <label for="radioMasculino">
                     Masculino
                   </label>
@@ -63,37 +63,27 @@ foreach ($infoPaciente->result() as $row) {
             </div>
 
             <div class="form-group">
-              <label>Estatura (Cm) *</label>
-              <input type="text" name="estatura" class="form-control" placeholder="Escriba la estatura" value="<?php echo $row->estatura; ?>" min="0" max="100" step="0.10" required>
-            </div>
-
-            <div class="form-group">
-              <label>Peso (Kg) *</label>
-              <input type="number" name="peso" class="form-control" value="<?php echo $row->peso; ?>" min="0" max="60" step="0.10" placeholder="Ingrese el peso" required>
-            </div>
-
-            <div class="form-group">
               <?php
-              $foto = $row->foto;
-              if ($foto == "") {
+              //$foto = $row->foto;
+              //if ($foto == "") {
               ?>
-                <img width="100" src="<?php echo base_url(); ?>/uploads/paciente/user_default.png">
+                <!-- <img width="100" src="<?php //echo base_url(); ?>/uploads/paciente/user_default.png"> -->
               <?php
-              } else {
+              //} else {
               ?>
-                <img width="100" src="<?php echo base_url(); ?>/uploads/paciente/<?php echo $foto; ?>">
+                <!-- <img width="100" src="<?php //echo base_url(); ?>/uploads/paciente/<?php //echo $foto; ?>"> -->
               <?php
-              }
+              //}
               ?>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <div>
                 <label>Subir Foto</label>
-                <input type="hidden" name="idPaciente" value="<?php echo $row->idPaciente; ?>" />
-                <input type="file" name="userfile">
+                <input type="hidden" name="idPaciente" value="<?php //echo $row->idPaciente; ?>" />
+                <input type="file" name="userfile" >
               </div>
-            </div>
+            </div> -->
 
             <div class="form-group">
               <button type="submit" class="btn btn-primary">Guardar</button>

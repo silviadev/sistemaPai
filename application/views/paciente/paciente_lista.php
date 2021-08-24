@@ -45,9 +45,7 @@
                     <th>Fecha de nacimiento</th>
                     <th>Edad</th>
                     <th>Sexo</th>
-                    <th>Estatura Cm.</th>
-                    <th>Peso Kg.</th>
-                    <th>Foto</th>
+                    <!-- <th>Foto</th> -->
                     <th></th>
                     <th></th>
                   </tr>
@@ -64,11 +62,9 @@
                       <td><?php echo $row->fechaNacimiento; ?></td>
                       <td><?php echo $row->edad; ?></td>
                       <td><?php echo $row->sexo; ?></td>
-                      <td><?php echo $row->estatura; ?></td>
-                      <td><?php echo $row->peso; ?></td>
-                      <td>
+                      <!-- <td> -->
                         <?php
-                        $foto = $row->foto;
+                        /* $foto = $row->foto;
                         if ($foto == "") {
                         ?>
                           <img width="100" src="<?php echo base_url(); ?>/uploads/paciente/user_default.png">
@@ -77,9 +73,9 @@
                         ?>
                           <img width="100" src="<?php echo base_url(); ?>/uploads/paciente/<?php echo $foto; ?>">
                         <?php
-                        }
+                        } */
                         ?>
-                      </td>
+                      <!-- </td> -->
                       <td>
                         <?php
                         echo form_open_multipart('paciente/modificar');

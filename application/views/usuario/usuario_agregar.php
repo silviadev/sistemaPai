@@ -23,7 +23,7 @@
               </div>
 
               <div class="form-group">
-                <label>Segundo Apellido (Opcional)</label>
+                <label>Segundo Apellido</label>
                 <input type="text" name="segundoApellido" class="form-control" placeholder="Escriba el segundo apellido">
               </div>
 

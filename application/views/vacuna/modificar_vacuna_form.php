@@ -13,7 +13,7 @@ foreach ($infoVacuna as $row) {
   <div class="content-wrapper">
     <div class="container">
       <div class="row justify-content-md-center">
-        <div class="col col-md-10">
+        <div class="col col-md-12">
           <form method="post" id="add_create" name="add_create" action="<?= site_url('vacuna/actualizarBd') ?>">
             <div class="card card-primary mt-3">
               <div class="card-header">
@@ -81,9 +81,16 @@ foreach ($infoVacuna as $row) {
                         </div>
                         <div class="col-sm">
                           <div class="form-group">
-                            <label for="rango-meses" class="form-label">Edad de aplicación meses*</label>
-                            <input id="rango-inicial" type="number" name="rangoMesInicial[]" class="form-control" value="<?php echo $rw->rangoMesInicial; ?>" required>
-                            <input id="rango-final" type="number" name="rangoMesFinal[]" class="form-control" value="<?php echo ($rw->rangoMesFinal > 0) ? $rw->rangoMesFinal : ''; ?>">
+                            <div class="row">
+                              <div class="col">
+                                <label>Inicial meses *</label>
+                                <input id="rango-inicial" type="number" name="rangoMesInicial[]" class="form-control" value="<?php echo $rw->rangoMesInicial; ?>" required>
+                              </div>
+                              <div class="col">
+                                <label>Final meses</label>
+                                <input id="rango-final" type="number" name="rangoMesFinal[]" class="form-control" value="<?php echo ($rw->rangoMesFinal > 0) ? $rw->rangoMesFinal : ''; ?>">
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div class="col-sm">
@@ -142,9 +149,16 @@ foreach ($infoVacuna as $row) {
               </div>
               <div class="col-sm">
                 <div class="form-group">
-                  <label for="rango-meses" class="form-label">Edad de aplicación meses*</label>
-                  <input id="rango-inicial" type="number" name="rangoMesInicial[]" class="form-control" required>
-                  <input id="rango-final" type="number" name="rangoMesFinal[]" class="form-control">
+                  <div class="row">
+                    <div class="col">
+                      <label>Inicial meses *</label>
+                      <input id="rango-inicial" type="number" name="rangoMesInicial[]" class="form-control" value="0" required>
+                    </div>
+                    <div class="col">
+                      <label>Final meses</label>
+                      <input id="rango-final" type="number" name="rangoMesFinal[]" class="form-control">
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-sm">

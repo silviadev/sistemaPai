@@ -1,5 +1,5 @@
 <?php
-foreach ($infoUsuario->result() as $row) {
+//foreach ($infoUsuario->result() as $row) {
 ?>
 
   <div class="content-wrapper">
@@ -16,23 +16,25 @@ foreach ($infoUsuario->result() as $row) {
 
               <form method="post" id="add_create" name="add_create" action="<?= site_url('usuario/modificarbdDatosSeguridad') ?>">
                 <div class="form-group">
-                  <input type="hidden" name="idUsuario" class="form-control" value="<?php echo $row->idUsuario; ?>">
-                  <input type="hidden" name="tipoUsuario" class="form-control" value="<?php echo $row->tipoUsuario; ?>">
+                 
                 </div>
 
                 <div class="form-group">
-                  <label>Contraseña antiguo</label>
-                  <input type="text" name="antiguaContrasena" class="form-control" required>
+                  <label>Antigua Contraseña *</label>
+                  <input type="password" name="antiguaContrasena" class="form-control" required>
+                  <?php echo form_error('antiguaContrasena', '<div class="error">', '</div>')?>
                 </div>
 
                 <div class="form-group">
-                  <label>Nueva contraseña</label>
-                  <input type="text" name="nuevaContrasena" class="form-control" required>
+                  <label>Nueva contraseña *</label>
+                  <input type="password" name="nuevaContrasena" class="form-control" required>
+                  <?php echo form_error('nuevaContrasena', '<div class="error">', '</div>')?>
                 </div>
 
                 <div class="form-group">
-                  <label>Confirmar nueva contraseña</label>
-                  <input type="text" name="confirmarContrasena" class="form-control" required>
+                  <label>Confirmar contraseña *</label>
+                  <input type="password" name="confirmarContrasena" class="form-control" required>
+                  <?php echo form_error('confirmarContrasena', '<div class="error">', '</div>')?>
                 </div>
 
                 <div class="form-group">
@@ -46,5 +48,5 @@ foreach ($infoUsuario->result() as $row) {
     </div>
   </div>
 <?php
-}
+//}
 ?>

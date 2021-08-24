@@ -11,7 +11,7 @@ class Paciente_model extends CI_Model {
 	}
 	
     public function recuperarPaciente($idPaciente){
-        $this->db->select('p.idPaciente, p.primerApellido, p.segundoApellido, p.nombre, p.fechaNacimiento, p.edad, p.sexo, p.estatura, p.peso, p.idUsuario, p.foto, u.ci');
+        $this->db->select('p.idPaciente, p.primerApellido, p.segundoApellido, p.nombre, p.fechaNacimiento, p.edad, p.sexo, p.idUsuario, p.foto, u.ci');
         $this->db->from('paciente p'); 
         $this->db->where('p.idPaciente', $idPaciente);
         $this->db->join('usuario u', 'u.idUsuario = p.idUsuario');
@@ -19,7 +19,7 @@ class Paciente_model extends CI_Model {
 	}
 
     public function recuperarPacientesPorIdUsuario($idUsuario) {
-        $this->db->select('p.idPaciente, p.primerApellido, p.segundoApellido, p.nombre, p.fechaNacimiento, p.edad, p.sexo, p.estatura, p.peso, p.idUsuario, p.foto');
+        $this->db->select('p.idPaciente, p.primerApellido, p.segundoApellido, p.nombre, p.fechaNacimiento, p.edad, p.sexo, p.idUsuario, p.foto');
         $this->db->from('paciente p'); 
         $this->db->where('p.idUsuario', $idUsuario);
         $this->db->join('usuario u', 'u.idUsuario = p.idUsuario');
@@ -35,6 +35,7 @@ class Paciente_model extends CI_Model {
 
     public function agregarPaciente($data)
     {
+        $data['fechaCreacion'] = date("Y-m-d H:i:s");
         $this->db->insert('paciente', $data); 
     }
 

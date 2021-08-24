@@ -41,6 +41,7 @@
                     <th>Nombre</th>
                     <th>primer Apellido</th>
                     <th>segundo Apellido</th>
+                    <th>CI</th>
                     <th>Direccion</th>
                     <th>Tipo de usuario</th>
                     <th>Correo</th>
@@ -58,6 +59,7 @@
                       <td><?php echo $row->nombre; ?></th>
                       <td><?php echo $row->primerApellido; ?></td>
                       <td><?php echo $row->segundoApellido; ?></td>
+                      <td><?php echo $row->ci; ?></td>
                       <td><?php echo $row->direccion; ?></td>
                       <td><?php echo $row->tipoUsuario; ?></td>
                       <td><?php echo $row->correo; ?></td>

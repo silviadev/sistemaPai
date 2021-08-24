@@ -18,7 +18,7 @@ class Paciente extends CI_Controller
 
         $this->load->view('inc_header');
         $this->load->view('inc_menu', $data);
-        $this->load->view('paciente_lista', $data);
+        $this->load->view('paciente/paciente_lista', $data);
         $this->load->view('inc_footer');
     }
 
@@ -34,7 +34,7 @@ class Paciente extends CI_Controller
 
         $this->load->view('inc_header');
         $this->load->view('inc_menu', $data);
-        $this->load->view('paciente_modificar', $data);
+        $this->load->view('paciente/paciente_modificar', $data);
         $this->load->view('inc_footer');
     }
 
@@ -48,12 +48,13 @@ class Paciente extends CI_Controller
         $data['fechaNacimiento'] = $_POST['fechaNacimiento'];
         $data['edad'] = calculaEdad($data['fechaNacimiento']);
         $data['sexo'] = $_POST['sexo'];
-        $data['estatura'] = $_POST['estatura'];
-        $data['peso'] = $_POST['peso'];
+        //$foto = $_POST["foto"];
+        /* $data['estatura'] = $_POST['estatura'];
+        $data['peso'] = $_POST['peso']; */
 
         $this->paciente_model->modificarPaciente($idPaciente, $data);
-        $this->subirFoto($idPaciente);
-        redirect('paciente/index', 'refresh');
+        //$this->subirFoto($idPaciente, $foto);
+        redirect('paciente', 'refresh');
     }
     public function agregar()
     {
@@ -65,7 +66,7 @@ class Paciente extends CI_Controller
 
         $this->load->view('inc_header');
         $this->load->view('inc_menu', $data);
-        $this->load->view('paciente_agregar');
+        $this->load->view('paciente/paciente_agregar');
         $this->load->view('inc_footer');
     }
 
@@ -79,17 +80,47 @@ class Paciente extends CI_Controller
         $data['fechaNacimiento'] = $_POST['fechaNacimiento'];
         $data['edad'] = calculaEdad($data['fechaNacimiento']);
         $data['sexo'] = $_POST['sexo'];
-        $data['estatura'] = $_POST['estatura'];
-        $data['peso'] = $_POST['peso'];
-        $this->load->model('usuario_model');
-        $usuario = $this->usuario_model->recuperarUsuarioPorCi($ci);
-        $result = $usuario->result();
+       /*  $data['estatura'] = $_POST['estatura'];
+        $data['peso'] = $_POST['peso']; */
+        $this->form_validation->set_rules('ci', 'CI', 'callback_verificar_ci');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
-        if (count($result) > 0)
-        {   $data['idUsuario'] = $result[0]->idUsuario;
-            $this->paciente_model->agregarPaciente($data);
-            redirect('paciente/index', 'refresh');
+        if ($this->form_validation->run() == false) {
+            $data['tipoUsuario']  = $this->session->userdata('tipoUsuario');
+            $data['nombre']  = $this->session->userdata('nombre');
+            $data['primerApellido']  = $this->session->userdata('primerApellido');
+            $data['segundoApellido']  = $this->session->userdata('segundoApellido');
+    
+            $this->load->view('inc_header');
+            $this->load->view('inc_menu', $data);
+            $this->load->view('paciente/paciente_agregar');
+            $this->load->view('inc_footer');
+        } else {
+            $this->load->model('usuario_model');
+            $usuario = $this->usuario_model->recuperarUsuarioPorCi($ci);
+            $result = $usuario->result();
+
+            if (count($result) > 0)
+            {   $data['idUsuario'] = $result[0]->idUsuario;
+                $this->paciente_model->agregarPaciente($data);
+                redirect('paciente/index', 'refresh');
+            }
         }
+
+        
+    }
+
+    public function verificar_ci($ci)
+    {
+        $user = $this->usuario_model->recuperarUsuarioTutorPorCi($ci);
+
+        if ($user->num_rows() == 0) {
+            $this->form_validation->set_message('verificar_ci', 'El usuario tutor con el {field} no existe');
+            return false;
+        }
+
+        return true;
+
     }
 
     public function eliminarbd()
@@ -99,26 +130,28 @@ class Paciente extends CI_Controller
         redirect('paciente/index', 'refresh');
     }
     
-    public function subirFoto ($idPaciente)
+    public function subirFoto ($idPaciente, $foto)
     {
-        $nombrearchivo  = $idPaciente.".jpg";
-        $config['upload_path'] = './uploads/paciente/';
-        $config['file_name'] = $nombrearchivo;
-
-        $direccion = "./uploads/paciente/".$nombrearchivo;
-        unlink($direccion);
-
-        $config['allowed_types'] = 'jpg|png';
-        $this->load->library('upload', $config);
-
-        if(!$this->upload->do_upload())
-        {
-            $data['error']  = $this->upload->display_errors();
-        }
-        else {
-            $data['foto'] = $nombrearchivo;
-            $this->paciente_model->modificarPaciente($idPaciente, $data);
-            $this->upload->data();
+        if (isset($foto)) {
+            $nombrearchivo  = $idPaciente.".jpg";
+            $config['upload_path'] = './uploads/paciente/';
+            $config['file_name'] = $nombrearchivo;
+    
+            $direccion = "./uploads/paciente/".$nombrearchivo;
+            unlink($direccion);
+    
+            $config['allowed_types'] = 'jpg|png';
+            $this->load->library('upload', $config);
+    
+            if(!$this->upload->do_upload())
+            {
+                $data['error']  = $this->upload->display_errors();
+            }
+            else {
+                $data['foto'] = $nombrearchivo;
+                $this->paciente_model->modificarPaciente($idPaciente, $data);
+                $this->upload->data();
+            }
         }
     }
 }

@@ -33,7 +33,7 @@ foreach ($infoUsuario->result() as $row) {
                   <input type="text" name="primerApellido" class="form-control" value="<?php echo $row->primerApellido; ?>" required>
                 </div>
                 <div class="form-group">
-                  <label>Segundo Apellido (Opcional)</label>
+                  <label>Segundo Apellido</label>
                   <input type="text" name="segundoApellido" class="form-control" value="<?php echo $row->segundoApellido; ?>">
                 </div>
 

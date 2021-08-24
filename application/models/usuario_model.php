@@ -16,7 +16,8 @@ class Usuario_model extends CI_Model {
 	public function lista()
 	{
 		$this->db->select('*');
-        $this->db->from('usuario');
+        $this->db->from('usuario'); 
+        $this->db->where('estado', 1);
         return $this->db->get();
 	}
 	
@@ -35,30 +36,30 @@ class Usuario_model extends CI_Model {
         return $this->db->get();
     }
 
+    public function recuperarUsuarioTutorPorCi($ci)
+    {
+        $this->db->select('*');
+        $this->db->from('usuario'); 
+        $this->db->where('ci', $ci);
+        $this->db->where('tipoUsuario', 'tutor');
+        return $this->db->get();
+    }
+
     public function modificarUsuario($idUsuario, $data)
     {
-        $data['fechaActualzacion'] = date("Y-m-d H:i:s");
+        $data['fechaActualizacion'] = date("Y-m-d H:i:s");
         $this->db->where('idUsuario', $idUsuario);
         $this->db->update('usuario', $data); 
     }
 
-    public function modificarUsuarioContrasena($idUsuario, $data)
-    {
-        var_dump($data);
-        $data['fechaActualzacion'] = date("Y-m-d H:i:s");
-        $this->db->where('idUsuario', $idUsuario);
-        $this->db->where('contrasena', $data["contrasena"]);
-        return $this->db->update('usuario', $data);
-    }
-
     public function agregarUsuario($data) {
-
-        $data['nombreUsuario'] = strtolower($data['ci']);
+        $nombreUsuario = substr($data['nombre'], 0, 1).$data['primerApellido'];
+        $data['nombreUsuario'] = strtolower($nombreUsuario);
         $data['contrasena'] = md5(strtolower($data['ci']));
-        //$data['contrasena'] = strtolower($data['nombre'].".".$data['primerApellido']."!..");
         $data['fechaCreacion'] = date("Y-m-d H:i:s");
         $this->db->insert('usuario', $data); 
     }
+
     public function eliminarUsuario($idUsuario)
     {
         $data['estado'] = false;
@@ -73,5 +74,19 @@ class Usuario_model extends CI_Model {
         $this->db->from('usuario'); 
         $this->db->like('nombre', $nombre);
         return $this->db->get();
+    }
+
+    public function get_user($id)
+    {
+        $this->db->where('idUsuario', $id);
+        $query = $this->db->get('usuario');
+        return $query->row();
+    }
+
+    public function update_user($id, $data)
+    {   
+        $data['fechaActualizacion'] = date("Y-m-d H:i:s");
+        $this->db->where('idUsuario', $id);
+        $this->db->update('usuario', $data);
     }
 }
