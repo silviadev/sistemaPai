@@ -26,19 +26,24 @@ class Paciente_model extends CI_Model {
         return $this->db->get();
     }
 
-    public function modificarPaciente($idPaciente, $data){
-
+    public function modificarPaciente($idPaciente, $data)
+    {
+        $data['fechaActualizacion'] = date("Y-m-d H:i:s");
         $this->db->where('idPaciente', $idPaciente);
         $this->db->update('paciente', $data); 
     }
 
-    public function agregarPaciente($data){
-
+    public function agregarPaciente($data)
+    {
         $this->db->insert('paciente', $data); 
     }
-    public function eliminarPaciente($idPaciente){
 
+    public function eliminarPaciente($idPaciente)
+    {
+        $data['estado'] = false;
+        $data['fechaActualizacion'] = date("Y-m-d H:i:s");
         $this->db->where('idPaciente', $idPaciente);
-        $this->db->delete('paciente'); 
+        $this->db->update('paciente', $data);
     }
 }
+

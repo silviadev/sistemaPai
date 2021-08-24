@@ -59,10 +59,12 @@ class Usuario_model extends CI_Model {
         $data['fechaCreacion'] = date("Y-m-d H:i:s");
         $this->db->insert('usuario', $data); 
     }
-    public function eliminarUsuario($idUsuario){
-
+    public function eliminarUsuario($idUsuario)
+    {
+        $data['estado'] = false;
+        $data['fechaActualizacion'] = date("Y-m-d H:i:s");
         $this->db->where('idUsuario', $idUsuario);
-        $this->db->delete('usuario'); 
+        $this->db->update('usuario', $data);
     }
 
     public function buscarPorNombre($nombre) 

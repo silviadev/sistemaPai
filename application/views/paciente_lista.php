@@ -86,7 +86,7 @@
                         ?>
                         <input type="hidden" name="idPaciente" value="<?php echo $row->idPaciente; ?>">
 
-                        <button type="submit" class="btn btn-primary btn-xs">Modificar</button>
+                        <button type="submit" class="btn btn-primary btn-xs"><i class="far fa-edit"></i></button>
                         <?php
                         echo form_close();
                         ?>
@@ -97,7 +97,7 @@
                         ?>
                         <input type="hidden" name="idPaciente" value="<?php echo $row->idPaciente; ?>">
 
-                        <button type="submit" class="btn btn-danger btn-xs">Eliminar</button>
+                        <button type="submit" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>
                         <?php
                         echo form_close();
                         ?>

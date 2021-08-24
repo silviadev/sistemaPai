@@ -3,9 +3,9 @@
     <div class="row justify-content-md-center">
       <div class="col col-lg-6">
 
-        <div class="card mt-3">
+        <div class="card card-primary mt-3">
           <div class="card-header">
-            <h3 class="card-title">Agregar Usuario</h3>
+            <label class="card-title">Agregar Usuario</label>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
@@ -40,9 +40,9 @@
               <div class="form-group">
                 <label>Tipo de usuario</label>
                 <select class="form-select" name="tipoUsuario" aria-label="seleccionar por defecto">
-                  <option selected>Seleccionar tipo de usuario</option>
-                  <option value="admin" selected="selected">admin</option>
-                  <option value="tutor">tutor</option>
+                    <option value="admin">Admin</option>
+                    <option value="tutor">Tutor</option>
+                    <option value="responsableVacuna">Responsable Vacuna</option>
                 </select>
               </div>
 

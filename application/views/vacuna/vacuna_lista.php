@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h5>Lista de Usuarios</h5>
+          <h5>Vacuna</h5>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -27,10 +27,10 @@
             <!-- /.card-header -->
             <div class="card-body">
               <?php
-              echo form_open_multipart('usuario/agregar');
+              echo form_open_multipart('vacuna/agregar');
               ?>
               <div class="form-group">
-                <button type="submit" class="btn btn-secondary btn-xs">Agregar Usuario</button>
+                <button type="submit" class="btn btn-secondary btn-xs">Agregar Vacuna</button>
               </div>
               <?php
               echo form_close();
@@ -39,12 +39,10 @@
                 <thead>
                   <tr>
                     <th>Nombre</th>
-                    <th>primer Apellido</th>
-                    <th>segundo Apellido</th>
-                    <th>Direccion</th>
-                    <th>Tipo de usuario</th>
-                    <th>Correo</th>
-                    <th>De alta</th>
+                    <th>Enfermedad que previene</th>
+                    <th>Via</th>
+                    <th>Edad de aplicacion</th>
+                    <th>Dosis y cantidad</th>
                     <th></th>
                     <th></th>
                   </tr>
@@ -52,21 +50,40 @@
                 <tbody>
 
                   <?php
-                  foreach ($usuario->result() as $row) {
+                  foreach ($vacuna as $row) {
+
                   ?>
                     <tr>
-                      <td><?php echo $row->nombre; ?></th>
-                      <td><?php echo $row->primerApellido; ?></td>
-                      <td><?php echo $row->segundoApellido; ?></td>
-                      <td><?php echo $row->direccion; ?></td>
-                      <td><?php echo $row->tipoUsuario; ?></td>
-                      <td><?php echo $row->correo; ?></td>
-                      <td><?php echo ($row->habilitado == 1) ? "Habilitado": "Deshabilitado"; ?></td>
+                      <td><?php echo $row["nombre"]; ?></th>
+                      <td><?php echo $row["descripcion"]; ?></td>
                       <td>
                         <?php
-                        echo form_open_multipart('Usuario/modificar');
+                        foreach ($row["dosis"] as $rw) {
+                          echo '<div class="row">'.$rw->viaNombre.'</div>';
+                          echo '<hr width=100%>';
+                        }
                         ?>
-                        <input type="hidden" name="idUsuario" value="<?php echo $row->idUsuario; ?>">
+                      </td>
+                      <td><?php
+                        foreach ($row["dosis"] as $rw) {
+                          $mesFinal = ($rw->rangoMesFinal > 0) ? ' a '.$rw->rangoMesFinal: "";
+                          echo '<div class="row">'.$rw->dosisNombre.' de '.$rw->rangoMesInicial.$mesFinal.' meses'.'</div>';
+                          echo '<hr width=100%>';
+                        }
+                        ?></td>
+                      <td><?php
+                        foreach ($row["dosis"] as $rw) {
+                          echo '<div class="row">'.$rw->cantidad.'</div>';
+                          echo '<hr width=100%>';
+                        }
+                        ?>
+
+                        </td>
+                      <td>
+                        <?php
+                        echo form_open_multipart('vacuna/modificar');
+                        ?>
+                        <input type="hidden" name="idVacuna" value="<?php echo $row["idVacuna"];  ?>">
 
                         <button type="submit" class="btn btn-primary btn-xs"><i class="far fa-edit"></i></button>
                         <?php
@@ -75,11 +92,15 @@
                       </td>
                       <td>
                         <?php
-                        echo form_open_multipart('Usuario/eliminarbd');
+                        echo form_open_multipart('vacuna/eliminarbd');
                         ?>
-                        <input type="hidden" name="idUsuario" value="<?php echo $row->idUsuario; ?>">
-                        
+                        <input type="hidden" name="idVacuna" value="<?php echo $row['idVacuna']; ?>">
                         <button type="submit" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>
+                        <?php
+                        foreach ($row["dosis"] as $rw) {
+                          echo '<input type="hidden" name="idDosis[]" value="'.$rw->idDosis.'">';
+                        }
+                        ?>
                         <?php
                         echo form_close();
                         ?>

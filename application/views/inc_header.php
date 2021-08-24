@@ -10,6 +10,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
   <title>AdminLTE 3 | DataTables</title>
 
   <style>
+
+    .card-primary:not(.card-outline)>.card-header {
+      background-color: #0AA5A7 !important;
+    }
     .btn-secondary {
       background-color: #0AA5A7 !important;
       border-color: #0AA5A7 !important;
@@ -35,6 +39,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
       background-color: #0AA5A7 !important;
       border-color: #0AA5A7;
     }
+
+    .dosis-form-template {
+      display: none;
+    }
   </style>
 
   <!-- Google Font: Source Sans Pro -->
@@ -53,5 +61,5 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 </head>
 
-<body class="hold-transition sidebar-mini dark-mode1">
+<body class="hold-transition sidebar-mini dark-mode1 text-sm">
   <div class="wrapper">

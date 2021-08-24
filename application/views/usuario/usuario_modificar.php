@@ -39,7 +39,7 @@ foreach ($infoUsuario->result() as $row) {
 
                 <div class="form-group">
                   <label>CI *</label>
-                  <input type="text" name="ci" class="form-control" placeholder="Escriba su numero de carnet de identidad" value="<?php echo $row->ci; ?>">
+                  <input type="text" name="ci" class="form-control" placeholder="Escriba su numero de carnet de identidad" value="<?php echo $row->ci; ?>" required>
                 </div>
 
                 <div class="form-group">
@@ -50,8 +50,9 @@ foreach ($infoUsuario->result() as $row) {
                 <div class="form-group">
                   <label>Tipo de usuario</label>
                   <select class="form-select" name="tipoUsuario" aria-label="seleccionar por defecto" >
-                    <option value="admin" <?php set_selected('admin', $row->tipoUsuario); ?>>admin</option>
-                    <option value="tutor" <?php set_selected('tutor', $row->tipoUsuario); ?>>tutor</option>
+                    <option value="admin" <?php set_selected('admin', $row->tipoUsuario); ?>>Admin</option>
+                    <option value="tutor" <?php set_selected('tutor', $row->tipoUsuario); ?>>Tutor</option>
+                    <option value="responsableVacuna" <?php set_selected('responsableVacuna', $row->tipoUsuario); ?>>Responsable Vacuna</option>
                   </select>
                 </div>
 

@@ -90,6 +90,14 @@
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="<?php echo base_url() ?>vacuna" class="nav-link">
+            <i class="nav-icon fas fa-book-medical"></i>
+            <p>
+              Vacuna
+            </p>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
