@@ -16,6 +16,7 @@ foreach ($infoPaciente->result() as $row) {
             <div class="form-group">
               <label>CI del usuario tutor *</label>
               <input type="text" name="ci" class="form-control" placeholder="Escriba su numero de carnet de identidad" value="<?php echo $row->ci; ?>" required>
+              <?php echo form_error('ci', '<div class="error">', '</div>')?>
             </div>
 
             <div class="form-group">

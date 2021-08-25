@@ -10,6 +10,7 @@ class Usuario_model extends CI_Model {
         $this->db->where('nombreUsuario', $nombreUsuario);
         $this->db->where('contrasena', $contrasena);
         $this->db->where('habilitado', 1);
+        $this->db->where('estado', 1);
         return $this->db->get();
     }
 
@@ -33,6 +34,7 @@ class Usuario_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('usuario'); 
         $this->db->where('ci', $ci);
+        $this->db->where('estado', 1);
         return $this->db->get();
     }
 
@@ -41,6 +43,7 @@ class Usuario_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('usuario'); 
         $this->db->where('ci', $ci);
+        $this->db->where('estado', 1);
         $this->db->where('tipoUsuario', 'tutor');
         return $this->db->get();
     }

@@ -42,6 +42,7 @@ class Paciente extends CI_Controller
     {
         $this->load->helper('funciones');
         $idPaciente = $_POST['idPaciente'];
+        $ci = $_POST['ci'];
         $data['nombre'] = $_POST['nombre'];
         $data['primerApellido'] = $_POST['primerApellido'];
         $data['segundoApellido'] = $_POST['segundoApellido'];
@@ -52,9 +53,21 @@ class Paciente extends CI_Controller
         /* $data['estatura'] = $_POST['estatura'];
         $data['peso'] = $_POST['peso']; */
 
-        $this->paciente_model->modificarPaciente($idPaciente, $data);
-        //$this->subirFoto($idPaciente, $foto);
-        redirect('paciente', 'refresh');
+        $this->form_validation->set_rules('ci', 'CI', 'callback_verificar_ci');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+
+        if ($this->form_validation->run() == false) {
+            $this->modificar();
+        } else {
+            $usuario = $this->usuario_model->recuperarUsuarioTutorPorCi($ci);
+            $result = $usuario->result();
+
+            if (count($result) > 0)
+            {   $this->paciente_model->modificarPaciente($idPaciente, $data);
+                //$this->subirFoto($idPaciente, $foto);
+                redirect('paciente', 'refresh');
+            }
+        }
     }
     public function agregar()
     {
@@ -97,7 +110,7 @@ class Paciente extends CI_Controller
             $this->load->view('inc_footer');
         } else {
             $this->load->model('usuario_model');
-            $usuario = $this->usuario_model->recuperarUsuarioPorCi($ci);
+            $usuario = $this->usuario_model->recuperarUsuarioTutorPorCi($ci);
             $result = $usuario->result();
 
             if (count($result) > 0)
@@ -115,7 +128,7 @@ class Paciente extends CI_Controller
         $user = $this->usuario_model->recuperarUsuarioTutorPorCi($ci);
 
         if ($user->num_rows() == 0) {
-            $this->form_validation->set_message('verificar_ci', 'El usuario tutor con el {field} no existe');
+            $this->form_validation->set_message('verificar_ci', 'El usuario tutor con el {field} '.$ci.' no existe');
             return false;
         }
 
