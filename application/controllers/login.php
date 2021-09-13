@@ -4,56 +4,127 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Login extends CI_Controller
 {
 
-    public function index()
-    {
-        $data['msg'] = $this->uri->segment(3);
-        if ($this->session->userdata('nombreUsuario')) {
-            redirect('login/panel', 'refresh');
-        } else {
-            $this->load->view('inc_header');
-            $this->load->view('loginForm', $data);
-            $this->load->view('inc_footer');
+  public function index()
+  {
+    $data['msg'] = $this->uri->segment(3);
+    if ($this->session->userdata('nombreUsuario')) {
+      redirect('login/panel', 'refresh');
+    } else {
+      $this->load->view('inc_header');
+      $this->load->view('loginForm', $data);
+      $this->load->view('inc_footer');
+    }
+  }
+
+  public function validarUsuario()
+  {
+    $nombreUsuario = $_POST['nombreUsuario'];
+    $contrasena = md5($_POST['contrasena']);
+    //$contrasena = $_POST['contrasena'];
+
+    $consulta = $this->usuario_model->validar($nombreUsuario, $contrasena);
+    if ($consulta->num_rows() > 0) {
+      foreach ($consulta->result() as $row) {
+        $this->session->set_userdata('idUsuario', $row->idUsuario);
+        $this->session->set_userdata('nombreUsuario', $row->nombreUsuario);
+        $this->session->set_userdata('tipoUsuario', $row->tipoUsuario);
+        $this->session->set_userdata('nombre', $row->nombre);
+        $this->session->set_userdata('primerApellido', $row->primerApellido);
+        $this->session->set_userdata('segundoApellido', $row->segundoApellido);
+        redirect('login/panel', 'refresh');
+      }
+    } else {
+      redirect('login/index/1', 'refresh');
+    }
+  }
+
+  public function panel()
+  {
+    if ($this->session->userdata('nombreUsuario')) {
+      if ($this->session->userdata('tipoUsuario') == 'admin') {
+        redirect('admin', 'refresh');
+      } else if ($this->session->userdata('tipoUsuario') == 'tutor') {
+        redirect('tutor', 'refresh');
+      }
+    } else {
+      redirect('login/index/2', 'refresh');
+    }
+  }
+
+  public function logout()
+  {
+    $this->session->sess_destroy();
+    redirect('login/index/3', 'refresh');
+  }
+
+  public function olvidoContrasena()
+  {
+    $this->load->view('inc_header');
+    $this->load->view('login/forgot_password');
+    $this->load->view('inc_footer');
+  }
+
+  public function resetPassword() {
+    $email = $_POST["email"];
+
+    $this->form_validation->set_rules('email', 'Email', 'callback_verificar_email');
+    $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+
+    if ($this->form_validation->run() == false) {
+      $this->load->view('inc_header');
+      $this->load->view('login/forgot_password');
+      $this->load->view('inc_footer');
+    } else {
+      //enviar el correo
+      //agregar en la bd un parametro reset
+        $this->load->model('usuario_model');
+        $usuario = $this->usuario_model->validarResetEmail($email);
+        $result = $usuario->result();
+
+        if (count($result) > 0)
+        {   $data['idUsuario'] = $result[0]->idUsuario;
+            $url = base_url()."login/reset/". $result[0]->idUsuario;
+
+            //$data["resetId"] = rand(5, 15);
+            //$usuario = $this->usuario_model->validarResetEmail($email);
+            var_dump($url);
+            
+            //redirect('login/envioReset', 'refresh');
         }
     }
+  }
 
-    public function validarUsuario()
-    {
-        $nombreUsuario = $_POST['nombreUsuario'];
-        $contrasena = md5($_POST['contrasena']);
-        //$contrasena = $_POST['contrasena'];
+  public function verificar_email($email)
+  {
+      $user = $this->usuario_model->validarResetEmail($email);
 
-        $consulta = $this->usuario_model->validar($nombreUsuario, $contrasena);
-        if ($consulta->num_rows() > 0) {
-            foreach ($consulta->result() as $row) {
-                $this->session->set_userdata('idUsuario', $row->idUsuario);
-                $this->session->set_userdata('nombreUsuario', $row->nombreUsuario);
-                $this->session->set_userdata('tipoUsuario', $row->tipoUsuario);
-                $this->session->set_userdata('nombre', $row->nombre);
-                $this->session->set_userdata('primerApellido', $row->primerApellido);
-                $this->session->set_userdata('segundoApellido', $row->segundoApellido);
-                redirect('login/panel', 'refresh');
-            }
-        } else {
-            redirect('login/index/1', 'refresh');
-        }
-    }
+      if ($user->num_rows() == 0) {
+          $this->form_validation->set_message('verificar_email', 'El usuario con el {field} '.$email.' no existe');
+          return false;
+      }
 
-    public function panel()
-    {
-        if ($this->session->userdata('nombreUsuario')) {
-            if ($this->session->userdata('tipoUsuario') == 'admin') {
-                redirect('admin', 'refresh');
-            } else if ($this->session->userdata('tipoUsuario') == 'tutor') {
-                redirect('tutor', 'refresh');
-            }
-        } else {
-            redirect('login/index/2', 'refresh');
-        }
-    }
+      return true;
+  }
 
-    public function logout()
-    {
-        $this->session->sess_destroy();
-        redirect('login/index/3', 'refresh');
-    }
+  public function reset($id) {
+    $data["idUsuario"] = $id;
+    $this->load->view('inc_header');
+    $this->load->view('login/recover_password', $data);
+    $this->load->view('inc_footer');
+  }
+
+  public function envioReset() 
+  {
+    $this->load->view('inc_header');
+    $this->load->view('login/envio-reset');
+    $this->load->view('inc_footer');
+  }
+
+  public function guardarBd()
+  {
+    $idUsuario = $_POST["idUsuario"];
+    $data["contrasena"] = md5($_POST["nuevaContrasena"]);
+    $this->usuario_model->modificarUsuario($idUsuario, $data);
+    redirect("login", "refresh");
+  }
 }

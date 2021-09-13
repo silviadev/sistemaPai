@@ -50,6 +50,8 @@ class Usuario extends CI_Controller
       $data['habilitado'] = false;
     }
 
+    $data['idAuthor'] = $this->session->userdata('idUsuario');
+
     $this->usuario_model->agregarUsuario($data);
     redirect('usuario/index', 'refresh');
   }
@@ -88,14 +90,16 @@ class Usuario extends CI_Controller
       $data['habilitado'] = false;
     }
 
+    $data['idAuthor'] = $this->session->userdata('idUsuario');
     $this->usuario_model->modificarUsuario($idUsuario, $data);
     redirect('usuario/index', 'refresh');
   }
 
   public function eliminarbd()
-  {
+  { 
+    $idAutor = $this->session->userdata('idUsuario');
     $idUsuario = $_POST['idUsuario'];
-    $this->usuario_model->eliminarUsuario($idUsuario);
+    $this->usuario_model->eliminarUsuario($idUsuario, $idAutor);
     redirect('usuario/index', 'refresh');
   }
 

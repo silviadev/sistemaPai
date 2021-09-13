@@ -15,8 +15,22 @@
               <div class="form-group">
                 <label>CI del usuario tutor *</label>
                 <input type="text" name="ci" class="form-control" placeholder="Escriba su numero de carnet de identidad" required>
+                
                 <?php echo form_error('ci', '<div class="error">', '</div>')?>
               </div>
+
+              <div class="form-group">
+                  <label>Minimal</label>
+                  <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">Alabama</option>
+                    <option>Alaska</option>
+                    <option>California</option>
+                    <option>Delaware</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Washington</option>
+                  </select>
+                </div>
 
               <div class="form-group">
                 <label>Nombre *</label>
@@ -72,6 +86,10 @@
 
 <!-- jQuery -->
 <script src="<?php echo base_url(); ?>/adminLte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="<?php echo base_url(); ?>/adminLte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="<?php echo base_url(); ?>/adminLte/plugins/select2/js/select2.full.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
 
@@ -82,5 +100,8 @@
 
     //Money Euro
     $('[data-mask]').inputmask();
+
+    $('.select2').select2();
+
   });
 </script>

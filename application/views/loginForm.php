@@ -62,9 +62,11 @@ switch ($msg) {
         <?php
         echo form_close();
         ?>
-        <!-- <p class="mb-1">
-          <a href="forgot-password.html">I forgot my password</a>
-        </p> -->
+  
+        <p class="mb-1">
+          <a href="<?php echo base_url() ?>login/olvidoContrasena">Olvide mi contraseña</a>
+        </p>
+   
         <!-- <p class="mb-0">
           <a href="register.html" class="text-center">Registrar un nuevo usuario</a>
         </p> -->

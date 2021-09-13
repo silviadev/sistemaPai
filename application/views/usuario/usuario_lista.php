@@ -44,6 +44,7 @@
                     <th>CI</th>
                     <th>Direccion</th>
                     <th>Tipo de usuario</th>
+                    <th>Nombre Usuario</th>
                     <th>Correo</th>
                     <th>De alta</th>
                     <th></th>
@@ -62,6 +63,7 @@
                       <td><?php echo $row->ci; ?></td>
                       <td><?php echo $row->direccion; ?></td>
                       <td><?php echo $row->tipoUsuario; ?></td>
+                      <td><?php echo $row->nombreUsuario; ?></td>
                       <td><?php echo $row->correo; ?></td>
                       <td><?php echo ($row->habilitado == 1) ? "Habilitado": "Deshabilitado"; ?></td>
                       <td>
