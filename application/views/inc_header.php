@@ -71,6 +71,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/select2/css/select2.min.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini dark-mode1 text-sm">

@@ -82,14 +82,20 @@ class Login extends CI_Controller
         $result = $usuario->result();
 
         if (count($result) > 0)
-        {   $data['idUsuario'] = $result[0]->idUsuario;
-            $url = base_url()."login/reset/". $result[0]->idUsuario;
-
-            //$data["resetId"] = rand(5, 15);
-            //$usuario = $this->usuario_model->validarResetEmail($email);
-            var_dump($url);
-            
-            //redirect('login/envioReset', 'refresh');
+        {   $idUsuario = $result[0]->idUsuario;
+            $data['codigoReset'] = mt_Rand(10000, 99999);
+            $id =  $this->usuario_model->guardarCodigoReset($data, $idUsuario);
+            if (!$id)
+            {
+              
+              redirect('login/forgot_password', 'refresh');
+            }
+            else {
+              $data['idUsuario'] = $idUsuario;
+              $this->load->view('inc_header');
+              $this->load->view('login/codigo_reset', $data);
+              $this->load->view('inc_footer');
+            }
         }
     }
   }
@@ -126,5 +132,42 @@ class Login extends CI_Controller
     $data["contrasena"] = md5($_POST["nuevaContrasena"]);
     $this->usuario_model->modificarUsuario($idUsuario, $data);
     redirect("login", "refresh");
+  }
+
+  public function verificarCodigoReset()
+  {
+    $data['idUsuario'] = $_POST['idUsuario'];
+    $this->load->view('inc_header');
+    $this->load->view('login/recover_password', $data);
+    $this->load->view('inc_footer');
+    //$codigoReset = $_POST["codigoReset"];
+    /* $this->form_validation->set_rules('codigoReset', 'Codigo Reset', 'callback_verificar_codigoReset');
+    $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+
+    if ($this->form_validation->run() == false) {
+      $data['idUsuario'] = 5;
+      $this->load->view('inc_header');
+      $this->load->view('login/codigo_reset', $data);
+      $this->load->view('inc_footer');
+    } else {
+      var_dump("dkfl;as;dfk;lasdf");
+      $this->load->view('inc_header');
+      $this->load->view('login/recover_password');
+      $this->load->view('inc_footer');
+    } */
+  }
+
+  public function callback_verificar_codigoReset($codigoReset)
+  {
+
+    $idUsuario = 5;//$_POST['idUsuario'];  
+    $user = $this->usuario_model->validarResetCodigo($codigoReset, $idUsuario);
+
+    if ($user->num_rows() == 0) {
+        $this->form_validation->set_message('verificar_codigoReset', 'El usuario con el {field} '.$codigoReset.' no existe');
+        return false;
+    }
+
+    return true;
   }
 }

@@ -115,4 +115,27 @@ class Usuario_model extends CI_Model {
         $this->db->where('estado', 1);
         return $this->db->get();
     }
+
+    public function guardarCodigoReset($data, $idUsuario)
+    {
+        $data['fechaActualizacion'] = $this->fechaActualizacion;
+        $this->db->where('idUsuario', $idUsuario);
+        $this->db->update('usuario', $data);
+        if($this->db->affected_rows() > 0){
+            return $idUsuario;
+         } else {
+            return false;
+         }
+    }
+
+    public function validarResetCodigo($codigoReset, $idUsuario)
+    {
+        $this->db->select('*');
+        $this->db->from('usuario');
+        $this->db->where('idUsuario', $idUsuario);
+        $this->db->where('codigoReset', $codigoReset);
+        $this->db->where('habilitado', 1);
+        $this->db->where('estado', 1);
+        return $this->db->get();
+    }
 }

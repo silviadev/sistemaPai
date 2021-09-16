@@ -20,19 +20,6 @@
               </div>
 
               <div class="form-group">
-                  <label>Minimal</label>
-                  <select class="form-control select2" style="width: 100%;">
-                    <option selected="selected">Alabama</option>
-                    <option>Alaska</option>
-                    <option>California</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
-                  </select>
-                </div>
-
-              <div class="form-group">
                 <label>Nombre *</label>
                 <input type="text" name="nombre" class="form-control" placeholder="Ingrese el Nombre" required>
               </div>
@@ -90,6 +77,7 @@
 <script src="<?php echo base_url(); ?>/adminLte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Select2 -->
 <script src="<?php echo base_url(); ?>/adminLte/plugins/select2/js/select2.full.min.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function() {
 
@@ -104,4 +92,25 @@
     $('.select2').select2();
 
   });
+</script>
+
+
+
+
+
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<script>
+    $(function () {
+      $('.select2').select2()
+    });
 </script>
