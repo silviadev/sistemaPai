@@ -58,8 +58,8 @@ class Vacuna extends CI_Controller
   {
     $data['nombre'] = $_POST['nombre'];
     $data['descripcion'] = $_POST['descripcion'];
-
-    $idVacuna = $this->vacuna_model->registrarVacuna($data);
+    $idAuthor = $this->session->userdata('idUsuario');
+    $idVacuna = $this->vacuna_model->registrarVacuna($data, $idAuthor);
 
     $items1 = [];
     $items2 = [];
@@ -81,7 +81,7 @@ class Vacuna extends CI_Controller
 
       $dataDosis["idVacuna"] = $idVacuna;
       $dataDosis["idVia"] = $via;
-      $dataDosis["idCategoriaDosis"] = $dosis;
+      $dataDosis["idCategoriadosis"] = $dosis;
       $dataDosis["rangoMesInicial"] = $rangoMesInicial;
       $dataDosis["rangoMesFinal"] = ($rangoMesFinal > 0) ? $rangoMesFinal : -1;
       $dataDosis["cantidad"] = $cantidad;
@@ -90,7 +90,7 @@ class Vacuna extends CI_Controller
         count($items1) > 0 && count($dataDosis) > 0 && count($dataDosis) > 0 &&
         count($dataDosis) > 0 && count($dataDosis) > 0
       ) {
-        $this->dosis_model->registrarDosis($dataDosis);
+        $this->dosis_model->registrarDosis($dataDosis, $idAuthor);
       }
 
       $via = next($items1);
@@ -109,6 +109,7 @@ class Vacuna extends CI_Controller
     $idVacuna = $_POST['idVacuna'];
     $vacuna = $this->vacuna_model->recuperarVacunaPorId($idVacuna);
     $result = [];
+    
     if ($vacuna->num_rows() > 0) {
       foreach ($vacuna->result() as $row) {
         $res = array(
@@ -146,8 +147,8 @@ class Vacuna extends CI_Controller
     $idVacuna = $_POST['idVacuna'];
     $data['nombre'] = $_POST['nombre'];
     $data['descripcion'] = $_POST['descripcion'];
-
-    $this->vacuna_model->actualizarVacuna($idVacuna, $data);
+    $idAuthor = $this->session->userdata('idUsuario');
+    $this->vacuna_model->actualizarVacuna($idVacuna, $data, $idAuthor);
     //Actualizar dosis
 
     $ids = [];
@@ -173,7 +174,7 @@ class Vacuna extends CI_Controller
 
       $dataDosis["idVacuna"] = $idVacuna;
       $dataDosis["idVia"] = $via;
-      $dataDosis["idCategoriaDosis"] = $dosis;
+      $dataDosis["idCategoriadosis"] = $dosis;
       $dataDosis["rangoMesInicial"] = $rangoMesInicial;
       $dataDosis["rangoMesFinal"] = ($rangoMesFinal > 0) ? $rangoMesFinal : -1;
       $dataDosis["cantidad"] = $cantidad;
@@ -181,11 +182,11 @@ class Vacuna extends CI_Controller
       if (
         count($items1) > 0 && count($items2) > 0 && count($items3) > 0 &&
         count($items4) > 0 && count($items5) > 0 && $id !== "") {
-        $this->dosis_model->actualizarDosis($id, $dataDosis);
+        $this->dosis_model->actualizarDosis($id, $dataDosis, $idAuthor);
       }
       else if (count($items1) > 0 && count($items2) > 0 && count($items3) > 0 &&
         count($items4) > 0 && count($items5) > 0 && $id == "") {
-        $this->dosis_model->registrarDosis($dataDosis);
+        $this->dosis_model->registrarDosis($dataDosis, $idAuthor);
       }
 
       $id = next($ids);
@@ -204,7 +205,7 @@ class Vacuna extends CI_Controller
       $id = current($idDosisEliminar);
 
       if (count($idDosisEliminar) > 0 && $id !== "") {
-        $this->dosis_model->eliminarDosis($id);
+        $this->dosis_model->eliminarDosis($id, $idAuthor);
       }
       
       $id = next($idDosisEliminar);
@@ -218,8 +219,9 @@ class Vacuna extends CI_Controller
   public function eliminarbd()
   {
     $idVacuna = $_POST['idVacuna'];
-    $this->dosis_model->eliminarDosisPorIdVacuna($idVacuna);
-    $this->vacuna_model->eliminarVacuna($idVacuna);
+    $idAuthor = $this->session->userdata('idUsuario');
+    $this->dosis_model->eliminarDosisPorIdVacuna($idVacuna, $idAuthor);
+    $this->vacuna_model->eliminarVacuna($idVacuna, $idAuthor);
     redirect('vacuna', 'refresh');
   }
 }

@@ -64,7 +64,7 @@
                   <?php
                   foreach ($categoriaDosis->result() as $row) {
                   ?>
-                    <option value="<?php echo $row->idCategoriaDosis; ?>"><?php echo $row->dosis; ?></option>
+                    <option value="<?php echo $row->idCategoriadosis; ?>"><?php echo $row->dosis; ?></option>
 
                   <?php  }  ?>
                 </select>

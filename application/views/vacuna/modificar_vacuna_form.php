@@ -70,9 +70,10 @@ foreach ($infoVacuna as $row) {
                             <select id="dosis-vacuna" class="form-control" name="dosis[]" aria-label="seleccionar por defecto">
 
                               <?php
+                              var_dump($categoriaDosis->result());
                               foreach ($categoriaDosis->result() as $row) {
                               ?>
-                                <option value="<?php echo $row->idCategoriaDosis; ?>" <?php set_selected($row->idCategoriaDosis, $rw->idCategoriaDosis); ?>><?php echo $row->dosis; ?></option>
+                                <option value="<?php echo $row->idCategoriadosis; ?>" <?php set_selected($row->idCategoriadosis, $rw->idCategoriadosis); ?>><?php echo $row->dosis; ?></option>
 
                               <?php  }  ?>
 
@@ -97,6 +98,7 @@ foreach ($infoVacuna as $row) {
                           <div class="form-group">
                             <label for="cantidad-dosis" class="form-label">Cantidad ml/gotas*</label>
                             <input id="cantidad-dosis" type="text" name="cantidad[]" class="form-control" placeholder="Escriba la cantidad" value="<?php echo $rw->cantidad; ?>" required>
+                            <small id="emailHelp" class="form-text text-muted">Ejm. 0.01 ml o 1 gota</small>
                           </div>
                         </div>
                         <div class="col-sm col-md-auto">
@@ -141,7 +143,7 @@ foreach ($infoVacuna as $row) {
                     <?php
                     foreach ($categoriaDosis->result() as $row) {
                     ?>
-                      <option value="<?php echo $row->idCategoriaDosis; ?>"><?php echo $row->dosis; ?></option>
+                      <option value="<?php echo $row->idCategoriadosis; ?>"><?php echo $row->dosis; ?></option>
 
                     <?php  }  ?>
                   </select>
@@ -165,6 +167,7 @@ foreach ($infoVacuna as $row) {
                 <div class="form-group">
                   <label for="cantidad-dosis" class="form-label">Cantidad ml/gotas*</label>
                   <input id="cantidad-dosis" type="text" name="cantidad[]" class="form-control" placeholder="Escriba la cantidad" required>
+                  <small id="emailHelp" class="form-text text-muted">Ejm. 0.01 ml o 1 gota</small>
                 </div>
               </div>
               <div class="col-sm col-md-auto">
