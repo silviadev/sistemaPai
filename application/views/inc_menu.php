@@ -99,7 +99,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url() ?>vacuna" class="nav-link">
+          <a href="<?php echo base_url() ?>pacienteVacuna" class="nav-link">
             <i class="nav-icon fas fa-syringe"></i>
             <p>
               Registrar vacuna a paciente
