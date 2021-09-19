@@ -1,41 +1,87 @@
 <div class="content-wrapper">
-  <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="col col-lg-6">
+  <!-- /.card-header -->
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>CI tutor</label>
+          <select class="form-control select2bs4" style="width: 100%;">
+           <!--  <option selected="selected">Alabama</option> -->
+            <?php
+            foreach ($usuario->result() as $row) {
+            ?>
+              <option value="<?php echo $row->idUsuario; ?>"><?php echo $row->nombre."(".$row->ci.")"; ?></option>
+            <?php
+            }
+            ?>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Dosis</label>
+          <select class="select2bs4" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
+            <option>Alabama</option>
+            <option>Alaska</option>
+            <option>California</option>
+            <option>Delaware</option>
+            <option>Tennessee</option>
+            <option>Texas</option>
+            <option>Washington</option>
+          </select>
+        </div>
+        <!-- /.form-group -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Paciente</label>
+          <select class="form-control select2bs4" style="width: 100%;">
+            <option selected="selected">Alabama</option>
+            <option>Alaska</option>
+            <option>California</option>
+            <option>Delaware</option>
+            <option>Tennessee</option>
+            <option>Texas</option>
+            <option>Washington</option>
+          </select>
+        </div>
 
-        <div class="card card-primary mt-3">
-          <div class="card-header">
-            <div class="card-title">Registrar vacuna a paciente</div>
+        <div class="form-group">
+          <label>Siguiente dosis</label>
+          <select class="select2bs4" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
+            <option>Alabama</option>
+            <option>Alaska</option>
+            <option>California</option>
+            <option>Delaware</option>
+            <option>Tennessee</option>
+            <option>Texas</option>
+            <option>Washington</option>
+          </select>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Fecha proxima vacuna:</label>
+              <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
+                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- /.card-header -->
-          <div class="card-body">
-           Formulario paciente
-          </div>
+        </div>
+        <!-- /.form-group -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Registrar</button>
         </div>
       </div>
     </div>
+    <!-- /.row -->
   </div>
 </div>
-
-<!-- jQuery -->
-<script src="<?php echo base_url(); ?>/adminLte/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="<?php echo base_url(); ?>/adminLte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Select2 -->
-<script src="<?php echo base_url(); ?>/adminLte/plugins/select2/js/select2.full.min.js"></script>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-
-    //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', {
-      'placeholder': 'dd/mm/yyyy'
-    });
-
-    //Money Euro
-    $('[data-mask]').inputmask();
-
-    $('.select2').select2();
-
-  });
-</script>
+</div>

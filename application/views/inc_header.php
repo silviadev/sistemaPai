@@ -63,17 +63,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   
-
-   <!-- Google Font: Source Sans Pro -->
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-
-
-    <!-- Select2 -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/select2/css/select2.min.css">
 
 </head>
 

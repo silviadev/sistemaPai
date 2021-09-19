@@ -32,6 +32,9 @@ class PacienteVacuna extends CI_Controller
       $data['primerApellido']  = $this->session->userdata('primerApellido');
       $data['segundoApellido']  = $this->session->userdata('segundoApellido');
 
+      $lista = $this->usuario_model->lista();
+      $data['usuario'] = $lista;
+
       $this->load->view('inc_header');
       $this->load->view('inc_menu', $data);
       $this->load->view('paciente_vacuna/paciente_vacuna_form', $data);

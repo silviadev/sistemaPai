@@ -44,6 +44,14 @@
  <!-- AdminLTE for demo purposes -->
  <script src="<?php echo base_url(); ?>/adminLte/dist/js/demo.js"></script>
  <!-- Page specific script -->
+
+ <!-- Select2 -->
+<script src="<?php echo base_url(); ?>adminLte/plugins/select2/js/select2.full.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="<?php echo base_url(); ?>adminLte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- BS-Stepper -->
+<script src="<?php echo base_url(); ?>adminLte/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+
  <script>
    $(function() {
      $("#example1").DataTable({
@@ -265,8 +273,36 @@
        "responsive": true,
      });
 
+
+     $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    });
+    //Date picker
+    $('#reservationdate').datetimepicker({
+        format: 'L'
+    });
    });
  </script>
  </body>
 
  </html>
+
+
+
+ 
+
+
+
+<script>
+  $(function () {
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    });
+    //Date picker
+    $('#reservationdate').datetimepicker({
+        format: 'L'
+    });
+  })
+</script>
+</body>
+</html>
