@@ -14,9 +14,20 @@
 
               <div class="form-group">
                 <label>CI del usuario tutor *</label>
-                <input type="text" name="ci" class="form-control" placeholder="Escriba su numero de carnet de identidad" required>
-                
-                <?php echo form_error('ci', '<div class="error">', '</div>')?>
+                <select class="form-control select2bs4 select-tutor" style="width: 100%;" name="usuario_tutor" required>
+                  <!--  <option selected="selected">Alabama</option> -->
+                  <option></option>
+                  <?php
+                  foreach ($usuario->result() as $row) {
+                    $ci = ($row->ci != "") ? "-" . $row->ci: $row->ci;
+                  ?>
+                    <option value="<?php echo $row->idUsuario; ?>"><?php echo $row->nombre . $ci; ?></option>
+                  <?php
+                  }
+                  ?>
+                </select>
+
+                <?php echo form_error('ci', '<div class="error">', '</div>') ?>
               </div>
 
               <div class="form-group">
@@ -92,25 +103,4 @@
     $('.select2').select2();
 
   });
-</script>
-
-
-
-
-
-
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Select2 -->
-<script src="../../plugins/select2/js/select2.full.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-<script>
-    $(function () {
-      $('.select2').select2()
-    });
 </script>

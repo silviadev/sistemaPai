@@ -32,13 +32,16 @@ class Paciente extends CI_Controller
         $data['primerApellido']  = $this->session->userdata('primerApellido');
         $data['segundoApellido']  = $this->session->userdata('segundoApellido');
 
+        $lista = $this->usuario_model->lista();
+        $data['usuario'] = $lista;
+
         $this->load->view('inc_header');
         $this->load->view('inc_menu', $data);
         $this->load->view('paciente/paciente_modificar', $data);
         $this->load->view('inc_footer');
     }
 
-    public function modificarbd()
+    /*public function modificarbd()
     {
         $this->load->helper('funciones');
         $idPaciente = $_POST['idPaciente'];
@@ -49,9 +52,6 @@ class Paciente extends CI_Controller
         $data['fechaNacimiento'] = $_POST['fechaNacimiento'];
         $data['edad'] = calculaEdad($data['fechaNacimiento']);
         $data['sexo'] = $_POST['sexo'];
-        //$foto = $_POST["foto"];
-        /* $data['estatura'] = $_POST['estatura'];
-        $data['peso'] = $_POST['peso']; */
 
         $this->form_validation->set_rules('ci', 'CI', 'callback_verificar_ci');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -64,11 +64,27 @@ class Paciente extends CI_Controller
 
             if (count($result) > 0)
             {   $this->paciente_model->modificarPaciente($idPaciente, $data);
-                //$this->subirFoto($idPaciente, $foto);
                 redirect('paciente', 'refresh');
             }
         }
+    }*/
+
+    public function modificarbd()
+    {
+        $this->load->helper('funciones');
+        $idPaciente = $_POST['idPaciente'];
+        $data['idUsuario'] = $_POST['usuario_tutor'];
+        $data['nombre'] = $_POST['nombre'];
+        $data['primerApellido'] = $_POST['primerApellido'];
+        $data['segundoApellido'] = $_POST['segundoApellido'];
+        $data['fechaNacimiento'] = $_POST['fechaNacimiento'];
+        $data['edad'] = calculaEdad($data['fechaNacimiento']);
+        $data['sexo'] = $_POST['sexo'];
+
+        $this->paciente_model->modificarPaciente($idPaciente, $data);
+        redirect('paciente', 'refresh');
     }
+
     public function agregar()
     {
         
@@ -77,13 +93,16 @@ class Paciente extends CI_Controller
         $data['primerApellido']  = $this->session->userdata('primerApellido');
         $data['segundoApellido']  = $this->session->userdata('segundoApellido');
 
+        $lista = $this->usuario_model->lista();
+        $data['usuario'] = $lista;
+
         $this->load->view('inc_header');
         $this->load->view('inc_menu', $data);
         $this->load->view('paciente/paciente_agregar');
         $this->load->view('inc_footer');
     }
 
-    public function crearPaciente()
+    /*public function crearPaciente()
     {
         $this->load->helper('funciones');
         $ci = $_POST['ci'];
@@ -93,8 +112,6 @@ class Paciente extends CI_Controller
         $data['fechaNacimiento'] = $_POST['fechaNacimiento'];
         $data['edad'] = calculaEdad($data['fechaNacimiento']);
         $data['sexo'] = $_POST['sexo'];
-       /*  $data['estatura'] = $_POST['estatura'];
-        $data['peso'] = $_POST['peso']; */
         $this->form_validation->set_rules('ci', 'CI', 'callback_verificar_ci');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
@@ -118,9 +135,21 @@ class Paciente extends CI_Controller
                 $this->paciente_model->agregarPaciente($data);
                 redirect('paciente/index', 'refresh');
             }
-        }
-
-        
+        }usuario_tutor
+    }*/
+    public function crearPaciente()
+    {
+        $this->load->helper('funciones');
+        $data['idUsuario'] = $_POST['usuario_tutor'];
+        $data['nombre'] = $_POST['nombre'];
+        $data['primerApellido'] = $_POST['primerApellido'];
+        $data['segundoApellido'] = $_POST['segundoApellido'];
+        $data['fechaNacimiento'] = $_POST['fechaNacimiento'];
+        $data['edad'] = calculaEdad($data['fechaNacimiento']);
+        $data['sexo'] = $_POST['sexo'];
+       
+        $this->paciente_model->agregarPaciente($data);
+        redirect('paciente/index', 'refresh');
     }
 
     public function verificar_ci($ci)

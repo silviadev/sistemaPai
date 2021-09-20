@@ -15,8 +15,18 @@ foreach ($infoPaciente->result() as $row) {
 
             <div class="form-group">
               <label>CI del usuario tutor *</label>
-              <input type="text" name="ci" class="form-control" placeholder="Escriba su numero de carnet de identidad" value="<?php echo $row->ci; ?>" required>
-              <?php echo form_error('ci', '<div class="error">', '</div>')?>
+              <select class="form-control select2bs4 select-tutor" style="width: 100%;" name="usuario_tutor" required>
+                <option selected="selected"><?php echo $row->nombreUsuario . "-" . $row->ci . ""; ?></option>
+                <?php
+                foreach ($usuario->result() as $rowUsuario) {
+                  $ci = ($rowUsuario->ci != "") ? "-" . $rowUsuario->ci: $rowUsuario->ci;
+                ?>
+                  <option value="<?php echo $rowUsuario->idUsuario; ?>"><?php echo $rowUsuario->nombre . $ci; ?></option>
+                <?php
+                }
+                ?>
+              </select>
+              <?php echo form_error('ci', '<div class="error">', '</div>') ?>
             </div>
 
             <div class="form-group">
@@ -49,13 +59,13 @@ foreach ($infoPaciente->result() as $row) {
               <label>Sexo</label>
               <div class="form-group clearfix">
                 <div class="icheck-primary d-inline">
-                  <input type="radio" id="radioFemenino" name="sexo" value="femenino" <?php echo ($row->sexo == "femenino")? "checked":"" ?>>
+                  <input type="radio" id="radioFemenino" name="sexo" value="femenino" <?php echo ($row->sexo == "femenino") ? "checked" : "" ?>>
                   <label for="radioFemenino">
                     Femenino
                   </label>
                 </div>
                 <div class="icheck-primary d-inline">
-                  <input type="radio" id="radioMasculino" name="sexo" value="masculino" <?php echo ($row->sexo == "masculino")? "checked":"" ?>>
+                  <input type="radio" id="radioMasculino" name="sexo" value="masculino" <?php echo ($row->sexo == "masculino") ? "checked" : "" ?>>
                   <label for="radioMasculino">
                     Masculino
                   </label>
@@ -68,11 +78,14 @@ foreach ($infoPaciente->result() as $row) {
               //$foto = $row->foto;
               //if ($foto == "") {
               ?>
-                <!-- <img width="100" src="<?php //echo base_url(); ?>/uploads/paciente/user_default.png"> -->
+              <!-- <img width="100" src="<?php //echo base_url(); 
+                                          ?>/uploads/paciente/user_default.png"> -->
               <?php
               //} else {
               ?>
-                <!-- <img width="100" src="<?php //echo base_url(); ?>/uploads/paciente/<?php //echo $foto; ?>"> -->
+              <!-- <img width="100" src="<?php //echo base_url(); 
+                                          ?>/uploads/paciente/<?php //echo $foto; 
+                                                                                      ?>"> -->
               <?php
               //}
               ?>
@@ -81,7 +94,8 @@ foreach ($infoPaciente->result() as $row) {
             <!-- <div class="form-group">
               <div>
                 <label>Subir Foto</label>
-                <input type="hidden" name="idPaciente" value="<?php //echo $row->idPaciente; ?>" />
+                <input type="hidden" name="idPaciente" value="<?php //echo $row->idPaciente; 
+                                                              ?>" />
                 <input type="file" name="userfile" >
               </div>
             </div> -->

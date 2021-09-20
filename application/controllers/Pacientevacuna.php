@@ -26,7 +26,6 @@ class PacienteVacuna extends CI_Controller
 
   public function registrarPacienteFormulario()
   {
-      var_dump("llega hasta aqui!!!!!");
       $data['tipoUsuario']  = $this->session->userdata('tipoUsuario');
       $data['nombre']  = $this->session->userdata('nombre');
       $data['primerApellido']  = $this->session->userdata('primerApellido');
@@ -35,9 +34,38 @@ class PacienteVacuna extends CI_Controller
       $lista = $this->usuario_model->lista();
       $data['usuario'] = $lista;
 
+      $dosis = $this->dosis_model->listaDosis();
+      $data['listaDosis'] = $dosis;
+
       $this->load->view('inc_header');
       $this->load->view('inc_menu', $data);
       $this->load->view('paciente_vacuna/paciente_vacuna_form', $data);
       $this->load->view('inc_footer');
+  }
+
+  public function registrarPacienteVacuna()
+  {
+    //$tutor = $_POST['usuario_tutor'];
+    //var_dump($tutor);
+  }
+
+  public function buscarPacientes()
+  {
+    $idTutor = $_POST['idTutor'];
+    $pacientes = $this->paciente_model->recuperarPacientesPorIdUsuario($idTutor);
+    echo ( json_encode ( $pacientes->result() ) );
+  }
+
+  public function buscarDosisPaciente()
+  {
+    $idPaciente = 1;//$_POST['idPaciente'];
+    $dosis = $this->dosis_model->listaDosisPaciente($idPaciente);
+    if (count($dosis->result()) > 0) {
+      echo ( json_encode ( $dosis->result() ) );
+    }
+    else {
+      $dosis = $this->dosis_model->listaDosis($idPaciente);
+      echo ( json_encode ( $dosis->result() ) );
+    }
   }
 }

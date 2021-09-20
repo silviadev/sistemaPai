@@ -1,8 +1,3 @@
-<?php
-                 var_dump($vacuna->result());
-
-                  ?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
  

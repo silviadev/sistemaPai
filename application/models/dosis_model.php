@@ -12,24 +12,38 @@ class Dosis_model extends CI_Model
     $this->fechaCreacion = date("Y-m-d H:i:s");
     $this->fechaActualizacion = date("Y-m-d H:i:s");
   }
-/*   public function lista()
-  {
-    $this->db->select('v.idVacuna, v.nombre, v.descripcion, via.nombre as via, d.orden as dosis, d.orden, d.orden');
-    $this->db->from('vacuna v');
-    $this->db->join('dosis d', 'v.idVacuna = d.idVacuna', 'left');
-    $this->db->join('via', 'via.idVia = d.idVia');
-    return $this->db->get();
-  } */
 
-  public function registrarDosis($data, $idAutor)
+  public function listaDosis()
   {
-    $data['fechaCreacion'] = $this->fechaCreacion;
-    $data['estado'] = $this->estado;
-    $data['idAuthor'] = $idAutor;
-    $this->db->insert('dosis', $data);
-    $insert_id = $this->db->insert_id();
-    return  $insert_id;
+    $this->db->select(
+      'd.idDosis, d.idVia, d.idCategoriadosis, d.rangoMesInicial, d.rangoMesFinal,
+      d.cantidad, d.idVacuna, d.estado, vi.nombre as viaNombre, c.dosis as dosisNombre,
+      v.nombre as vacunaNombre');
+    $this->db->from('dosis d');
+    $this->db->join('via vi', 'vi.idVia = d.idVia');
+    $this->db->join('vacuna v', 'd.idVacuna = v.idVacuna');
+    $this->db->join('categoriadosis c', 'd.idCategoriadosis = c.idCategoriadosis');
+    $this->db->where('d.estado', 1);
+    return $this->db->get();
   }
+
+  public function listaDosisPaciente($idPaciente)
+  {
+    $this->db->select(
+      'd.idDosis, d.idVia, d.idCategoriadosis, d.rangoMesInicial, d.rangoMesFinal,
+      d.cantidad, d.idVacuna, d.estado, vi.nombre as viaNombre, c.dosis as dosisNombre,
+      v.nombre as vacunaNombre');
+    $this->db->from('dosis d');
+    $this->db->join('via vi', 'vi.idVia = d.idVia');
+    $this->db->join('vacuna v', 'd.idVacuna = v.idVacuna');
+    $this->db->join('categoriadosis c', 'd.idCategoriadosis = c.idCategoriadosis');
+    $this->db->join('paciente p', 'p.idPaciente = d.idPaciente');
+    $this->db->where('d.estado', 1);
+    $this->db->where('d.idPaciente', $idPaciente);
+    return $this->db->get();
+  }
+
+  
 
   public function listaDosisPorIdVacuna($idVacuna)
   {
@@ -41,6 +55,16 @@ class Dosis_model extends CI_Model
     $this->db->join('vacuna v', 'd.idVacuna = v.idVacuna');
     $this->db->join('categoriadosis c', 'd.idCategoriadosis = c.idCategoriadosis');
     return $this->db->get();
+  }
+
+  public function registrarDosis($data, $idAutor)
+  {
+    $data['fechaCreacion'] = $this->fechaCreacion;
+    $data['estado'] = $this->estado;
+    $data['idAuthor'] = $idAutor;
+    $this->db->insert('dosis', $data);
+    $insert_id = $this->db->insert_id();
+    return  $insert_id;
   }
 
   public function actualizarDosis($idDosis, $data, $idAutor)
