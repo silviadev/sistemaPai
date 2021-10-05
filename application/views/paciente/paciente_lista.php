@@ -45,6 +45,7 @@
                     <th>Fecha de nacimiento</th>
                     <th>Edad</th>
                     <th>Sexo</th>
+                    <th>Codigo</th>
                     <!-- <th>Foto</th> -->
                     <th></th>
                     <th></th>
@@ -62,6 +63,7 @@
                       <td><?php echo $row->fechaNacimiento; ?></td>
                       <td><?php echo $row->edad; ?></td>
                       <td><?php echo $row->sexo; ?></td>
+                      <td><?php echo $row->codigo; ?></td>
                       <!-- <td> -->
                         <?php
                         /* $foto = $row->foto;

@@ -73,13 +73,15 @@
             <div class="col-sm">
               <div class="form-group">
                 <div class="row">
-                  <div class="col">
-                    <label>Inicial meses *</label>
-                    <input id="rango-inicial" type="number" name="rangoMesInicial[]" class="form-control" value="0" required>
+                  <label>Edad (meses)</label>
+                </div>
+                <div class="row">
+                  <div class="col-sm m-0 h-0">
+                    <input id="rango-inicial" type="number" name="rangoMesInicial[]"  min="0" class="form-control" value="0" required>
                   </div>
-                  <div class="col">
-                    <label>Final meses</label>
-                    <input id="rango-final" type="number" name="rangoMesFinal[]" class="form-control">
+                  <div class="pr-1">A</div>
+                  <div class="col-sm m-0 p-0">
+                    <input id="rango-final" type="number" name="rangoMesFinal[]"  min="0" class="form-control">
                   </div>
                 </div>
               </div>
@@ -88,6 +90,7 @@
               <div class="form-group">
                 <label for="cantidad-dosis" class="form-label">Cantidad ml/gotas*</label>
                 <input id="cantidad-dosis" type="text" name="cantidad[]" class="form-control" placeholder="Escriba la cantidad" required>
+                <small id="emailHelp" class="form-text text-muted">Cantidad 0.1 ml o 1 gota</small>
               </div>
             </div>
             <div class="col-sm col-md-auto">

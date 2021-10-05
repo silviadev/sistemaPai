@@ -32,7 +32,7 @@ class Paciente extends CI_Controller
         $data['primerApellido']  = $this->session->userdata('primerApellido');
         $data['segundoApellido']  = $this->session->userdata('segundoApellido');
 
-        $lista = $this->usuario_model->lista();
+        $lista = $this->usuario_model->listaUsuarioPorTipo("tutor");
         $data['usuario'] = $lista;
 
         $this->load->view('inc_header');
@@ -93,7 +93,7 @@ class Paciente extends CI_Controller
         $data['primerApellido']  = $this->session->userdata('primerApellido');
         $data['segundoApellido']  = $this->session->userdata('segundoApellido');
 
-        $lista = $this->usuario_model->lista();
+        $lista = $this->usuario_model->listaUsuarioPorTipo("tutor");
         $data['usuario'] = $lista;
 
         $this->load->view('inc_header');
@@ -147,6 +147,11 @@ class Paciente extends CI_Controller
         $data['fechaNacimiento'] = $_POST['fechaNacimiento'];
         $data['edad'] = calculaEdad($data['fechaNacimiento']);
         $data['sexo'] = $_POST['sexo'];
+        
+        $fecha = explode("/", $data['fechaNacimiento']);
+        $concatenarIniciales = strtoupper(substr($data['nombre'], 0, 1).substr($data['primerApellido'], 0, 1).substr($data['segundoApellido'], 0, 1));
+        $codigo = $fecha[0].$fecha[1].$fecha[2]."-".$concatenarIniciales;
+        $data['codigo'] = $codigo;
        
         $this->paciente_model->agregarPaciente($data);
         redirect('paciente/index', 'refresh');

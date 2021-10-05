@@ -1,115 +1,118 @@
 <div class="content-wrapper">
-  <!-- /.card-header -->
-  <div class="card-body">
-    <?php
-    echo form_open_multipart('pacientevacuna/registrarPacienteVacuna');
-    ?>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label>CI tutor</label>
-          <select class="form-control select2bs4 select-tutor" style="width: 100%;" name="usuario_tutor">
-            <!--  <option selected="selected">Alabama</option> -->
-            <option></option>
-            <?php
-            foreach ($usuario->result() as $row) {
-              $ci = ($row->ci != "") ? "-" . $row->ci: $row->ci;
-            ?>
-              <option value="<?php echo $row->idUsuario; ?>"><?php echo $row->nombre . $ci; ?></option>
-            <?php
-            }
-            ?>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label>Paciente</label>
-          <select class="select-paciente-ajax form-control select2bs4" style="width: 100%;" name="paciente">
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label>Dosis</label>
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col col-lg-10">
 
-          <select class="select2bs4 select-dosis-ajax" multiple="multiple" data-placeholder="Select a State" style="width: 100%;" name="dosis[]">
+        <div class="card card-primary mt-3">
+          <div class="card-header">
+            <div class="card-title">Paciente vacuna</div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+
             <?php
-            foreach ($listaDosis->result() as $row) {
+            //echo form_open_multipart('pacientevacuna/registrarPacienteVacuna');
             ?>
-              <option value="<?php echo $row->idDosis; ?>"><?php echo $row->vacunaNombre . " " . $row->dosisNombre . " via " . $row->viaNombre; ?></option>
-            <?php
-            }
-            ?>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label>Siguiente dosis</label>
-          <select class="select2bs4" name="siguienteDosis[]" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-            <?php
-            foreach ($listaDosis->result() as $row) {
-            ?>
-              <option value="<?php echo $row->idDosis; ?>"><?php echo $row->vacunaNombre . " " . $row->dosisNombre . " via " . $row->viaNombre; ?></option>
-            <?php
-            }
-            ?>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label>Fecha proxima vacuna:</label>
-          <div class="input-group date" id="reservationdate" data-target-input="nearest">
-            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
-            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-              <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Paciente</label>
+                  <select class="select-paciente-ajax form-control select2bs4" style="width: 100%;" name="paciente">
+                    <option></option>
+                    <?php
+                    foreach ($pacienteCodigo->result() as $row) {
+                      $codigo = $row->codigo;
+                    ?>
+                      <option value="<?php echo $row->idUsuario; ?>"><?php echo $row->nombre . " " . $row->primerApellido . " " . $row->segundoApellido . " - " . $codigo; ?></option>
+                    <?php
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
             </div>
+            <div class="table-responsive-sm">
+              <table class="table table-sm table-bordered">
+                <thead class="vacuna-cabecera">
+                  <tr>
+                    <th>Edad de aplicación (Meses)</th>
+                    <th>Vacuna</th>
+                    <th>Fecha vacuna</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-vacunas">
+
+                </tbody>
+              </table>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Registrar</button>
+                </div>
+              </div>
+            </div>
+            <?php
+            //echo form_close();
+            ?>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary">Registrar</button>
-        </div>
-      </div>
-    </div>
-    <?php
-    echo form_close();
-    ?>
   </div>
 </div>
 
 <!-- jQuery -->
 <script src="<?php echo base_url(); ?>/adminLte/plugins/jquery/jquery.min.js"></script>
+
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="<?php echo base_url(); ?>adminLte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function() {
-    $('.select-tutor').on('change', function() {
-      var idTutor = $(".select-tutor option:selected").val();
 
-      var pacientes = $(".select-paciente-ajax");
-      if (idTutor != '') {
+    $('.select-paciente-ajax').on('change', function() {
+      var idPaciente = $(".select-paciente-ajax option:selected").val();
+      console.log(idPaciente);
+      var tablaDosis = $("tbody");
+
+      if (idPaciente != '') {
         $.ajax({
           data: {
-            idTutor: idTutor
+            idPaciente: idPaciente
           },
-          url: '<?= base_url() ?>pacientevacuna/buscarPacientes',
+          url: '<?= base_url() ?>pacientevacuna/buscarDosisPaciente',
           type: 'POST',
           dataType: 'json',
           success: function(r) {
-            console.log(r);
-            // Limpiamos el select
-            pacientes.find('option').remove();
+            console.log("jasdkfjaklsd", r);
+            tablaDosis.find('tr').remove();
 
-            $(r).each(function(i, v) { // indice, valor
-              pacientes.append('<option value="' + v.idPaciente + '">' + v.nombre + '</option>');
+            $(r).each(function(indice, valor) {
+              console.log(valor);
+              tablaDosis.append(
+                '<tr class="bg-color-'+ valor.rangoMesInicial +'">' +
+                '<td><label>' + valor.rangoMesInicial + '</label></td>' +
+                '<td><label>' + valor.nombrevacuna + " " + valor.dosis + " " + valor.nombrevia + '</label></td>' +
+                '<td>' +
+
+                '<div class="input-group">' +
+                '<div class="input-group-prepend">' +
+                '<span class="input-group-text"><i class="far fa-calendar-alt"></i></span>' +
+                '</div>' +
+                '<input type="text" name="fechavacunapaciente" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask required>' +
+                '</div>' +
+
+                '</td>' +
+                '<td>' +
+                '<div class="form-check">' +
+                '<input class="form-control form-check-input" type="checkbox" value="" id="flexCheckChecked">' +
+                '</div>' +
+                '</td>' +
+                '</tr>'
+              );
             })
 
             //pacientes.prop('disabled', false);
@@ -122,36 +125,13 @@
       }
     });
 
-    /*$('.select-paciente-ajax').on('change', function() {
-      var idPaciente = $(".select-paciente-ajax option:selected").val();
-      console.log(idPaciente);
-      var dosis = $(".select-dosis-ajax");
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', {
+      'placeholder': 'dd/mm/yyyy'
+    });
 
-      if (idPaciente != '') {
-        $.ajax({
-          data: {
-            idPaciente: idPaciente
-          },
-          url: '<?= base_url() ?>pacientevacuna/buscarDosisPaciente',
-          type: 'POST',
-          dataType: 'json',
-          success: function(r) {
-            console.log(r);
-            dosis.find('option').remove();
-
-            $(r).each(function(indice, valor) {
-              dosis.append('<option value="' + valor.idDosis + '">' + valor.dosisNombre + '</option>');
-            })
-
-            //pacientes.prop('disabled', false);
-          },
-          error: function() {
-            alert('Ocurrio un error en el servidor ..');
-            //alumnos.prop('disabled', false);
-          }
-        });
-      }
-    });*/
+    //Money Euro
+    $('[data-mask]').inputmask();
 
   });
 </script>

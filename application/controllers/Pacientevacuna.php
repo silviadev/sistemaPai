@@ -31,11 +31,10 @@ class PacienteVacuna extends CI_Controller
       $data['primerApellido']  = $this->session->userdata('primerApellido');
       $data['segundoApellido']  = $this->session->userdata('segundoApellido');
 
-      $lista = $this->usuario_model->lista();
-      $data['usuario'] = $lista;
-
-      $dosis = $this->dosis_model->listaDosis();
+      $dosis = $this->dosis_model->listaDosisVacunas();
       $data['listaDosis'] = $dosis;
+
+      $data['pacienteCodigo'] = $this->paciente_model->lista();
 
       $this->load->view('inc_header');
       $this->load->view('inc_menu', $data);
@@ -58,14 +57,18 @@ class PacienteVacuna extends CI_Controller
 
   public function buscarDosisPaciente()
   {
-    $idPaciente = 1;//$_POST['idPaciente'];
-    $dosis = $this->dosis_model->listaDosisPaciente($idPaciente);
+    $idPaciente = 6; //$_POST['idPaciente'];
+   /*  $dosis = $this->dosis_model->listaDosisPaciente($idPaciente);
     if (count($dosis->result()) > 0) {
       echo ( json_encode ( $dosis->result() ) );
     }
     else {
       $dosis = $this->dosis_model->listaDosis($idPaciente);
       echo ( json_encode ( $dosis->result() ) );
-    }
+    } */
+
+    //$dosis = $this->dosis_model->listaDosis($idPaciente);
+    $dosis = $this->dosis_model->listaDosisVacunas();
+    echo ( json_encode ( $dosis->result() ) );
   }
 }

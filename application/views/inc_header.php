@@ -10,10 +10,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
   <title>AdminLTE 3 | DataTables</title>
 
   <style>
-
     .card-primary:not(.card-outline)>.card-header {
       background-color: #0AA5A7 !important;
     }
+
     .btn-secondary {
       background-color: #0AA5A7 !important;
       border-color: #0AA5A7 !important;
@@ -62,12 +62,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
   <!-- Select2 -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-  
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 
+
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/style.css">
 </head>
 
 <body class="hold-transition sidebar-mini dark-mode1 text-sm">

@@ -20,7 +20,6 @@ class Login extends CI_Controller
   {
     $nombreUsuario = $_POST['nombreUsuario'];
     $contrasena = md5($_POST['contrasena']);
-    //$contrasena = $_POST['contrasena'];
 
     $consulta = $this->usuario_model->validar($nombreUsuario, $contrasena);
     if ($consulta->num_rows() > 0) {
@@ -41,7 +40,7 @@ class Login extends CI_Controller
   public function panel()
   {
     if ($this->session->userdata('nombreUsuario')) {
-      if ($this->session->userdata('tipoUsuario') == 'admin') {
+      if ($this->session->userdata('tipoUsuario') == 'admin' || $this->session->userdata('tipoUsuario') == 'responsableVacuna') {
         redirect('admin', 'refresh');
       } else if ($this->session->userdata('tipoUsuario') == 'tutor') {
         redirect('tutor', 'refresh');

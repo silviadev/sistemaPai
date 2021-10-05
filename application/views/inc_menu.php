@@ -71,17 +71,19 @@
         </li>
 
         <li>
-        <div class="brand-link"></div>
+          <div class="brand-link"></div>
         </li>
         <li class="nav-header">Administrar</li>
-        <li class="nav-item">
-          <a href="<?php echo base_url() ?>usuario" class="nav-link">
-            <i class="nav-icon fas fa-users"></i>
-            <p>
-              Usuarios
-            </p>
-          </a>
-        </li>
+        <?php if ($tipoUsuario != "responsableVacuna") { ?>
+          <li class="nav-item">
+            <a href="<?php echo base_url() ?>usuario" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Usuarios
+              </p>
+            </a>
+          </li>
+        <?php } ?>
         <li class="nav-item">
           <a href="<?php echo base_url() ?>paciente" class="nav-link">
             <i class="nav-icon fas fa-child"></i>

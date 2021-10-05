@@ -27,6 +27,18 @@ class Dosis_model extends CI_Model
     return $this->db->get();
   }
 
+  public function listaDosisVacunas()
+  {
+    $query = $this->db->query("SELECT d.idDosis, v.idVacuna, v.nombre as nombrevacuna, cd.dosis, via.nombre as nombrevia, d.rangoMesInicial
+    FROM sistemapai.dosis d
+    INNER JOIN sistemapai.vacuna v on d.idVacuna = v.idVacuna
+    INNER JOIN sistemapai.via on via.idVia = d.idVia
+    INNER JOIN sistemapai.categoriadosis cd on cd.idCategoriadosis = d.idCategoriadosis
+    WHERE d.estado = 1
+    ORDER BY (d.rangoMesInicial) ASC");
+    return $query;
+  }
+
   public function listaDosisPaciente($idPaciente)
   {
     $this->db->select(

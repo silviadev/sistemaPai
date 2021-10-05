@@ -24,6 +24,15 @@ class Usuario_model extends CI_Model {
         return $this->db->get();
     }
 
+    public function listaUsuarioPorTipo($tipo)
+	{
+		$this->db->select('*');
+        $this->db->from('usuario'); 
+        $this->db->where('estado', 1);
+        $this->db->where('tipoUsuario', $tipo);
+        return $this->db->get();
+	}
+
 	public function lista()
 	{
 		$this->db->select('*');
