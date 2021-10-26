@@ -21,7 +21,7 @@ class Paciente_model extends CI_Model {
 	}
 
     public function recuperarPacientesPorIdUsuario($idUsuario) {
-        $this->db->select('p.idPaciente, p.primerApellido, p.segundoApellido, p.nombre, p.fechaNacimiento, p.edad, p.sexo, p.idUsuario, p.foto');
+        $this->db->select('p.idPaciente, p.primerApellido, p.segundoApellido, p.nombre, p.fechaNacimiento, p.edad, p.sexo, p.idUsuario, p.foto, p.codigo');
         $this->db->from('paciente p'); 
         $this->db->where('p.idUsuario', $idUsuario);
         $this->db->where('p.estado', 1);

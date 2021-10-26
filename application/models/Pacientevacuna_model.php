@@ -7,7 +7,8 @@ class PacienteVacuna_model extends CI_Model
   public $fechaCreacion;
   public $fechaActualizacion;
 
-  public function __construct() {
+  public function __construct()
+  {
     $this->estado = true;
     $this->fechaCreacion = date("Y-m-d H:i:s");
     $this->fechaActualizacion = date("Y-m-d H:i:s");
@@ -15,12 +16,20 @@ class PacienteVacuna_model extends CI_Model
 
   public function lista()
   {
-    $query = $this->db->query("Select p.nombre as nombrePaciente, v.nombre as nombreVacuna, v.descripcion, 
-    obtener_dosis(pv.idDosis) as dosis, obtener_dosis(pv.idSiguienteDosis) as siguienteDosis, pv.fechaSiguienteDosis, pv.idPacienteVacuna
-    From sistemapai.pacientevacuna pv
-    Inner join sistemapai.paciente p on p.idPaciente=pv.idPaciente
-    inner join sistemapai.dosis d on d.idDosis = pv.idDosis
-    inner join sistemapai.vacuna v on d.idVacuna = d.idVacuna;");
+    $query = $this->db->query("Select p.nombre as nombrePaciente, 
+    obtener_dosis(pv.idDosis) as dosis, obtener_vacuna(pv.idDosis) as nombreVacuna, pv.idPacienteVacuna, d.rangoMesInicial, pv.fechaVacuna
+    From pacientevacuna pv
+    inner join paciente p on p.idPaciente=pv.idPaciente
+    inner join dosis d on d.idDosis = pv.idDosis
+    order by d.rangoMesInicial asc;");
     return $query;
+  }
+
+  public function agregarPacienteVacuna($idAutor, $data)
+  {
+    $data['fechaCreacion'] = $this->fechaCreacion;
+    $data['estado'] = $this->estado;
+    $data['idAuthor'] = $idAutor;
+    $this->db->insert('pacientevacuna', $data);
   }
 }

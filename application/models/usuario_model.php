@@ -13,13 +13,16 @@ class Usuario_model extends CI_Model {
         $this->fechaActualizacion = date("Y-m-d H:i:s");
     }
 
-    public function validar($nombreUsuario, $contrasena)
+    public function validar($nombreUsuario, $contrasena, $tipoUsuario)
     {
         $this->db->select('*');
         $this->db->from('usuario');
         $this->db->where('nombreUsuario', $nombreUsuario);
         $this->db->where('contrasena', $contrasena);
         $this->db->where('habilitado', 1);
+        if ($tipoUsuario !== "") {
+            $this->db->where('tipoUsuario', $tipoUsuario);
+        }
         $this->db->where('estado', 1);
         return $this->db->get();
     }

@@ -11,7 +11,7 @@
           <div class="card-body">
 
             <?php
-            //echo form_open_multipart('pacientevacuna/registrarPacienteVacuna');
+              echo form_open_multipart('pacientevacuna/registrarPacienteVacuna');
             ?>
 
             <div class="row">
@@ -24,7 +24,7 @@
                     foreach ($pacienteCodigo->result() as $row) {
                       $codigo = $row->codigo;
                     ?>
-                      <option value="<?php echo $row->idUsuario; ?>"><?php echo $row->nombre . " " . $row->primerApellido . " " . $row->segundoApellido . " - " . $codigo; ?></option>
+                      <option value="<?php echo $row->idPaciente; ?>"><?php echo $row->nombre . " " . $row->primerApellido . " " . $row->segundoApellido . " - " . $codigo; ?></option>
                     <?php
                     }
                     ?>
@@ -39,7 +39,9 @@
                     <th>Edad de aplicación (Meses)</th>
                     <th>Vacuna</th>
                     <th>Fecha vacuna</th>
-                    <th></th>
+                    <th>Seleccionar vacuna</th>
+                    <th>SiguienteVacuna vacuna</th>
+                    <th>Fecha siguiente Vacuna</th>
                   </tr>
                 </thead>
                 <tbody id="tabla-vacunas">
@@ -55,7 +57,7 @@
               </div>
             </div>
             <?php
-            //echo form_close();
+              echo form_close();
             ?>
           </div>
         </div>
@@ -66,16 +68,17 @@
 
 <!-- jQuery -->
 <script src="<?php echo base_url(); ?>/adminLte/plugins/jquery/jquery.min.js"></script>
-
+<script src="<?php echo base_url(); ?>/adminLte/plugins/moment/moment.min.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="<?php echo base_url(); ?>adminLte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="<?php echo base_url(); ?>adminLte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js"></script>
 
 <script type="text/javascript">
   $(document).ready(function() {
-
+    
     $('.select-paciente-ajax').on('change', function() {
       var idPaciente = $(".select-paciente-ajax option:selected").val();
       console.log(idPaciente);
+      //<td class="prova" data-ribbon="✅"></td>
       var tablaDosis = $("tbody");
 
       if (idPaciente != '') {
@@ -92,46 +95,59 @@
 
             $(r).each(function(indice, valor) {
               console.log(valor);
+              var color = valor.rangoMesInicial;
+              var checked = "";
+              var disabled = "";
+              var fechaVacuna = "";
+              if (valor.idPacienteVacuna)
+              {
+                checked = 'checked="checked"';
+                disabled = 'disabled';
+                color = 'realizado';
+
+                fechaVacuna = valor.fechaVacuna.replace(/^(\d{4})-(\d{2})-(\d{2})/, '$2/$3/$1');
+                 
+              }
               tablaDosis.append(
-                '<tr class="bg-color-'+ valor.rangoMesInicial +'">' +
+                '<tr class="bg-color-' + color + '">' +
+                '<div class="ribbon-bookmark-h bg-maroon">Sale!</div>'+
                 '<td><label>' + valor.rangoMesInicial + '</label></td>' +
                 '<td><label>' + valor.nombrevacuna + " " + valor.dosis + " " + valor.nombrevia + '</label></td>' +
                 '<td>' +
 
-                '<div class="input-group">' +
-                '<div class="input-group-prepend">' +
-                '<span class="input-group-text"><i class="far fa-calendar-alt"></i></span>' +
-                '</div>' +
-                '<input type="text" name="fechavacunapaciente" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask required>' +
-                '</div>' +
+                  '<div class="input-group date reservationdate" id="fechavacuna' + valor.idDosis + '" data-target-input="nearest">' +
+                  '<input type="text" class="form-control datetimepicker-input" data-target="#fechavacuna' + valor.idDosis + '" name="fechavacunapacientes['+valor.idDosis+'][]" ' + disabled + ' value="'+fechaVacuna+'" />' +
+                  '<div class="input-group-append" data-target="#fechavacuna' + valor.idDosis + '" data-toggle="datetimepicker">' +
+                  '<div class="input-group-text"><i class="fa fa-calendar"></i></div>' +
+                  '</div>' +
+                  '</div>' +
 
                 '</td>' +
                 '<td>' +
-                '<div class="form-check">' +
-                '<input class="form-control form-check-input" type="checkbox" value="" id="flexCheckChecked">' +
-                '</div>' +
+                  '<div class="form-check">' +
+                  '<input class="form-control form-check-input" type="checkbox" value="' + valor.idDosis + '" name=selecteddosis[] ' + checked + ' ' + disabled + ' />' +
+                  '</div>' +
                 '</td>' +
+                '<td>'+
+                '</td>'+
+                '<td>'+
+                '</td>'+
                 '</tr>'
               );
-            })
+            });
+
+            $('.reservationdate').datetimepicker({
+              format: 'L'
+            });
 
             //pacientes.prop('disabled', false);
           },
           error: function() {
             alert('Ocurrio un error en el servidor ..');
-            //alumnos.prop('disabled', false);
           }
         });
       }
     });
-
-    //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', {
-      'placeholder': 'dd/mm/yyyy'
-    });
-
-    //Money Euro
-    $('[data-mask]').inputmask();
-
+    
   });
 </script>

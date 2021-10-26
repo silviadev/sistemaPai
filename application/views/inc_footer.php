@@ -48,7 +48,7 @@
  <!-- Select2 -->
 <script src="<?php echo base_url(); ?>adminLte/plugins/select2/js/select2.full.min.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="<?php echo base_url(); ?>adminLte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="<?php echo base_url(); ?>adminLte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js"></script>
 <!-- BS-Stepper -->
 <script src="<?php echo base_url(); ?>adminLte/plugins/bs-stepper/js/bs-stepper.min.js"></script>
 
@@ -278,7 +278,7 @@
       theme: 'bootstrap4'
     });
     //Date picker
-    $('#reservationdate').datetimepicker({
+    $('.reservationdate').datetimepicker({
         format: 'L'
     });
    });

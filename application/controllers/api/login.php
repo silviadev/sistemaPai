@@ -29,7 +29,8 @@ class Login extends REST_Controller
         $data = json_decode($json, true);
         $nombreUsuario = $data['nombreUsuario'];
         $contrasena = md5($data['contrasena']);
-        $consulta = $this->usuario_model->validar($nombreUsuario, $contrasena);
+        $tipoUsuario = "tutor";
+        $consulta = $this->usuario_model->validar($nombreUsuario, $contrasena, $tipoUsuario);
         $result = [];
         if ($consulta->num_rows() > 0) {
             foreach ($consulta->result() as $row) {
@@ -46,9 +47,9 @@ class Login extends REST_Controller
             }
         } else {
             $result = array(
-                'message' => "No se encuentra el usuario"
+                'message' => "El usuario o la contraseña es incorrecta. Por favor, vuelve a intentarlo."
             );
-            $this->response(json_encode($result), REST_Controller::HTTP_INTERNAL_SERVER_ERROR);
+            $this->response(json_encode($result), REST_Controller::HTTP_NOT_FOUND);//HTTP_INTERNAL_SERVER_ERROR
         }
     }
 }

@@ -41,10 +41,9 @@
                   <tr>
                     <th>Paciente</th>
                     <th>Vacuna</th>
-                    <th>Descripcion</th>
                     <th>Dosis</th>
-                    <th>Siguiente dosis</th>
-                    <th>Fecha siguiente dosis</th>
+                    <th>Mes</th>
+                    <th>Fecha vacuna</th>
                     <th></th>
                     <th></th>
                   </tr>
@@ -58,10 +57,9 @@
                     <tr>
                       <td><?php echo $row->nombrePaciente; ?></th>
                       <td><?php echo $row->nombreVacuna; ?></td>
-                      <td><?php echo $row->descripcion; ?></td>
                       <td><?php echo $row->dosis; ?></td>
-                      <td><?php echo $row->siguienteDosis; ?></td>
-                      <td><?php echo $row->fechaSiguienteDosis; ?></td>
+                      <td><?php echo $row->rangoMesInicial; ?></td>
+                      <td><?php echo $row->fechaVacuna; ?></td>
                       <td>
                         <?php
                         echo form_open_multipart('vacuna/modificar');

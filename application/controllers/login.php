@@ -21,7 +21,7 @@ class Login extends CI_Controller
     $nombreUsuario = $_POST['nombreUsuario'];
     $contrasena = md5($_POST['contrasena']);
 
-    $consulta = $this->usuario_model->validar($nombreUsuario, $contrasena);
+    $consulta = $this->usuario_model->validar($nombreUsuario, $contrasena, "");
     if ($consulta->num_rows() > 0) {
       foreach ($consulta->result() as $row) {
         $this->session->set_userdata('idUsuario', $row->idUsuario);

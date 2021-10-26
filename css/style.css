@@ -28,3 +28,29 @@
     background-color: #0AA5A7;
     color: white;
 }
+
+.bg-color-realizado {
+    background-color: #D4D4D4;
+}
+
+.sash1 tr1 td1{
+    position: relative;
+    overflow: hidden;
+    width: 200px;
+    height: 100px;
+    
+  }
+  .sash1 tr1 td1.prova:after {
+    content: attr(data-ribbon);
+    position: absolute;
+    width: 90px;
+    height: 40px;
+    background: #428bca;
+    color: white;
+    top: -5px;
+    text-align: center ;
+    line-height: 50px;
+    right: -34px;
+    transform: rotate(45deg);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }

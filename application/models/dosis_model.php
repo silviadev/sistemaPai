@@ -30,10 +30,24 @@ class Dosis_model extends CI_Model
   public function listaDosisVacunas()
   {
     $query = $this->db->query("SELECT d.idDosis, v.idVacuna, v.nombre as nombrevacuna, cd.dosis, via.nombre as nombrevia, d.rangoMesInicial
-    FROM sistemapai.dosis d
-    INNER JOIN sistemapai.vacuna v on d.idVacuna = v.idVacuna
-    INNER JOIN sistemapai.via on via.idVia = d.idVia
-    INNER JOIN sistemapai.categoriadosis cd on cd.idCategoriadosis = d.idCategoriadosis
+    FROM dosis d
+    INNER JOIN vacuna v on d.idVacuna = v.idVacuna
+    INNER JOIN via on via.idVia = d.idVia
+    INNER JOIN categoriadosis cd on cd.idCategoriadosis = d.idCategoriadosis
+    WHERE d.estado = 1
+    ORDER BY (d.rangoMesInicial) ASC");
+    return $query;
+  }
+
+  public function listaDosisVacunasPorIdPaciente($idPaciente)
+  {
+    $query = $this->db->query("SELECT d.idDosis, v.idVacuna, v.nombre as nombrevacuna,
+    cd.dosis, via.nombre as nombrevia, d.rangoMesInicial, pv.idPacienteVacuna, pv.fechaVacuna
+    FROM dosis d
+    INNER JOIN vacuna v on d.idVacuna = v.idVacuna
+    INNER JOIN via on via.idVia = d.idVia
+    INNER JOIN categoriadosis cd on cd.idCategoriadosis = d.idCategoriadosis
+    LEFT JOIN pacientevacuna pv on pv.idDosis = d.idDosis and pv.estado = 1 and pv.idPaciente = $idPaciente
     WHERE d.estado = 1
     ORDER BY (d.rangoMesInicial) ASC");
     return $query;
