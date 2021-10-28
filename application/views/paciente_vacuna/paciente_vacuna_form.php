@@ -94,20 +94,31 @@
             tablaDosis.find('tr').remove();
 
             $(r).each(function(indice, valor) {
-              console.log(valor);
               var color = valor.rangoMesInicial;
               var checked = "";
               var disabled = "";
               var fechaVacuna = "";
-              if (valor.idPacienteVacuna)
+              var disabledSiguienteDosis = "";
+              if (valor.rangoMesInicial == "0") {
+                disabledSiguienteDosis = 'disabled';
+              }
+              if (valor.fechaVacuna)//idPacienteVacuna
               {
                 checked = 'checked="checked"';
                 disabled = 'disabled';
+                disabledSiguienteDosis = 'disabled';
                 color = 'realizado';
-
                 fechaVacuna = valor.fechaVacuna.replace(/^(\d{4})-(\d{2})-(\d{2})/, '$2/$3/$1');
-                 
+                
               }
+              var fechaSiguienteDosis = "";
+              var checkedSiguienteDosis = "";
+              if (valor.fechaSiguienteDosis) {
+                checkedSiguienteDosis = 'checked="checked"';
+                disabledSiguienteDosis = 'disabled';
+                fechaSiguienteDosis = valor.fechaSiguienteDosis.replace(/^(\d{4})-(\d{2})-(\d{2})/, '$2/$3/$1');
+              }
+
               tablaDosis.append(
                 '<tr class="bg-color-' + color + '">' +
                 '<div class="ribbon-bookmark-h bg-maroon">Sale!</div>'+
@@ -128,10 +139,21 @@
                   '<input class="form-control form-check-input" type="checkbox" value="' + valor.idDosis + '" name=selecteddosis[] ' + checked + ' ' + disabled + ' />' +
                   '</div>' +
                 '</td>' +
-                '<td>'+
-                '</td>'+
-                '<td>'+
-                '</td>'+
+                '<td>' +
+
+                  '<div class="input-group date reservationdate" id="fechasiguientevacuna' + valor.idDosis + '" data-target-input="nearest">' +
+                  '<input type="text" class="form-control datetimepicker-input" data-target="#fechasiguientevacuna' + valor.idDosis + '" name="fechasiguientevacunapacientes['+valor.idDosis+'][]" ' + disabledSiguienteDosis + ' value="'+fechaSiguienteDosis+'" />' +
+                  '<div class="input-group-append" data-target="#fechasiguientevacuna' + valor.idDosis + '" data-toggle="datetimepicker">' +
+                  '<div class="input-group-text"><i class="fa fa-calendar"></i></div>' +
+                  '</div>' +
+                  '</div>' +
+
+                '</td>' +
+                '<td>' +
+                  '<div class="form-check">' +
+                  '<input class="form-control form-check-input" type="checkbox" value="' + valor.idDosis + '" name=selectedsiguientedosis[] ' + checkedSiguienteDosis + ' ' + disabledSiguienteDosis + '/>' +
+                  '</div>' +
+                '</td>' +
                 '</tr>'
               );
             });
@@ -139,7 +161,6 @@
             $('.reservationdate').datetimepicker({
               format: 'L'
             });
-
             //pacientes.prop('disabled', false);
           },
           error: function() {

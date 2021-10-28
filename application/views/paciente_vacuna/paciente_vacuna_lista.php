@@ -51,6 +51,7 @@
                 <tbody>
 
                   <?php
+                  if (isset($vacuna)) {
                   foreach ($vacuna->result() as $row) {
 
                   ?>
@@ -84,6 +85,7 @@
                     </tr>
                   <?php
                   }
+                }
                   ?>
 
                 </tbody>

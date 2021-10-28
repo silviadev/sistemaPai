@@ -47,13 +47,25 @@ class PacienteVacuna extends CI_Controller
     $idAuthor = $this->session->userdata('idUsuario');
     $data['idPaciente'] = $idPaciente;
     
-    foreach ($_POST['selecteddosis'] as $key => $id) {
-      $fecha = $_POST['fechavacunapacientes'][$id];
-      $data['idDosis'] = $id;
-      $data['idSiguienteDosis'] = $id;
-      $data['fechaVacuna'] = date("Y-m-d H:i:s", strtotime($fecha[0]));
-      $this->pacientevacuna_model->agregarPacienteVacuna($idAuthor, $data);
+    if (isset($_POST['selecteddosis'])) {
+      foreach ($_POST['selecteddosis'] as $key => $id) {
+        $fecha = $_POST['fechavacunapacientes'][$id];
+        $data['idDosis'] = $id;
+        $data['fechaVacuna'] = date("Y-m-d", strtotime($fecha[0]));
+        $this->pacientevacuna_model->agregarPacienteVacuna($idAuthor, $data);
+      }
     }
+    
+    if (isset($_POST['selectedsiguientedosis'])) {
+      foreach ($_POST['selectedsiguientedosis'] as $key => $id) {
+        $fechaSiguienteVacuna = $_POST['fechasiguientevacunapacientes'][$id];
+        $dataDosis['idPaciente'] = $idPaciente;
+        $dataDosis['idSiguienteDosis'] = $id;
+        $dataDosis['fechaSiguienteDosis'] = date("Y-m-d", strtotime($fechaSiguienteVacuna[0]));
+        $this->pacientevacuna_model->agregarPacienteVacuna($idAuthor, $dataDosis);
+      }
+    }
+    
     redirect('pacientevacuna', 'refresh');
   }
 
