@@ -32,4 +32,23 @@ class PacienteVacuna_model extends CI_Model
     $data['idAuthor'] = $idAutor;
     $this->db->insert('pacientevacuna', $data);
   }
+
+  public function obtenerPacienteConSiguienteVacuna($idPaciente, $idDosis)
+  {
+    $this->db->select('*');
+    $this->db->where('estado', 1);
+    $this->db->where('idPaciente', $idPaciente);
+    $this->db->where('idSiguienteDosis', $idDosis);
+    $this->db->from('pacientevacuna');
+    return $this->db->get();
+  }
+
+  public function actualizarPacienteVacuna($idAutor, $idPaciente, $idDosis, $data)
+  {
+    $data['fechaActualizacion'] = date("Y-m-d H:i:s");
+    $data['idAuthor'] = $idAutor;
+    $this->db->where('idPaciente', $idPaciente);
+    $this->db->where('idSiguienteDosis', $idDosis);
+    $this->db->update('pacientevacuna', $data); 
+  }
 }

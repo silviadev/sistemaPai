@@ -49,10 +49,21 @@ class PacienteVacuna extends CI_Controller
     
     if (isset($_POST['selecteddosis'])) {
       foreach ($_POST['selecteddosis'] as $key => $id) {
+        //buscar 
         $fecha = $_POST['fechavacunapacientes'][$id];
-        $data['idDosis'] = $id;
-        $data['fechaVacuna'] = date("Y-m-d", strtotime($fecha[0]));
-        $this->pacientevacuna_model->agregarPacienteVacuna($idAuthor, $data);
+        $siguienteVacunaProgramado = $this->pacientevacuna_model->obtenerPacienteConSiguienteVacuna($idPaciente, $id);
+        if ($siguienteVacunaProgramado->num_rows() > 0) {
+          $dataUpdate['idDosis'] = $id;
+          $dataUpdate['fechaVacuna'] = date("Y-m-d", strtotime($fecha[0]));
+          foreach ($siguienteVacunaProgramado->result() as $row) {
+            $this->pacientevacuna_model->actualizarPacienteVacuna($idAuthor, $row->idPaciente, $row->idSiguienteDosis, $dataUpdate);
+          }
+        }
+        else {
+          $data['idDosis'] = $id;
+          $data['fechaVacuna'] = date("Y-m-d", strtotime($fecha[0]));
+          $this->pacientevacuna_model->agregarPacienteVacuna($idAuthor, $data);
+        }
       }
     }
     
