@@ -43,7 +43,7 @@ class Dosis_model extends CI_Model
   {
     $query = $this->db->query("SELECT d.idDosis, v.idVacuna, v.nombre as nombrevacuna,
     cd.dosis, via.nombre as nombrevia, d.rangoMesInicial, pv.idPacienteVacuna, pv.fechaVacuna, pv.idSiguienteDosis,
-    pv.fechaSiguienteDosis, pv.idSiguienteDosis, pv.fechaSiguienteDosis
+    pv.fechaSiguienteDosis
     FROM dosis d
     INNER JOIN vacuna v on d.idVacuna = v.idVacuna
     INNER JOIN via on via.idVia = d.idVia

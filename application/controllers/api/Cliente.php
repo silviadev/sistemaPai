@@ -31,6 +31,8 @@ class Cliente extends REST_Controller
           'rangoMesInicial' => $row->rangoMesInicial,
           'idPacienteVacuna' => $row->idPacienteVacuna,
           'fechaVacuna' => $row->fechaVacuna,
+          'fechaSiguienteDosis'=> $row->fechaSiguienteDosis,
+          'idSiguienteDosis'=> $row->idSiguienteDosis,
         ]);
 
         $this->output->set_status_header(REST_Controller::HTTP_OK)->set_content_type('application/json')->set_output(json_encode($result));

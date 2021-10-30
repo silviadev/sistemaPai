@@ -27,15 +27,28 @@
             <div class="card-header">
             <!-- /.card-header -->
             <div class="card-body">
-              <?php
-              echo form_open_multipart('pacientevacuna/registrarPacienteFormulario');
-              ?>
-              <div class="form-group">
-                <button type="submit" class="btn btn-secondary btn-xs">Registrar vacuna a paciente</button>
+              <div class="inline-flex" style="display: inline-flex;">
+                <?php
+                echo form_open_multipart('pacientevacuna/registrarPacienteFormulario');
+                ?>
+                <div class="form-group pr-2">
+                  <button type="submit" class="btn btn-secondary btn-xs">Registrar vacuna a paciente</button>
+                </div>
+                <?php
+                echo form_close();
+                ?>
+
+                <?php
+                  echo form_open_multipart('pacientevacuna/modificarform');
+                ?>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-xs">Actualizar vacuna a paciente</button>
+                </div>
+                <?php
+                  echo form_close();
+                ?>
               </div>
-              <?php
-              echo form_close();
-              ?>
+
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -43,8 +56,7 @@
                     <th>Vacuna</th>
                     <th>Dosis</th>
                     <th>Mes</th>
-                    <th>Fecha vacuna</th>
-                    <th></th>
+                    <th>Fecha registro vacuna</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -63,18 +75,7 @@
                       <td><?php echo $row->fechaVacuna; ?></td>
                       <td>
                         <?php
-                        echo form_open_multipart('vacuna/modificar');
-                        ?>
-                        <input type="hidden" name="idPacienteVacuna" value="<?php echo $row->idPacienteVacuna;  ?>">
-
-                        <button type="submit" class="btn btn-primary btn-xs"><i class="far fa-edit"></i></button>
-                        <?php
-                        echo form_close();
-                        ?>
-                      </td>
-                      <td>
-                        <?php
-                        echo form_open_multipart('vacuna/eliminarbd');
+                        echo form_open_multipart('pacientevacuna/eliminarpacientevacunabd');
                         ?>
                         <input type="hidden" name="idPacienteVacuna" value="<?php echo $row->idPacienteVacuna; ?>">
                         <button type="submit" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>

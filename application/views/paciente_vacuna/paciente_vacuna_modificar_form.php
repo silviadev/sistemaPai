@@ -5,13 +5,13 @@
 
         <div class="card card-primary mt-3">
           <div class="card-header">
-            <div class="card-title">Registrar Vacuna a Paciente</div>
+            <div class="card-title">Actualizar Vacuna a Paciente</div>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
 
             <?php
-            echo form_open_multipart('pacientevacuna/registrarPacienteVacuna');
+            echo form_open_multipart('pacientevacuna/actualizarPacienteVacunaBd');
             ?>
 
             <div class="row">
@@ -52,7 +52,7 @@
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Registrar</button>
+                  <button type="submit" class="btn btn-primary">Guardar cambios</button>
                 </div>
               </div>
             </div>
@@ -96,31 +96,27 @@
             $(r).each(function(indice, valor) {
               var color = valor.rangoMesInicial;
               var checked = "";
-              var disabled = "";
+              var disabled = "disabled";
+              var disabledSiguienteDosis = "disabled";
               var fechaVacuna = "";
-              var disabledSiguienteDosis = "";
               if (valor.rangoMesInicial == "0") {
                 disabledSiguienteDosis = 'disabled';
               }
               if (valor.fechaVacuna)
               {
-                checked = 'checked="checked"';
-                disabled = 'disabled';
+                checked = '';
                 disabledSiguienteDosis = 'disabled';
-                //color = 'realizado';
-
-                fechaVacuna = (valor.fechaVacuna) ? 'min="2021-01-01" max="2021-12-31" value="' + valor.fechaVacuna + '"' : "";
-
-                console.log("fechavacuna: ", valor.fechaVacuna);
-
+                disabled = "";
+                fechaVacuna = (valor.fechaVacuna) ? ' value="' + valor.fechaVacuna + '"' : "";
+              }
+              else {
               }
               var fechaSiguienteDosisValue = "";
               var checkedSiguienteDosis = "";
               if (valor.fechaSiguienteDosis) {
-                checkedSiguienteDosis = 'checked="checked"';
-                disabledSiguienteDosis = 'disabled';
-                fechaSiguienteDosisValue = (valor.fechaSiguienteDosis) ? 'min="2021-01-01" max="2021-12-31" value="' + valor.fechaSiguienteDosis + '"' : "";
-                console.log("fechasiguienteDosis: ", valor.fechaSiguienteDosis);
+                checkedSiguienteDosis = '';
+                disabledSiguienteDosis = "";
+                fechaSiguienteDosisValue = (valor.fechaSiguienteDosis) ? ' value="' + valor.fechaSiguienteDosis + '"' : "";
               }
 
               tablaDosis.append(
@@ -154,9 +150,9 @@
               var component = $("input[name*='fechavacunapacientes["+this.value+"]']");
               if (checked) {
                 component.attr( "style", "background-color: orange" );
-                var yourDateValue = new Date();
+               /*  var yourDateValue = new Date();
                 var formattedDate = yourDateValue.toISOString().substr(0, 10);
-                component.val(formattedDate);
+                component.val(formattedDate); */
               }
               else {
                 component.removeAttr("style");
@@ -169,13 +165,13 @@
               if (checked) {
                 component.attr( "style", "background-color: orange" );
 
-                var dateSrt = new Date();
+                /* var dateSrt = new Date();
                 var currentMonth = dateSrt.getMonth();
                 var currentDay = dateSrt.getDate();
                 var valueMonth =  $(".rangoInicial-"+this.value+"").text();
                 dateSrt.setMonth(currentMonth + parseInt(valueMonth), currentDay);
                 var formattedDate = dateSrt.toISOString().substr(0, 10);
-                component.val(formattedDate);
+                component.val(formattedDate); */
               }
               else {
                 component.removeAttr("style");

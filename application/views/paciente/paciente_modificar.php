@@ -16,7 +16,7 @@ foreach ($infoPaciente->result() as $row) {
             <div class="form-group">
               <label>CI del usuario tutor *</label>
               <select class="form-control select2bs4 select-tutor" style="width: 100%;" name="usuario_tutor" required>
-                <option selected="selected"><?php echo $row->nombreUsuario . "-" . $row->ci . ""; ?></option>
+                
                 <?php
                 foreach ($usuario->result() as $rowUsuario) {
                   $ci = ($rowUsuario->ci != "") ? "-" . $rowUsuario->ci: $rowUsuario->ci;
