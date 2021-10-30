@@ -102,7 +102,7 @@
               if (valor.rangoMesInicial == "0") {
                 disabledSiguienteDosis = 'disabled';
               }
-              if (valor.fechaVacuna) //idPacienteVacuna
+              if (valor.fechaVacuna)
               {
                 checked = 'checked="checked"';
                 disabled = 'disabled';
@@ -181,10 +181,6 @@
                 component.removeAttr("style");
               }
             });
-
-
-
-            //pacientes.prop('disabled', false);
           },
           error: function() {
             alert('Ocurrio un error en el servidor ..');
@@ -192,6 +188,5 @@
         });
       }
     });
-
   });
 </script>
