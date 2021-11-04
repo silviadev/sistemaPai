@@ -108,6 +108,28 @@
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <p>
+              Reportes
+              <i class="right fas fa-angle-left"></i>
+            </p>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo base_url() ?>reportes/reportevacuna" class="nav-link">
+                  <i class="fas fa-clipboard-list nav-icon"></i>
+                  <p>Reporte de vacunas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url() ?>reportes/reportetutores" class="nav-link">
+                  <i class="fas fa-clipboard-list nav-icon"></i>
+                  <p>Tutores</p>
+                </a>
+              </li>
+            </ul>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

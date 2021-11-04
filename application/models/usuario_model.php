@@ -41,8 +41,22 @@ class Usuario_model extends CI_Model {
 		$this->db->select('*');
         $this->db->from('usuario'); 
         $this->db->where('estado', 1);
+       
         return $this->db->get();
 	}
+
+    public function listaTutores($tutor)
+    {
+        $this->db->select('*');
+        $this->db->from('usuario'); 
+        $this->db->where('estado', 1);
+        if ($tutor)
+        {
+            $this->db->where('tipoUsuario', "tutor");
+
+        }
+        return $this->db->get();
+    }
 	
     public function recuperarUsuario($idUsuario){
         $this->db->select('*');

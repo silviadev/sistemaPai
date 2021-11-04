@@ -31,6 +31,7 @@
  <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
  <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
  <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+ <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-searchbuilder/js/dataTables.searchBuilder.min.js"></script>
 
  <!-- InputMask -->
 <script src="<?php echo base_url(); ?>/adminLte/plugins/moment/moment.min.js"></script>
@@ -263,7 +264,7 @@
        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros"
      }
      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-     $('#example2').DataTable({
+     $('#dataTable').DataTable({
        "paging": true,
        "lengthChange": false,
        "searching": false,
@@ -281,6 +282,26 @@
     $('.reservationdate').datetimepicker({
         format: 'L'
     });
+
+    var dt = $('#datatable').DataTable( {
+        language: {
+            searchBuilder: {
+                button: 'Filtro',
+            }
+        },
+        columns: [
+            /* { data: null, render: function ( data, type, row ) {
+                // Combine the first and last names into a single table field
+                return data.first_name+' '+data.last_name;
+            } }, */
+            { data: "nombre" }
+           
+        ],
+        buttons:[
+            'searchBuilder'
+        ],
+        dom: 'Bfrtip',
+    } );
    });
  </script>
  </body>
