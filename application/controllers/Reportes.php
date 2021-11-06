@@ -37,4 +37,21 @@ class Reportes extends CI_Controller
     $this->load->view('inc_footer');
 
   }
+
+  public function reportepacientes()
+  {
+    $data['tipoUsuario']  = $this->session->userdata('tipoUsuario');
+    $data['nombre']  = $this->session->userdata('nombre');
+    $data['primerApellido']  = $this->session->userdata('primerApellido');
+    $data['segundoApellido']  = $this->session->userdata('segundoApellido');
+
+    $lista = $this->paciente_model->lista();
+    $data['paciente'] = $lista;
+
+    $this->load->view('inc_header');
+    $this->load->view('inc_menu', $data);
+    $this->load->view('reportes/reporte_paciente', $data);
+    $this->load->view('inc_footer');
+
+  }
 }

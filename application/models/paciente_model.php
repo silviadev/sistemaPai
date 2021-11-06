@@ -5,9 +5,10 @@ class Paciente_model extends CI_Model {
    
 	public function lista()
 	{
-		$this->db->select('*');
-        $this->db->where('estado', 1);
-        $this->db->from('paciente');
+		$this->db->select('p.*, concat(u.nombre, " ", u.primerApellido, " ", u.segundoApellido) as tutor');
+        $this->db->from('paciente p');
+        $this->db->where('p.estado', 1);
+        $this->db->join('usuario u', 'u.idUsuario = p.idUsuario');
         return $this->db->get();
 	}
 	

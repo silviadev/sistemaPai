@@ -32,8 +32,8 @@
                 </div>
               </div>
             </div>
-            <div class="table-responsive-sm">
-              <table class="table table-sm table-bordered">
+            <div class="table-responsive-sm table-responsive p-0 " style="height: 300px; color:red; ">
+              <table class="table table-sm table-bordered table-head-fixed text-nowrap">
                 <thead class="vacuna-cabecera">
                   <tr>
                     <th>Edad de aplicación (Meses)</th>

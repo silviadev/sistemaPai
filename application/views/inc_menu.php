@@ -127,6 +127,12 @@
                   <p>Tutores</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url() ?>reportes/reportepacientes" class="nav-link">
+                  <i class="fas fa-clipboard-list nav-icon"></i>
+                  <p>Pacientes</p>
+                </a>
+              </li>
             </ul>
           </a>
         </li>

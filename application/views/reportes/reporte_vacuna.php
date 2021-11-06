@@ -26,57 +26,69 @@
               <h3 class="card-title">Reporte </h3>
             </div>
 
-            <div class="input-daterange">
-              <div class="col-md-4">
-                <div class="form-group start-date">
-                  <label>From</label>
-                  <div class="input-group date">
-                    <input type="date" class="form-control pull-right" id="start_date" name="start_date">
-                  </div>
-                  <!-- /.input group -->
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group end-date">
-                  <label>To</label>
-                  <div class="input-group date">
-                    <input type="date" class="form-control pull-right" id="end_date" name="end_date">
-                  </div>
-                  <!-- /.input group -->
-                </div>
+            <!-- #Add custom filters in the server-side dataTable -->
+            <div class="row well input-daterange">
+              <div class="col-sm-4">
+                <label class="control-label">Gender</label>
+                <select class="form-control" name="gender" id="gender" style="height: 40px;">
+                  <option value="">- Please select -</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
               </div>
 
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="datatable" class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Primer Apellido</th>
-                      <th>Segundo Apellido</th>
-                      <th>Fecha de nacimiento</th>
-                      <th>Edad</th>
-                      <th>Sexo</th>
-                      <th>Codigo</th>
-                      <!-- <th>Foto</th> -->
-                      <th></th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                  </tbody>
-                </table>
+              <div class="col-sm-3">
+                <label class="control-label">Start date</label>
+                <input class="form-control datepicker" type="date" name="initial_date" id="initial_date" placeholder="yyyy-mm-dd" style="height: 40px;" />
               </div>
-              <!-- /.card-body -->
+
+              <div class="col-sm-3">
+                <label class="control-label">End date</label>
+                <input class="form-control datepicker" type="date" name="final_date" id="final_date" placeholder="yyyy-mm-dd" style="height: 40px;" />
+              </div>
+
+              <div class="col-sm-2">
+                <button class="btn btn-success btn-block" type="submit" name="filter" id="filter" style="margin-top: 30px">
+                  <i class="fa fa-filter"></i> Filter
+                </button>
+              </div>
+
+              <div class="col-sm-12 text-danger" id="error_log"></div>
             </div>
-            <!-- /.card -->
+
+            <br /><br />
+
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="datatable" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Primer Apellido</th>
+                    <th>Segundo Apellido</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>Edad</th>
+                    <th>Sexo</th>
+                    <th>Codigo</th>
+                    <!-- <th>Foto</th> -->
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
           </div>
-          <!-- /.col -->
+          <!-- /.card -->
         </div>
-        <!-- /.row -->
+        <!-- /.col -->
       </div>
-      <!-- /.container-fluid -->
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
   </section>
   <!-- /.content -->
 </div>

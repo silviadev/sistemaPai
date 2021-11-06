@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h5 id="docTitle">Lista de Usuarios</h5>
+          <h5 id="docTitle">Lista de Pacientes</h5>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -32,25 +32,25 @@
                     <th>Nombre</th>
                     <th>Primer Apellido</th>
                     <th>Segundo Apellido</th>
-                    <th>CI</th>
-                    <th>Direccion</th>
-                    <th>Correo</th>
-                    <th>De alta</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Sexo</th>
+                    <th>Codigo</th>
+                    <th>Tutor</th>
                   </tr>
                 </thead>
                 <tbody>
 
                   <?php
-                  foreach ($usuario->result() as $row) {
+                  foreach ($paciente->result() as $row) {
                   ?>
                     <tr>
                       <td><?php echo $row->nombre; ?></th>
                       <td><?php echo $row->primerApellido; ?></td>
                       <td><?php echo $row->segundoApellido; ?></td>
-                      <td><?php echo $row->ci; ?></td>
-                      <td><?php echo $row->direccion; ?></td>
-                      <td><?php echo $row->correo; ?></td>
-                      <td><?php echo ($row->habilitado == 1) ? "Habilitado": "Deshabilitado"; ?></td>
+                      <td><?php echo $row->fechaNacimiento; ?></td>
+                      <td><?php echo $row->sexo; ?></td>
+                      <td><?php echo $row->codigo; ?></td>
+                      <td><?php echo $row->tutor; ?></td>
                     </tr>
                   <?php
                   }
