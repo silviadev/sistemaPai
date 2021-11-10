@@ -50,5 +50,13 @@ class Paciente_model extends CI_Model {
         $this->db->where('idPaciente', $idPaciente);
         $this->db->update('paciente', $data);
     }
+
+    public function recuperarUsuarioPorIdPaciente($idPaciente) {
+        $this->db->select('u.nombre as nombreTutor, u.primerApellido as primerApellidoTutor, u.segundoApellido as segundoApellidoTutor, u.ci, p.nombre as nombrePaciente, p.primerApellido as primerApellidoPaciente, p.segundoApellido as segundoApellidoPaciente, p.codigo, p.sexo');
+        $this->db->from('paciente p');
+        $this->db->where('p.idPaciente', $idPaciente);
+        $this->db->join('usuario u', 'u.idUsuario = p.idUsuario' );
+        return $this->db->get();
+    }
 }
 

@@ -25,6 +25,13 @@ class PacienteVacuna_model extends CI_Model
     return $query;
   }
 
+  public function listaVacunaPaciente()
+  { $this->db->select('*');
+    $this->db->from('pacienteVacuna p');
+    $this->db->where('p.estado', 1);
+    return $this->db->get();
+  }
+
   public function agregarPacienteVacuna($idAutor, $data)
   {
     $data['fechaCreacion'] = $this->fechaCreacion;

@@ -32,9 +32,9 @@
                 </div>
               </div>
             </div>
-            <div class="table-responsive-sm table-responsive p-0 " style="height: 300px; color:red; ">
-              <table class="table table-sm table-bordered table-head-fixed text-nowrap">
-                <thead class="vacuna-cabecera">
+            <div class="table-responsive-sm table-responsive p-0 ">
+              <table class="table table-sm table-bordered ">
+                <thead>
                   <tr>
                     <th>Edad de aplicación (Meses)</th>
                     <th>Vacuna</th>
@@ -77,8 +77,6 @@
 
     $('.select-paciente-ajax').on('change', function() {
       var idPaciente = $(".select-paciente-ajax option:selected").val();
-      console.log(idPaciente);
-      //<td class="prova" data-ribbon="✅"></td>
       var tablaDosis = $("tbody");
 
       if (idPaciente != '') {
@@ -90,7 +88,6 @@
           type: 'POST',
           dataType: 'json',
           success: function(r) {
-            console.log("jasdkfjaklsd", r);
             tablaDosis.find('tr').remove();
 
             $(r).each(function(indice, valor) {

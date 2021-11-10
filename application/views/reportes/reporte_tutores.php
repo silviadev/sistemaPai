@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h5 id="docTitle">Lista de Usuarios</h5>
+          <h5 id="docTitle">Lista de Tutores</h5>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -36,6 +36,7 @@
                     <th>Direccion</th>
                     <th>Correo</th>
                     <th>De alta</th>
+                    <th>Fecha de registro</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -51,6 +52,7 @@
                       <td><?php echo $row->direccion; ?></td>
                       <td><?php echo $row->correo; ?></td>
                       <td><?php echo ($row->habilitado == 1) ? "Habilitado": "Deshabilitado"; ?></td>
+                      <td><?php echo $row->fechaCreacion; ?></td>
                     </tr>
                   <?php
                   }
