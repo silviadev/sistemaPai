@@ -1,6 +1,6 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
- 
+
   <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
@@ -23,49 +23,66 @@
         <div class="col-12">
 
           <div class="card">
-            <div class="card-header">
-            <!-- /.card-header -->
-            <div class="card-body table-responsive p-0">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Primer Apellido</th>
-                    <th>Segundo Apellido</th>
-                    <th>CI</th>
-                    <th>Direccion</th>
-                    <th>Correo</th>
-                    <th>De alta</th>
-                    <th>Fecha de registro</th>
-                  </tr>
-                </thead>
-                <tbody>
+            <div class="card-body">
+              <div class="row">
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                  <!-- small card -->
+                  <div class="small-box bg-success">
+                    <div class="inner">
+                      <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                  <?php
-                  foreach ($usuario->result() as $row) {
-                  ?>
-                    <tr>
-                      <td><?php echo $row->nombre; ?></th>
-                      <td><?php echo $row->primerApellido; ?></td>
-                      <td><?php echo $row->segundoApellido; ?></td>
-                      <td><?php echo $row->ci; ?></td>
-                      <td><?php echo $row->direccion; ?></td>
-                      <td><?php echo $row->correo; ?></td>
-                      <td><?php echo ($row->habilitado == 1) ? "Habilitado": "Deshabilitado"; ?></td>
-                      <td><?php echo $row->fechaCreacion; ?></td>
-                    </tr>
-                  <?php
-                  }
-                  ?>
+                      <p>Bounce Rate</p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                      More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                  </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                  <!-- small card -->
+                  <div class="small-box bg-warning">
+                    <div class="inner">
+                      <h3>44</h3>
 
-                </tbody>
-              </table>
+                      <p>User Registrations</p>
+                    </div>
+                    <div class="icon">
+                      <i class="fas fa-user-plus"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                      More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                  </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                  <!-- small card -->
+                  <div class="small-box bg-danger">
+                    <div class="inner">
+                      <h3>65</h3>
+
+                      <p>Unique Visitors</p>
+                    </div>
+                    <div class="icon">
+                      <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                      More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                  </div>
+                </div>
+                <!-- ./col -->
+              </div>
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
         </div>
-        <!-- /.col -->
       </div>
       <!-- /.row -->
     </div>
