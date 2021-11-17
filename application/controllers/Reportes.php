@@ -4,8 +4,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Reportes extends CI_Controller
 {
 
-  public function index()
+  public function __construct()
   {
+    parent::__construct();
+    date_default_timezone_set('America/La_Paz');
   }
 
   public function reportevacuna()
@@ -29,12 +31,19 @@ class Reportes extends CI_Controller
     $data['primerApellido']  = $this->session->userdata('primerApellido');
     $data['segundoApellido']  = $this->session->userdata('segundoApellido');
 
-    $lista = $this->usuario_model->listaTutores("tutor");
-    $data['usuario'] = $lista;
+    $today = date('Y-m-d');
+    $dataToday = $this->dosis_model->listaDosisVacunasHoy($today);
+    $data['totalHoy'] = $dataToday->num_rows();
+    
+    $dataPendiente = $this->dosis_model->listaDosisVacunasPendientes($today);
+    $data['totalPendiente'] = $dataPendiente->num_rows();
+    
+    $dataRezagado = $this->dosis_model->listaDosisVacunasRezagado($today);
+    $data['totalRezagado'] = $dataRezagado->num_rows();
 
     $this->load->view('inc_header');
     $this->load->view('inc_menu', $data);
-    $this->load->view('reportes/reporte_tutores', $data);
+    $this->load->view('reportes/reporte_paciente_vacuna', $data);
     $this->load->view('inc_footer');
   }
 
@@ -72,6 +81,26 @@ class Reportes extends CI_Controller
     $this->load->view('inc_menu', $data);
     $this->load->view('reportes/reporte_detalle_paciente', $data);
     $this->load->view('inc_footer');
+  }
+
+  public function reporteHoy()
+  {
+    $today = date('Y-m-d');
+    $json_data = $this->dosis_model->listaDosisVacunasHoy($today);
+    echo json_encode($json_data->result());
+  }
+
+  public function reporteVacunasPendientes()
+  {
+    $today = date('Y-m-d');
+    $json_data = $this->dosis_model->listaDosisVacunasPendientes($today);
+    echo json_encode($json_data->result());
+  }
+
+  public function reporteVacunaRezagado() {
+    $today = date('Y-m-d');
+    $json_data = $this->dosis_model->listaDosisVacunasRezagado($today);
+    echo json_encode($json_data->result());
   }
 
   public function buscarvacuna()

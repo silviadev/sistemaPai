@@ -124,7 +124,7 @@
               <li class="nav-item">
                 <a href="<?php echo base_url() ?>reportes/reportetutores" class="nav-link">
                   <i class="fas fa-clipboard-list nav-icon"></i>
-                  <p>Tutores</p>
+                  <p>Pacientes con vacunas</p>
                 </a>
               </li>
               <li class="nav-item">
