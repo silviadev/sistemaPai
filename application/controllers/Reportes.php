@@ -34,18 +34,29 @@ class Reportes extends CI_Controller
 
     $today = date('Y-m-d');
     $dataToday = $this->dosis_model->listaDosisVacunasHoy($today);
-    $data['totalHoy'] = $dataToday->num_rows();
+    
+    $data['totalHoy'] = $this->total($dataToday);
     
     $dataPendiente = $this->dosis_model->listaDosisVacunasPendientes($today);
-    $data['totalPendiente'] = $dataPendiente->num_rows();
+    $data['totalPendiente'] = $this->total($dataPendiente);
     
     $dataRezagado = $this->dosis_model->listaDosisVacunasRezagado($today);
-    $data['totalRezagado'] = $dataRezagado->num_rows();
+    $data['totalRezagado'] =  $this->total($dataRezagado);
 
     $this->load->view('inc_header');
     $this->load->view('inc_menu', $data);
     $this->load->view('reportes/reporte_paciente_vacuna', $data);
     $this->load->view('inc_footer');
+  }
+
+  public function total($dataTotal)
+  {
+    $arrayToday = array();
+    foreach ($dataTotal->result() as $key => $value) {
+      $arrayToday[] = $value->codigo;
+    }
+    $total = array_unique($arrayToday);
+    return count($total);
   }
 
   public function reportepacientes()
