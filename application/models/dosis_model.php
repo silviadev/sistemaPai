@@ -126,11 +126,7 @@ class Dosis_model extends CI_Model
   {
     $consulta = "SELECT d.idDosis, v.idVacuna, v.nombre as nombrevacuna,
     cd.dosis, via.nombre as nombrevia, d.rangoMesInicial, pv.idPacienteVacuna, pv.fechaVacuna, pv.idSiguienteDosis,
-<<<<<<< HEAD
     pv.fechaSiguienteDosis, p.nombre as nombrePaciente, p.primerApellido, p.segundoApellido, p.codigo
-=======
-    pv.fechaSiguienteDosis, p.nombre as nombrePaciente, p.primerApellido, p.segundoApellido
->>>>>>> 27209abe514dbc1082a2c81576de74f939fe132c
     FROM sistemapai.dosis d
     INNER JOIN sistemapai.vacuna v on d.idVacuna = v.idVacuna
     INNER JOIN sistemapai.via on via.idVia = d.idVia
@@ -148,11 +144,7 @@ class Dosis_model extends CI_Model
   {
     $consulta = "SELECT d.idDosis, v.idVacuna, v.nombre as nombrevacuna,
     cd.dosis, via.nombre as nombrevia, d.rangoMesInicial, pv.idPacienteVacuna, pv.fechaVacuna, pv.idSiguienteDosis,
-<<<<<<< HEAD
     pv.fechaSiguienteDosis, p.nombre as nombrePaciente, p.primerApellido, p.segundoApellido, p.codigo
-=======
-    pv.fechaSiguienteDosis, p.nombre as nombrePaciente, p.primerApellido, p.segundoApellido
->>>>>>> 27209abe514dbc1082a2c81576de74f939fe132c
     FROM dosis d
     INNER JOIN vacuna v on d.idVacuna = v.idVacuna
     INNER JOIN via on via.idVia = d.idVia
@@ -171,11 +163,7 @@ class Dosis_model extends CI_Model
   {
     $consulta = "SELECT d.idDosis, v.idVacuna, v.nombre as nombrevacuna,
     cd.dosis, via.nombre as nombrevia, d.rangoMesInicial, pv.idPacienteVacuna, pv.fechaVacuna, pv.idSiguienteDosis,
-<<<<<<< HEAD
     pv.fechaSiguienteDosis, p.nombre as nombrePaciente, p.primerApellido, p.segundoApellido, p.codigo
-=======
-    pv.fechaSiguienteDosis, p.nombre as nombrePaciente, p.primerApellido, p.segundoApellido
->>>>>>> 27209abe514dbc1082a2c81576de74f939fe132c
     FROM dosis d
     INNER JOIN vacuna v on d.idVacuna = v.idVacuna
     INNER JOIN via on via.idVia = d.idVia

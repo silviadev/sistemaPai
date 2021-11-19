@@ -3,17 +3,7 @@
 
   <section class="content-header">
     <div class="container-fluid">
-<<<<<<< HEAD
       <div class="row mb-2 justify-content-lg-end">
-=======
-      <div class="row mb-2">
-        <div class="col-sm-11">
-          <div>
-            <h2 id="docTitle">Reporte de pacientes con vacunas</h2>
-          </div>
-          
-        </div>
->>>>>>> 27209abe514dbc1082a2c81576de74f939fe132c
         <div class="col-sm-1">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="<?php echo base_url() ?>usuario" class="nav-link">Inicio</a></li>
@@ -30,12 +20,9 @@
         <div class="col-12">
 
           <div class="card">
-<<<<<<< HEAD
             <div class="row justify-content-md-center m-3">
               <h3 id="docTitle" ><b>REPORTE DE PACIENTES Y SUS VACUNAS</b></h3>
             </div>
-=======
->>>>>>> 27209abe514dbc1082a2c81576de74f939fe132c
             <div class="card-body">
               <div class="row">
                 <!-- ./col -->
@@ -99,16 +86,10 @@
               <table id="example2"  class="table table-sm table-bordered" style="display:none">
                 <thead>
                   <th>Nombre Paciente</th>
-<<<<<<< HEAD
                   <th>Código  Paciente</th>
                   <th>Vacuna</th>
                   <th>Dosis</th>
                   <th class="fechaVacuna">Fecha de vacunación</th>
-=======
-                  <th>Vacuna</th>
-                  <th>Dosis</th>
-                  <th class="fechaVacuna">Fecha de vacunacion</th>
->>>>>>> 27209abe514dbc1082a2c81576de74f939fe132c
                 </thead>
                 <tbody id="tabla-vacunas2">
                   
@@ -117,16 +98,10 @@
               <table id="example3"  class="table table-sm table-bordered" style="display:none">
                 <thead>
                   <th>Nombre Paciente</th>
-<<<<<<< HEAD
                   <th>Código Paciente</th>
                   <th>Vacuna</th>
                   <th>Dosis</th>
                   <th class="fechaVacuna">Fecha de vacunación</th>
-=======
-                  <th>Vacuna</th>
-                  <th>Dosis</th>
-                  <th class="fechaVacuna">Fecha de vacunacion</th>
->>>>>>> 27209abe514dbc1082a2c81576de74f939fe132c
                 </thead>
                 <tbody id="tabla-vacunas3">
                   
@@ -135,16 +110,10 @@
               <table id="example4"  class="table table-sm table-bordered" style="display:none; margin: 0 auto;">
                 <thead>
                   <th>Nombre Paciente</th>
-<<<<<<< HEAD
                   <th>Código Paciente</th>
                   <th>Vacuna</th>
                   <th>Dosis</th>
                   <th class="fechaVacuna">Fecha de vacunación</th>
-=======
-                  <th>Vacuna</th>
-                  <th>Dosis</th>
-                  <th class="fechaVacuna">Fecha de vacunacion</th>
->>>>>>> 27209abe514dbc1082a2c81576de74f939fe132c
                 </thead>
                 <tbody id="tabla-vacunas4">
   
@@ -196,10 +165,7 @@
           tablaDosis2.append(
             '<tr>' +
             '<td>' + valor.nombrePaciente + " " + valor.primerApellido + " " + valor.segundoApellido + '</td>'+
-<<<<<<< HEAD
             '<td>' + valor.codigo + '</td>'+
-=======
->>>>>>> 27209abe514dbc1082a2c81576de74f939fe132c
             '<td>' + valor.nombrevacuna + '</td>'+
             '<td>' + valor.dosis + " " + valor.nombrevia + '</td>'+
             '<td>' + valor.fechaVacuna + '</td>'+
@@ -292,10 +258,7 @@
           tablaDosis3.append(
             '<tr>' +
             '<td>' + valor.nombrePaciente + " " + valor.primerApellido + " " + valor.segundoApellido + '</td>'+
-<<<<<<< HEAD
             '<td>' + valor.codigo + '</td>'+
-=======
->>>>>>> 27209abe514dbc1082a2c81576de74f939fe132c
             '<td>' + valor.nombrevacuna + '</td>'+
             '<td>' + valor.dosis + " " + valor.nombrevia + '</td>'+
             '<td>' + valor.fechaSiguienteDosis + '</td>'+
@@ -390,10 +353,7 @@
           tablaDosis4.append(
             '<tr>' +
             '<td>' + valor.nombrePaciente + " " + valor.primerApellido + " " + valor.segundoApellido + '</td>'+
-<<<<<<< HEAD
             '<td>' + valor.codigo + '</td>'+
-=======
->>>>>>> 27209abe514dbc1082a2c81576de74f939fe132c
             '<td>' + valor.nombrevacuna + '</td>'+
             '<td>' + valor.dosis + " " + valor.nombrevia + '</td>'+
             '<td>' + valor.fechaSiguienteDosis + '</td>'+
