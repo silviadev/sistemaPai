@@ -6,45 +6,38 @@
           <div class="card-header">
             <div class="card-title">Detalle Paciente</div>
           </div>
+          <?php
+          echo form_open_multipart('reportes/imprimir');
+          ?>
+          <div class="p-3">
+            <input type="hidden" name="idPaciente" value="<?php echo $idPaciente?>">
+            <button class="btn btn-primary" id="pdf">PDF</button>
+          </div>
+      
+          <?php
+            echo form_close();
+          ?>
           <!-- /.card-header -->
-          <div class="card-body">
-
-
-
+          <div class="card-body contenido-detalle">
+            <div class="container text-center">
+              <h5><b>REPORTE PACIENTE</b></h5>
+            </div>
             <div class="form-group">
               <div class="container border">
+                <h5><b>INFORMACION TUTOR Y PACIENTE</b></h5>
                 <div class="container">
-                  <h5>Paciente</h5>
                   <table class="table">
                     <?php
                     if (isset($pacienteTutor)) {
                       foreach ($pacienteTutor->result() as $row) {
                     ?>
                         <tr>
-                          <td class="col-sm-2"><b>Nombre Completo: </b></td>
-                          <td><?php echo $row->nombrePaciente . "  " . $row->primerApellidoPaciente . "  " . $row->segundoApellidoPaciente; ?></td>
-                        </tr>
-                    <?php
-                      }
-                    }
-                    echo form_close();
-                    ?>
-                  </table>
-                </div>
-                <div class="container">
-                  <h5>Datos Tutor</h5>
-                  <table class="table">
-                    <?php
-                    if (isset($pacienteTutor)) {
-                      foreach ($pacienteTutor->result() as $row) {
-                    ?>
-                        <tr>
-                          <td class="col-sm-2"><b>Nombre Completo: </b></td>
-                          <td><?php echo $row->nombreTutor." ".$row->primerApellidoTutor." ".$row->segundoApellidoTutor; ?></td>
+                          <td class="col-sm-2"><b>Tutor:</b></td>
+                          <td><b><?php echo $row->nombreTutor." ".$row->primerApellidoTutor." ".$row->segundoApellidoTutor; ?></b></td>
                         </tr>
                         <tr>
                           <td><b>CI: </b></td>
-                          <td><?php echo $row->ci ?></td>
+                          <td><b><?php echo $row->ci ?></b></td>
                         </tr>
                     <?php
                       }
@@ -53,14 +46,37 @@
                     ?>
                   </table>
                 </div>
-
+                <div class="container">
+                  <table class="table">
+                    <?php
+                    if (isset($pacienteTutor)) {
+                      foreach ($pacienteTutor->result() as $row) {
+                    ?>
+                        <tr>
+                          <td class="col-sm-2"><b>Paciente: </b></td>
+                          <td><b><?php echo $row->nombrePaciente . "  " . $row->primerApellidoPaciente . "  " . $row->segundoApellidoPaciente; ?></b></td>
+                          <tr>
+                          <td><b>Codigo: </b></td>
+                          <td><b><?php echo $row->codigo ?></b></td>
+                        </tr>
+                        </tr>
+                    <?php
+                      }
+                    }
+                    echo form_close();
+                    ?>
+                  </table>
+                </div>
               </div>
               <div class="container">
-                <h5>Reporte Vacunas Aplicadas</h5>
-                <table class="table table-bordered table-striped">
-                  <th>Edad de Aplicacion Meses</th>
-                  <th>Vacuna dosis</th>
-                  <th>Fecha vacuna</th>
+                <h5 class="d-flex justify-content-center"><b>VACUNAS APLICADAS</b></h5>
+                <table class="table table-bordered">
+                <thead >
+                  <tr class="table-info">
+                    <th>Edad de Aplicacion Meses</th>
+                    <th>Vacuna dosis</th>
+                    <th>Fecha vacuna</th>
+                  </tr>
                   <?php
                   if (isset($pacienteDosis)) {
                     foreach ($pacienteDosis->result() as $row) {
@@ -80,11 +96,15 @@
                 </table>
               </div>
               <div class="container">
-                <h5>Siguiente Vacuna</h5>
-                <table class="table table-bordered table-striped">
-                  <th>Edad de Aplicacion Meses</th>
-                  <th>Vacuna dosis</th>
-                  <th>Fecha Siguiente dosis</th>
+                <h5 class="d-flex justify-content-center"><b>SIGUIENTE VACUNA</b></h5>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr class="table-info">
+                      <th>Edad de Aplicacion Meses</th>
+                      <th>Vacuna dosis</th>
+                      <th>Fecha Siguiente dosis</th>
+                    </tr>
+                  </thead>
                   <?php
                   if (isset($pacienteDosis)) {
                     foreach ($pacienteDosis->result() as $row) {
@@ -104,12 +124,16 @@
                 </table>
               </div>
               <div class="container">
-                <h5>Vacunas Pendientes</h5>
-                <table class="table table-bordered table-striped">
-                  <th>Edad de Aplicacion Meses</th>
-                  <th>Vacuna dosis</th>
-                  <th>Fecha vacuna</th>
-                  <th>Fecha Siguiente dosis</th>
+                <h5 class="d-flex justify-content-center"><b>VACUNAS PENDIENTES</b></h5>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr class="table-info">
+                      <th>Edad de Aplicacion Meses</th>
+                      <th>Vacuna dosis</th>
+                      <th>Fecha vacuna</th>
+                      <th>Fecha Siguiente dosis</th>
+                    </tr>
+                  </thead>
                   <?php
                   if (isset($pacienteDosis)) {
                     foreach ($pacienteDosis->result() as $row) {
@@ -130,9 +154,6 @@
                 </table>
               </div>
             </div>
-
-
-
           </div>
         </div>
       </div>

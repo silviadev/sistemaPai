@@ -7,7 +7,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SistemaPai</title>
+  <title>Sistema Pai Bolivia</title>
 
   <style>
     .card-primary:not(.card-outline)>.card-header {
@@ -43,6 +43,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
     .dosis-form-template {
       display: none;
     }
+
+    .selected-card {
+      background-color: #0aa5a7 !important;
+    }
+
+    .small-box>.small-box-footer:hover {
+      background-color: #0aa5a7 !important;
+    }
+
   </style>
 
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/jquery-ui/jquery-ui.min.css">
@@ -69,7 +78,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-
+  <link rel="icon" href="<?=base_url()?>uploads/pai.png" type="image/png">
 
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/style.css">
 </head>

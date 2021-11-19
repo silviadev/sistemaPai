@@ -29,12 +29,12 @@
               <!-- #Add custom filters in the server-side dataTable -->
               <div class="row well input-daterange">
                 <div class="col-sm-3">
-                  <label class="control-label">Fecha inicio</label>
+                  <label class="control-label">Fecha vacuna inicio</label>
                   <input class="form-control datepicker" type="date" name="initial_date" id="min" placeholder="yyyy-mm-dd" style="height: 40px;" />
                 </div>
 
                 <div class="col-sm-3">
-                  <label class="control-label">Fecha final</label>
+                  <label class="control-label">Fecha vacuna final</label>
                   <input class="form-control datepicker" type="date" name="final_date" id="max" placeholder="yyyy-mm-dd" style="height: 40px;" />
                 </div>
 
@@ -43,8 +43,21 @@
                     <i class="fa fa-filter"></i> Buscar
                   </button>
                 </div>
-
                 <div class="col-sm-12 text-danger" id="error_log"></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-2">
+                  <label class="control-label">Vacuna</label>
+                  <input class="form-control" type="text" name="vacuna"/>
+                </div>
+                <div class="col-sm-2">
+                  <label class="control-label">Paciente</label>
+                  <input class="form-control" type="text" name="codigo"/>
+                </div>
+                <div class="col-sm-2">
+                  <label class="control-label">Código Paciente</label>
+                  <input class="form-control" type="text" name="codigo"/>
+                </div>
               </div>
 
               <br /><br />
@@ -91,42 +104,25 @@
   <!-- /.content -->
 </div>
 
-<!-- jQuery -->
+
 <script src="<?php echo base_url(); ?>/adminLte/plugins/jquery/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>/js/custom.js"></script>
+
 <script src="<?php echo base_url(); ?>/adminLte/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="<?php echo base_url(); ?>/adminLte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables  & Plugins -->
+ 
 <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="<?php echo base_url(); ?>/adminLte/plugins/jszip/jszip.min.js"></script>
 <script src="<?php echo base_url(); ?>/adminLte/plugins/pdfmake/pdfmake.min.js"></script>
 <script src="<?php echo base_url(); ?>/adminLte/plugins/pdfmake/vfs_fonts.js"></script>
 <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-searchbuilder/js/dataTables.searchBuilder.min.js"></script>
-<!-- InputMask -->
-<script src="<?php echo base_url(); ?>/adminLte/plugins/moment/moment.min.js"></script>
-<script src="<?php echo base_url(); ?>/adminLte/plugins/inputmask/jquery.inputmask.min.js"></script>
-<!-- date-range-picker -->
-<script src="<?php echo base_url(); ?>/adminLte/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo base_url(); ?>/adminLte/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url(); ?>/adminLte/dist/js/demo.js"></script>
-<!-- Page specific script -->
-<!-- Select2 -->
-<script src="<?php echo base_url(); ?>adminLte/plugins/select2/js/select2.full.min.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="<?php echo base_url(); ?>adminLte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js"></script>
-<!-- BS-Stepper -->
-<script src="<?php echo base_url(); ?>adminLte/plugins/bs-stepper/js/bs-stepper.min.js"></script>
-<!-- <script src="https://cdn.datatables.net/plug-ins/1.11.3/filtering/row-based/range_dates.js" ></script> -->
+
 <script type="text/javascript">
   /* load_data(); // first load
 

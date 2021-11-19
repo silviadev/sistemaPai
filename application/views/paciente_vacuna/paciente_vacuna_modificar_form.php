@@ -107,7 +107,8 @@
                 checked = '';
                 disabledSiguienteDosis = 'disabled';
                 disabled = "";
-                fechaVacuna = (valor.fechaVacuna) ? ' value="' + valor.fechaVacuna + '"' : "";
+                var fechaVacunaCustom = valor.fechaVacuna.split(" ");
+                fechaVacuna = (valor.fechaVacuna) ? ' value="' + fechaVacunaCustom[0] + '"' : "";
               }
               else {
               }

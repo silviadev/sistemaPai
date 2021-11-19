@@ -104,12 +104,8 @@
                 checked = 'checked="checked"';
                 disabled = 'disabled';
                 disabledSiguienteDosis = 'disabled';
-                //color = 'realizado';
-
-                fechaVacuna = (valor.fechaVacuna) ? 'min="2021-01-01" max="2021-12-31" value="' + valor.fechaVacuna + '"' : "";
-
-                console.log("fechavacuna: ", valor.fechaVacuna);
-
+                var fechaVacunaCustom = valor.fechaVacuna.split(" ");
+                fechaVacuna = (valor.fechaVacuna) ? 'min="2021-01-01" max="2021-12-31" value="' + fechaVacunaCustom[0] + '"' : "";
               }
               var fechaSiguienteDosisValue = "";
               var checkedSiguienteDosis = "";

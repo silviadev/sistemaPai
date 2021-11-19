@@ -61,7 +61,6 @@
        buttons: [{
          extend: 'pdfHtml5',
          title: $('#docTitle').text(),
-         messageTop: 'Lista de usuarios tutor',
          bom: true
        }],
        "responsive": true,

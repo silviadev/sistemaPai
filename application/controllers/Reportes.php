@@ -1,11 +1,14 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+require_once APPPATH.'third_party/fpdf/fpdf.php';
 
 class Reportes extends CI_Controller
 {
 
-  public function index()
+  public function __construct()
   {
+    parent::__construct();
+    date_default_timezone_set('America/La_Paz');
   }
 
   public function reportevacuna()
@@ -29,12 +32,19 @@ class Reportes extends CI_Controller
     $data['primerApellido']  = $this->session->userdata('primerApellido');
     $data['segundoApellido']  = $this->session->userdata('segundoApellido');
 
-    $lista = $this->usuario_model->listaTutores("tutor");
-    $data['usuario'] = $lista;
+    $today = date('Y-m-d');
+    $dataToday = $this->dosis_model->listaDosisVacunasHoy($today);
+    $data['totalHoy'] = $dataToday->num_rows();
+    
+    $dataPendiente = $this->dosis_model->listaDosisVacunasPendientes($today);
+    $data['totalPendiente'] = $dataPendiente->num_rows();
+    
+    $dataRezagado = $this->dosis_model->listaDosisVacunasRezagado($today);
+    $data['totalRezagado'] = $dataRezagado->num_rows();
 
     $this->load->view('inc_header');
     $this->load->view('inc_menu', $data);
-    $this->load->view('reportes/reporte_tutores', $data);
+    $this->load->view('reportes/reporte_paciente_vacuna', $data);
     $this->load->view('inc_footer');
   }
 
@@ -60,8 +70,9 @@ class Reportes extends CI_Controller
     $data['nombre']  = $this->session->userdata('nombre');
     $data['primerApellido']  = $this->session->userdata('primerApellido');
     $data['segundoApellido']  = $this->session->userdata('segundoApellido');
-
+    
     $idPaciente = $_POST['idPaciente'];
+    $data['idPaciente']=$idPaciente;
     $lista = $this->dosis_model->listaDosisVacunasPorIdPaciente($idPaciente);
 
     $tutor = $this->paciente_model->recuperarUsuarioPorIdPaciente($idPaciente);
@@ -72,6 +83,88 @@ class Reportes extends CI_Controller
     $this->load->view('inc_menu', $data);
     $this->load->view('reportes/reporte_detalle_paciente', $data);
     $this->load->view('inc_footer');
+  }
+
+  public function reporteHoy()
+  {
+    $today = date('Y-m-d');
+    $json_data = $this->dosis_model->listaDosisVacunasHoy($today);
+    echo json_encode($json_data->result());
+  }
+
+  public function reporteVacunasPendientes()
+  {
+    $today = date('Y-m-d');
+    $json_data = $this->dosis_model->listaDosisVacunasPendientes($today);
+    echo json_encode($json_data->result());
+  }
+
+  public function reporteVacunaRezagado() {
+    $today = date('Y-m-d');
+    $json_data = $this->dosis_model->listaDosisVacunasRezagado($today);
+    echo json_encode($json_data->result());
+  }
+
+  public function imprimir() 
+  {  
+    $GLOBALS["autor"] = $this->session->userdata('nombre')." ".$this->session->userdata('primerApellido')." ".$this->session->userdata('segundoApellido');
+    $idPaciente = $_POST['idPaciente'];
+    $pacienteDosis = $this->dosis_model->listaDosisVacunasPorIdPaciente($idPaciente);
+
+    $pacienteTutor = $this->paciente_model->recuperarUsuarioPorIdPaciente($idPaciente);
+
+    $this->load->library('pdf');
+    $this->pdf = new Pdf();
+    $this->pdf->AddPage('P','Letter',0);
+    $this->pdf->Ln();
+    
+    $this->pdf->SetFont('Arial','B', 12);
+    foreach ($pacienteTutor->result() as $row) {
+      $nombre = "Tutor: ".$row->nombrePaciente . "  " . $row->primerApellidoPaciente . "  " . $row->segundoApellidoPaciente;
+      $this->pdf->Cell(25, 5, $nombre, 0, 1, 'L');
+      $this->pdf->Cell(25, 5, "CI: ".$row->ci, 0, 1, 'L');
+    }
+
+    $this->pdf->Ln();
+    foreach ($pacienteTutor->result() as $row) {
+      $nombrePaciente =  "Paciente: ".$row->nombreTutor." ".$row->primerApellidoTutor." ".$row->segundoApellidoTutor;
+      
+      $this->pdf->Cell(25, 5, $nombrePaciente, 0, 1,'L');
+      $this->pdf->Cell(25, 5, "Codigo: ".$row->codigo, 0, 1,'L');
+    }
+    
+    $this->pdf->Line(10, 45, 210-10, 45);
+    $this->pdf->Line(10, 80, 210-10, 80);
+
+    $this->pdf->Ln(10);
+    $this->pdf->SetFont('Arial', 'B', 14);
+    $this->pdf->Cell(0, 5, 'REPORTE VACUNAS APLICADAS', 0, 1, 'C');
+    $this->pdf->Ln();
+    
+    $this->pdf->SetFont('Arial', '', 11);
+    $header = array('APLICACION (MESES)', 'VACUNA DOSIS', 'FECHA VACUNA');
+    $this->pdf->FancyTable($header, $pacienteDosis, "APLICADAS");
+    $this->pdf->Ln(5);
+
+    $this->pdf->SetFont('Arial', 'B', 14);
+    $this->pdf->Cell(0, 5, 'SIGUIENTE VACUNA', 0, 1, 'C');
+    $this->pdf->Ln();
+    
+    $this->pdf->SetFont('Arial', '', 11);
+    $header = array('APLICACION (MESES)', 'VACUNA DOSIS', 'FECHA SIGUIENTE DOSIS');
+    $this->pdf->FancyTable($header, $pacienteDosis, "SIGUIENTE_VACUNA");
+    $this->pdf->Ln(5);
+
+    $this->pdf->SetFont('Arial', 'B', 14);
+    $this->pdf->Cell(0, 5, 'VACUNAS PENDIENTES', 0, 1, 'C');
+    $this->pdf->Ln();
+    
+    $this->pdf->SetFont('Arial', '', 11);
+    $header = array('APLICACION (MESES)', 'VACUNA DOSIS', 'FECHA VACUNA');
+    $this->pdf->FancyTable($header, $pacienteDosis, "VACUNA_PENDIENTE");
+    
+    $this->pdf->AliasNbPages();
+    $this->pdf->Output('reporte_paciente.pdf' , 'D' );
   }
 
   public function buscarvacuna()

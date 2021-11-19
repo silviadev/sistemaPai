@@ -136,30 +136,32 @@ class Login extends CI_Controller
   public function verificarCodigoReset()
   {
     $data['idUsuario'] = $_POST['idUsuario'];
-    $this->load->view('inc_header');
+    /* $this->load->view('inc_header');
     $this->load->view('login/recover_password', $data);
-    $this->load->view('inc_footer');
-    //$codigoReset = $_POST["codigoReset"];
-    /* $this->form_validation->set_rules('codigoReset', 'Codigo Reset', 'callback_verificar_codigoReset');
+    $this->load->view('inc_footer'); */
+
+
+    $codigoReset = $_POST["codigoReset"];
+    $this->form_validation->set_rules('codigoReset', 'Codigo Reset', 'callback_verificar_codigoReset');
     $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
     if ($this->form_validation->run() == false) {
-      $data['idUsuario'] = 5;
+      //$data['idUsuario'] = 5;
       $this->load->view('inc_header');
       $this->load->view('login/codigo_reset', $data);
       $this->load->view('inc_footer');
     } else {
-      var_dump("dkfl;as;dfk;lasdf");
       $this->load->view('inc_header');
-      $this->load->view('login/recover_password');
+      $this->load->view('login/recover_password', $da);
       $this->load->view('inc_footer');
-    } */
+    }
   }
 
-  public function callback_verificar_codigoReset($codigoReset)
+  public function callback_verificar_codigoReset()
   {
 
-    $idUsuario = 5;//$_POST['idUsuario'];  
+    $idUsuario = $_POST['idUsuario']; 
+    $codigoReset = $_POST["codigoReset"]; 
     $user = $this->usuario_model->validarResetCodigo($codigoReset, $idUsuario);
 
     if ($user->num_rows() == 0) {

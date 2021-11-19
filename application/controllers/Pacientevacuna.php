@@ -3,6 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class PacienteVacuna extends CI_Controller
 {
+  public function __construct()
+  {
+    parent::__construct();
+    date_default_timezone_set('America/La_Paz');
+  }
 
   public function index()
   {
@@ -11,7 +16,6 @@ class PacienteVacuna extends CI_Controller
     $data['primerApellido']  = $this->session->userdata('primerApellido');
     $data['segundoApellido']  = $this->session->userdata('segundoApellido');
 
-    //$idUsuario = $this->session->userdata('idUsuario');
     $vacuna = $this->pacientevacuna_model->lista();
     if (count($vacuna->result())) {
       $data['vacuna'] = $vacuna;
@@ -48,11 +52,13 @@ class PacienteVacuna extends CI_Controller
     $data['idPaciente'] = $idPaciente;
     
     if (isset($_POST['selecteddosis'])) {
+      $hhmmss = date("H:i:s");
       foreach ($_POST['selecteddosis'] as $key => $id) {
         $fecha = $_POST['fechavacunapacientes'][$id];
+
         $siguienteVacunaProgramado = $this->pacientevacuna_model->obtenerPacienteConSiguienteVacuna($idPaciente, $id);
         if ($siguienteVacunaProgramado->num_rows() > 0) {
-          $dataUpdate['fechaVacuna'] = date("Y-m-d", strtotime($fecha[0]));
+          $dataUpdate['fechaVacuna'] = date("Y-m-d", strtotime($fecha[0]." ". $hhmmss));
           foreach ($siguienteVacunaProgramado->result() as $row) {
             $dataUpdate['idDosis'] = $row->idSiguienteDosis;
             $this->pacientevacuna_model->actualizarPacienteSiguienteVacuna($idAuthor, $row->idPaciente, $row->idSiguienteDosis, $dataUpdate);
@@ -60,7 +66,8 @@ class PacienteVacuna extends CI_Controller
         }
         else {
           $data['idDosis'] = $id;
-          $data['fechaVacuna'] = date("Y-m-d", strtotime($fecha[0]));
+          
+          $data['fechaVacuna'] = date("Y-m-d H:i:s", strtotime($fecha[0]." ". $hhmmss));
           $this->pacientevacuna_model->agregarPacienteVacuna($idAuthor, $data);
         }
       }
@@ -140,11 +147,12 @@ class PacienteVacuna extends CI_Controller
     $idAuthor = $this->session->userdata('idUsuario');
     
     if (isset($_POST['selecteddosis'])) {
+      $hhmmss = date("H:i:s");
       foreach ($_POST['selecteddosis'] as $key => $id) {
         $fecha = $_POST['fechavacunapacientes'][$id];
         $siguienteVacuna = $this->pacientevacuna_model->obtenerPacienteVacuna($idPaciente, $id);
         if ($siguienteVacuna->num_rows() > 0) {
-          $dataUpdate['fechaVacuna'] = date("Y-m-d", strtotime($fecha[0]));
+          $dataUpdate['fechaVacuna'] = date("Y-m-d H:i:s", strtotime($fecha[0]." ".$hhmmss));
           foreach ($siguienteVacuna->result() as $row) {
             $this->pacientevacuna_model->actualizarPacienteVacuna($idAuthor, $row->idPaciente, $row->idDosis, $dataUpdate);
           }

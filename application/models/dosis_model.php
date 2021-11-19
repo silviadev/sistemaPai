@@ -121,4 +121,61 @@ class Dosis_model extends CI_Model
     $this->db->where('idDosis', $idDosis);
     $this->db->update('dosis', $data);
   }
+
+  public function listaDosisVacunasHoy($fecha)
+  {
+    $consulta = "SELECT d.idDosis, v.idVacuna, v.nombre as nombrevacuna,
+    cd.dosis, via.nombre as nombrevia, d.rangoMesInicial, pv.idPacienteVacuna, pv.fechaVacuna, pv.idSiguienteDosis,
+    pv.fechaSiguienteDosis, p.nombre as nombrePaciente, p.primerApellido, p.segundoApellido, p.codigo
+    FROM sistemapai.dosis d
+    INNER JOIN sistemapai.vacuna v on d.idVacuna = v.idVacuna
+    INNER JOIN sistemapai.via on via.idVia = d.idVia
+    INNER JOIN sistemapai.categoriadosis cd on cd.idCategoriadosis = d.idCategoriadosis
+    INNER JOIN sistemapai.pacientevacuna pv on (pv.idDosis = d.idDosis)
+	  INNER JOIN sistemapai.paciente p on p.idPaciente = pv.idPaciente
+    WHERE fechaVacuna like '%$fecha%'
+    and pv.estado = 1
+    ORDER BY (p.codigo) ASC";
+
+    return $this->db->query($consulta);
+  }
+
+  public function listaDosisVacunasPendientes($fecha)
+  {
+    $consulta = "SELECT d.idDosis, v.idVacuna, v.nombre as nombrevacuna,
+    cd.dosis, via.nombre as nombrevia, d.rangoMesInicial, pv.idPacienteVacuna, pv.fechaVacuna, pv.idSiguienteDosis,
+    pv.fechaSiguienteDosis, p.nombre as nombrePaciente, p.primerApellido, p.segundoApellido, p.codigo
+    FROM dosis d
+    INNER JOIN vacuna v on d.idVacuna = v.idVacuna
+    INNER JOIN via on via.idVia = d.idVia
+    INNER JOIN categoriadosis cd on cd.idCategoriadosis = d.idCategoriadosis
+    LEFT JOIN pacientevacuna pv on (pv.idDosis = d.idDosis or pv.idSiguienteDosis=d.idDosis)
+    INNER JOIN paciente p on p.idPaciente = pv.idPaciente
+    WHERE pv.idDosis IS NULL
+    AND CAST(pv.fechaSiguienteDosis AS Datetime)  >= '$fecha'
+    and pv.estado = 1
+    ORDER BY (p.codigo) ASC";
+
+    return $this->db->query($consulta);
+  }
+
+  public function listaDosisVacunasRezagado($fecha)
+  {
+    $consulta = "SELECT d.idDosis, v.idVacuna, v.nombre as nombrevacuna,
+    cd.dosis, via.nombre as nombrevia, d.rangoMesInicial, pv.idPacienteVacuna, pv.fechaVacuna, pv.idSiguienteDosis,
+    pv.fechaSiguienteDosis, p.nombre as nombrePaciente, p.primerApellido, p.segundoApellido, p.codigo
+    FROM dosis d
+    INNER JOIN vacuna v on d.idVacuna = v.idVacuna
+    INNER JOIN via on via.idVia = d.idVia
+    INNER JOIN categoriadosis cd on cd.idCategoriadosis = d.idCategoriadosis
+    LEFT JOIN pacientevacuna pv on (pv.idDosis = d.idDosis or pv.idSiguienteDosis=d.idDosis)
+    INNER JOIN paciente p on p.idPaciente = pv.idPaciente
+    WHERE pv.idDosis IS NULL
+    AND CAST(pv.fechaSiguienteDosis AS Datetime)  < '$fecha'
+    and pv.estado = 1
+    ORDER BY (p.codigo) ASC";
+
+    return $this->db->query($consulta);
+  }
 }
+
