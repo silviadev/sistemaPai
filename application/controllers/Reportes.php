@@ -105,7 +105,6 @@ class Reportes extends CI_Controller
     echo json_encode($json_data->result());
   }
 
-<<<<<<< HEAD
   public function imprimir() 
   {  
     $GLOBALS["autor"] = $this->session->userdata('nombre')." ".$this->session->userdata('primerApellido')." ".$this->session->userdata('segundoApellido');
@@ -168,8 +167,6 @@ class Reportes extends CI_Controller
     $this->pdf->Output('reporte_paciente.pdf' , 'D' );
   }
 
-=======
->>>>>>> 27209abe514dbc1082a2c81576de74f939fe132c
   public function buscarvacuna()
   {
 
