@@ -28,7 +28,7 @@ class Pdf extends FPDF {
         $this->Cell(0, 6, "Autor: ".$GLOBALS["autor"], 0, 0, 'L', false);
         $this->Ln();
         $this->Cell(0, 6, $this->getDate(), 0, 0, 'L', false);
-        $this->Cell(0, 6,'Pagina '.$this->PageNo().'/{nb}', 0, 0, 'R');
+        $this->Cell(0, 6,'Pagina '.$this->PageNo().' de {nb}', 0, 0, 'R');
     }
 
     public function getDate()
@@ -82,7 +82,54 @@ class Pdf extends FPDF {
             }
             $fill = !$fill;
         }
-        $this->Cell(array_sum($w),0,'','T');
+        $this->Cell(array_sum($w), 0, '', 'T');
+    }
+    function SetCol($col)
+    {
+        // Establecer la posici�n de una columna dada
+        $this->col = $col;
+        $x = 10+$col*65;
+        $this->SetLeftMargin($x);
+        $this->SetX($x);
+    }
+    public function FancyTablePaciente($header1,$header2, $data)
+    {
+        // Colors, line width and bold font
+        $this->SetFillColor(20,205, 227);
+        $this->SetTextColor(255);
+        $this->SetDrawColor(0, 0, 0);
+        $this->SetLineWidth(.3);
+        $this->SetFont('','B');
+        // Header
+        $w = array(30, 25, 25, 30, 20, 30, 35);
+        for($i = 0; $i < count($header1); $i++)
+        {
+            $this->Cell($w[$i], 6, $header1[$i], "LRT", 0, 'L', true);
+        }
+        $this->Ln();
+        for($i = 0; $i < count($header2); $i++)
+        {
+            $this->Cell($w[$i], 6, $header2[$i], "LRB", 0, 'L', true);
+        }
+        $this->Ln();
+        $this->SetFillColor(235, 250, 252);
+        $this->SetTextColor(0);
+        $this->SetFont('');
+
+        $fill = false;
+        foreach($data->result() as $row)
+        {
+            $this->Cell($w[0], 6, $row->nombre,'LR', 0,'L', $fill);
+            $this->Cell($w[1], 6, $row->primerApellido,'LR', 0,'L', $fill);
+            $this->Cell($w[2], 6, $row->segundoApellido,'LR', 0,'R', $fill);
+            $this->Cell($w[3], 6, $row->codigo,'LR', 0,'R', $fill);
+            $this->Cell($w[4], 6, $row->sexo,'LR', 0,'R', $fill);
+            $this->Cell($w[5], 6, $row->fechaNacimiento,'LR', 0,'R', $fill);
+            $this->Cell($w[6], 6, $row->fechaCreacion,'LR', 0,'R', $fill);
+            $this->Ln();
+            $fill = !$fill;
+        }
+        $this->Cell(array_sum($w), 0, '','T');
     }
 }
 ?>

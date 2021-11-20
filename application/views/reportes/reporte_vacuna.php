@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="col-sm-2">
-                  <button class="btn btn-success btn-block" type="submit" name="filter" id="filter" style="margin-top: 30px">
+                  <button class="btn btn-success btn-block" type="button" name="filter" id="filter-button" style="margin-top: 30px">
                     <i class="fa fa-filter"></i> Buscar
                   </button>
                 </div>
@@ -67,26 +67,28 @@
               <table id="datatable_vacuna" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Paciente</th>
-                    <th>Vacuna</th>
-                    <th>Dosis</th>
-                    <th>Fecha de vacuna</th>
+                    <th>VACUNA</th>
+                    <th>DOSIS</th>
+                    <th>EDAD DE APLICACIÓN (MESES)</th>
+                    <th>PACIENTE</th>
+                    <th>FECHA REGISTRO VACUNA</th>
                   </tr>
                 </thead>
                 <tbody>
 
-                  <!-- <?php
-                  //foreach ($pacienteVacunas->result() as $row) {
+                  <?php
+                  foreach ($pacienteVacunas->result() as $row) {
                   ?>
                     <tr>
-                      <td><?php //echo $row->idPaciente; ?></th>
-                      <td><?php //echo $row->idDosis; ?></td>
-                      <td><?php //echo $row->idSiguienteDosis; ?></td>
-                      <td><?php //echo $row->fechaVacuna; ?></td>
+                      <td><?php echo $row->nombreVacuna; ?></td>
+                      <td><?php echo $row->dosis; ?></td>
+                      <td><?php echo $row->rangoMesInicial; ?></td>
+                      <td><?php echo $row->nombrePaciente; ?></th>
+                      <td><?php echo $row->fechaVacuna; ?></td>
                     </tr>
                   <?php
-                  //}
-                  ?> -->
+                  }
+                  ?>
 
                 </tbody>
               </table>
@@ -122,6 +124,7 @@
 <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script src="<?php echo base_url(); ?>/adminLte/plugins/datatables-searchbuilder/js/dataTables.searchBuilder.min.js"></script>
+<script src="<?php echo base_url(); ?>/adminLte/plugins/moment/moment.min.js"></script>
 
 <script type="text/javascript">
   /* load_data(); // first load
@@ -214,7 +217,7 @@
       $('#fini').keyup( function() { table.draw(); } );
       $('#ffin').keyup( function() { table.draw(); } ); */
 
-      $.fn.dataTable.ext.search.push(
+ /*  $.fn.dataTable.ext.search.push(
     function(settings, data, dataIndex) {
       var min_date = document.getElementById("min").value;
       var min = new Date(min_date);
@@ -238,12 +241,27 @@
       
       return false;
     }
-  );
+  ); */
+
+  $.fn.dataTable.ext.search.push(function( settings, data, dataIndex ) {                 
+        var dateStart = moment(from,"DD/MM/YYYY");
+        var dateEnd = moment(to,"DD/MM/YYYY");
+
+        var evalDate= moment(data[num],"DD/MM/YYYY");
+        console.log("dateStart +"+dateStart+" dateEnd "+dateEnd);
+
+        if (evalDate >= dateStart && evalDate <= dateEnd) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    });
 
   var table = $('#datatable_vacuna').DataTable();
 
   // Event listener to the two range filtering inputs to redraw on input
-  $('#min, #max').change(function() {
+  $('#filter-button').on("click", function() {
     table.draw();
   });
 </script>

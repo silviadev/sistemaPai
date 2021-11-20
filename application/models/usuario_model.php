@@ -45,16 +45,11 @@ class Usuario_model extends CI_Model {
         return $this->db->get();
 	}
 
-    public function listaTutores($tutor)
+    public function listaTutores()
     {
         $this->db->select('*');
         $this->db->from('usuario'); 
-        $this->db->where('estado', 1);
-        if ($tutor)
-        {
-            $this->db->where('tipoUsuario', "tutor");
-
-        }
+        $this->db->where('tipoUsuario', "tutor");
         return $this->db->get();
     }
 	

@@ -37,7 +37,7 @@
                       <i class="fas fa-check-circle"></i>
                     </div>
                     <a id="reporte-hoy" href="#" class="small-box-footer">
-                      Mas informacion <i class="fas fa-arrow-circle-right"></i>
+                      Más informacion <i class="fas fa-arrow-circle-right"></i>
                     </a>
                   </div>
                 </div>
@@ -55,7 +55,7 @@
                       <i class="fas fa-exclamation-triangle"></i>
                     </div>
                     <a id="reporte-pendiente" href="#" class="small-box-footer">
-                      Mas informacion <i class="fas fa-arrow-circle-right"></i>
+                    Más informacion <i class="fas fa-arrow-circle-right"></i>
                     </a>
                   </div>
                 </div>
@@ -71,7 +71,7 @@
                       <i class="fas fa-radiation-alt"></i>
                     </div>
                     <a id="reporte-vencido" href="#" class="small-box-footer">
-                      Mas informacion <i class="fas fa-arrow-circle-right"></i>
+                      Más informacion <i class="fas fa-arrow-circle-right"></i>
                     </a>
                   </div>
                 </div>
@@ -85,11 +85,11 @@
             <div class="card-body">
               <table id="example2"  class="table table-sm table-bordered" style="display:none">
                 <thead>
-                  <th>Nombre Paciente</th>
-                  <th>Código  Paciente</th>
-                  <th>Vacuna</th>
-                  <th>Dosis</th>
-                  <th class="fechaVacuna">Fecha de vacunación</th>
+                  <th>NOMBRE PACIENTE</th>
+                  <th>CODIGO PACIENTE</th>
+                  <th>VACUNA</th>
+                  <th>DOSIS</th>
+                  <th class="fechaVacuna">FECHA DE VACUNACION</th>
                 </thead>
                 <tbody id="tabla-vacunas2">
                   
@@ -97,11 +97,11 @@
               </table>
               <table id="example3"  class="table table-sm table-bordered" style="display:none">
                 <thead>
-                  <th>Nombre Paciente</th>
-                  <th>Código Paciente</th>
-                  <th>Vacuna</th>
-                  <th>Dosis</th>
-                  <th class="fechaVacuna">Fecha de vacunación</th>
+                  <th>NOMBRE PACIENTE</th>
+                  <th>CODIGO PACIENTE</th>
+                  <th>VACUNA</th>
+                  <th>DOSIS</th>
+                  <th class="fechaVacuna">FECHA DE VACUNACION</th>
                 </thead>
                 <tbody id="tabla-vacunas3">
                   
@@ -109,11 +109,11 @@
               </table>
               <table id="example4"  class="table table-sm table-bordered" style="display:none; margin: 0 auto;">
                 <thead>
-                  <th>Nombre Paciente</th>
-                  <th>Código Paciente</th>
-                  <th>Vacuna</th>
-                  <th>Dosis</th>
-                  <th class="fechaVacuna">Fecha de vacunación</th>
+                  <th>NOMBRE PACIENTE</th>
+                  <th>CODIGO PACIENTE</th>
+                  <th>VACUNA</th>
+                  <th>DOSIS</th>
+                  <th class="fechaVacuna">FECHA DE VACUNACION</th>
                 </thead>
                 <tbody id="tabla-vacunas4">
   

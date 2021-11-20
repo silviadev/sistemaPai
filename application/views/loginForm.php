@@ -1,7 +1,7 @@
 <?php
 switch ($msg) {
   case '1':
-    $mensaje  = "Error de ingreso, verifique sus datos o contactese con el administrador para tener acceso";
+    $mensaje  = "Error de ingreso, Por favor verifique los datos";
     break;
   case '2':
     $mensaje  = "Acceso no valido";

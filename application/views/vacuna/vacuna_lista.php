@@ -38,11 +38,11 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Nombre</th>
-                    <th>Enfermedad que previene</th>
-                    <th>Via</th>
-                    <th>Edad de aplicacion</th>
-                    <th>Dosis y cantidad</th>
+                    <th>NOMBRE VACUNA</th>
+                    <th>ENFERMEDAD QUE PREVIENE</th>
+                    <th>VIA</th>
+                    <th>EDAD DE APLICACION</th>
+                    <th>DOSIS Y CANTIDAD</th>
                     <th></th>
                     <th></th>
                   </tr>

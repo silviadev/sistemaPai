@@ -142,6 +142,7 @@ class Login extends CI_Controller
 
 
     $codigoReset = $_POST["codigoReset"];
+
     $this->form_validation->set_rules('codigoReset', 'Codigo Reset', 'callback_verificar_codigoReset');
     $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
@@ -159,11 +160,10 @@ class Login extends CI_Controller
 
   public function callback_verificar_codigoReset()
   {
-
     $idUsuario = $_POST['idUsuario']; 
-    $codigoReset = $_POST["codigoReset"]; 
+    $codigoReset = $_POST["codigoReset"];
     $user = $this->usuario_model->validarResetCodigo($codigoReset, $idUsuario);
-
+    var_dump($user);
     if ($user->num_rows() == 0) {
         $this->form_validation->set_message('verificar_codigoReset', 'El usuario con el {field} '.$codigoReset.' no existe');
         return false;

@@ -1,11 +1,11 @@
 <div class="content-wrapper">
   <div class="container">
     <div class="row justify-content-md-center">
-      <div class="col col-lg-10">
+      <div class="col">
 
         <div class="card card-primary mt-3">
           <div class="card-header">
-            <div class="card-title">Actualizar Vacuna a Paciente</div>
+            <div class="card-title">ACTUALIZAR VACUNA A PACIENTE</div>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
@@ -36,12 +36,12 @@
               <table class="table table-sm table-bordered">
                 <thead class="vacuna-cabecera">
                   <tr>
-                    <th>Edad de aplicación (Meses)</th>
-                    <th>Vacuna</th>
-                    <th>Fecha Vacuna Actual</th>
-                    <th>Seleccionar Vacuna Actual</th>
-                    <th>Fecha Siguiente Vacuna</th>
-                    <th>Seleccionar Siguiente Vacuna</th>
+                    <th>EDAD DE APLICACIÓN (MESES)</th>
+                    <th>VACUNA</th>
+                    <th>FECHA VACUNA</th>
+                    <th>SELECCIONAR VACUNA</th>
+                    <th>FECHA SIGUIENTE VACUNA</th>
+                    <th>SELECCIONAR SIGUIENTE VACUNA</th>
                   </tr>
                 </thead>
                 <tbody id="tabla-vacunas">

@@ -32,7 +32,7 @@
                       foreach ($pacienteTutor->result() as $row) {
                     ?>
                         <tr>
-                          <td class="col-sm-2"><b>Tutor:</b></td>
+                          <td class="col-sm-2"><b>TUTOR:</b></td>
                           <td><b><?php echo $row->nombreTutor." ".$row->primerApellidoTutor." ".$row->segundoApellidoTutor; ?></b></td>
                         </tr>
                         <tr>
@@ -53,10 +53,10 @@
                       foreach ($pacienteTutor->result() as $row) {
                     ?>
                         <tr>
-                          <td class="col-sm-2"><b>Paciente: </b></td>
+                          <td class="col-sm-2"><b>PACIENTE: </b></td>
                           <td><b><?php echo $row->nombrePaciente . "  " . $row->primerApellidoPaciente . "  " . $row->segundoApellidoPaciente; ?></b></td>
                           <tr>
-                          <td><b>Codigo: </b></td>
+                          <td><b>CÓDIGO: </b></td>
                           <td><b><?php echo $row->codigo ?></b></td>
                         </tr>
                         </tr>
@@ -73,9 +73,9 @@
                 <table class="table table-bordered">
                 <thead >
                   <tr class="table-info">
-                    <th>Edad de Aplicacion Meses</th>
-                    <th>Vacuna dosis</th>
-                    <th>Fecha vacuna</th>
+                    <th>EDAD DE APLICACION(MESES)</th>
+                    <th>VACUNA DOSIS</th>
+                    <th>FECHA VACUNA</th>
                   </tr>
                   <?php
                   if (isset($pacienteDosis)) {
@@ -100,9 +100,9 @@
                 <table class="table table-bordered">
                   <thead>
                     <tr class="table-info">
-                      <th>Edad de Aplicacion Meses</th>
-                      <th>Vacuna dosis</th>
-                      <th>Fecha Siguiente dosis</th>
+                      <th>EDAD DE APLICACION(MESES)</th>
+                      <th>VACUNA DOSIS</th>
+                      <th>FECHA SIGUIENTE DOSIS</th>
                     </tr>
                   </thead>
                   <?php
@@ -128,10 +128,10 @@
                 <table class="table table-bordered">
                   <thead>
                     <tr class="table-info">
-                      <th>Edad de Aplicacion Meses</th>
-                      <th>Vacuna dosis</th>
-                      <th>Fecha vacuna</th>
-                      <th>Fecha Siguiente dosis</th>
+                      <th>EDAD DE APLICACION(MESES)</th>
+                      <th>VACUNA DOSIS</th>
+                      <th>FECHA VACUNA</th>
+                      <th>FECHA SIGUIENTE DOSIS</th>
                     </tr>
                   </thead>
                   <?php

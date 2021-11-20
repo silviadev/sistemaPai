@@ -17,15 +17,21 @@ class Reportes extends CI_Controller
     $data['nombre']  = $this->session->userdata('nombre');
     $data['primerApellido']  = $this->session->userdata('primerApellido');
     $data['segundoApellido']  = $this->session->userdata('segundoApellido');
-    $vacunaPaciente = $this->pacientevacuna_model->listaVacunaPaciente();
-    $data['pacienteVacunas'] = $vacunaPaciente;
+    /* $vacunaPaciente = $this->pacientevacuna_model->listaVacunaPaciente();
+    $data['pacienteVacunas'] = $vacunaPaciente; */
+
+    $vacuna = $this->pacientevacuna_model->lista();
+    if (count($vacuna->result())) {
+      $data['pacienteVacunas'] = $vacuna;
+    }
+
     $this->load->view('inc_header');
     $this->load->view('inc_menu', $data);
     $this->load->view('reportes/reporte_vacuna', $data);
     $this->load->view('inc_footer');
   }
 
-  public function reportetutores()
+  public function reportepacientevacuna()
   {
     $data['tipoUsuario']  = $this->session->userdata('tipoUsuario');
     $data['nombre']  = $this->session->userdata('nombre');
@@ -96,6 +102,25 @@ class Reportes extends CI_Controller
     $this->load->view('inc_footer');
   }
 
+  public function verdetalletutor()
+  {
+    $data['tipoUsuario']  = $this->session->userdata('tipoUsuario');
+    $data['nombre']  = $this->session->userdata('nombre');
+    $data['primerApellido']  = $this->session->userdata('primerApellido');
+    $data['segundoApellido']  = $this->session->userdata('segundoApellido');
+    
+    $idUsuario = $_POST['idUsuario'];
+    $lista = $this->paciente_model->recuperarPacientesPorIdUsuario($idUsuario);
+    $data['idUsuario'] = $idUsuario;
+    $data['pacientes'] = $lista;
+    $data['usuario'] = $this->usuario_model->recuperarUsuario($idUsuario);
+
+    $this->load->view('inc_header');
+    $this->load->view('inc_menu', $data);
+    $this->load->view('reportes/reporte_detalle_tutor', $data);
+    $this->load->view('inc_footer');
+  }
+
   public function reporteHoy()
   {
     $today = date('Y-m-d');
@@ -131,17 +156,17 @@ class Reportes extends CI_Controller
     
     $this->pdf->SetFont('Arial','B', 12);
     foreach ($pacienteTutor->result() as $row) {
-      $nombre = "Tutor: ".$row->nombrePaciente . "  " . $row->primerApellidoPaciente . "  " . $row->segundoApellidoPaciente;
+      $nombre = "TUTOR: ".$row->nombrePaciente . "  " . $row->primerApellidoPaciente . "  " . $row->segundoApellidoPaciente;
       $this->pdf->Cell(25, 5, $nombre, 0, 1, 'L');
       $this->pdf->Cell(25, 5, "CI: ".$row->ci, 0, 1, 'L');
     }
 
     $this->pdf->Ln();
     foreach ($pacienteTutor->result() as $row) {
-      $nombrePaciente =  "Paciente: ".$row->nombreTutor." ".$row->primerApellidoTutor." ".$row->segundoApellidoTutor;
+      $nombrePaciente =  "PACIENTE: ".$row->nombreTutor." ".$row->primerApellidoTutor." ".$row->segundoApellidoTutor;
       
       $this->pdf->Cell(25, 5, $nombrePaciente, 0, 1,'L');
-      $this->pdf->Cell(25, 5, "Codigo: ".$row->codigo, 0, 1,'L');
+      $this->pdf->Cell(25, 5, "CÓDIGO: ".$row->codigo, 0, 1,'L');
     }
     
     $this->pdf->Line(10, 45, 210-10, 45);
@@ -176,6 +201,60 @@ class Reportes extends CI_Controller
     
     $this->pdf->AliasNbPages();
     $this->pdf->Output('reporte_paciente.pdf' , 'D' );
+  }
+
+  public function imprimir_tutor_paciente()
+  {
+    $GLOBALS["autor"] = $this->session->userdata('nombre')." ".$this->session->userdata('primerApellido')." ".$this->session->userdata('segundoApellido');
+    $idUsuario = $_POST['idUsuario'];
+
+    $pacienteTutor = $this->usuario_model->recuperarUsuario($idUsuario);
+    $pacientes = $this->paciente_model->recuperarPacientesPorIdUsuario($idUsuario);
+
+    $this->load->library('pdf');
+    $this->pdf = new Pdf();
+    $this->pdf->AddPage('P','Letter', 0);
+    $this->pdf->Ln();
+    
+    $this->pdf->SetFont('Arial','B', 12);
+    foreach ($pacienteTutor->result() as $row) {
+      $nombre = "TUTOR: ".$row->nombre . "  " . $row->primerApellido . "  " . $row->segundoApellido;
+      $this->pdf->Cell(25, 5, $nombre, 0, 1, 'L');
+      $this->pdf->Cell(25, 5, "CI: ".$row->ci, 0, 1, 'L');
+      $this->pdf->Cell(25, 5, "DIRECCION: ".$row->direccion, 0, 1, 'L');
+      $this->pdf->Cell(25, 5, "CORREO: ".$row->correo, 0, 1, 'L');
+    }
+
+    $this->pdf->Ln();
+    
+    $this->pdf->Line(10, 45, 210-10, 45);
+    $this->pdf->Line(10, 75, 210-10, 75);
+  
+    $this->pdf->Ln();
+    
+    $this->pdf->SetFont('Arial', '', 10);
+    $header1 = array('NOMBRE', 'APELLIDO ', 'APELLIDO', 'CODIGO', 'SEXO', 'FECHA DE', 'FECHA DE');
+    $header2 = array('', 'PATERNO', 'MATERNO', '', '', 'NACIMIENTO', 'REGISTRO');
+    $this->pdf->FancyTablePaciente($header1, $header2, $pacientes);
+    
+    $this->pdf->AliasNbPages();
+    $this->pdf->Output('reporte_tutor_pacientes.pdf' , 'D' );
+  }
+
+  public function listatutores() 
+  {
+    $lista = $this->usuario_model->listaTutores();
+    $data['usuario'] = $lista;
+
+    $data['tipoUsuario']  = $this->session->userdata('tipoUsuario');
+    $data['nombre']  = $this->session->userdata('nombre');
+    $data['primerApellido']  = $this->session->userdata('primerApellido');
+    $data['segundoApellido']  = $this->session->userdata('segundoApellido');
+
+    $this->load->view('inc_header');
+    $this->load->view('inc_menu', $data);
+    $this->load->view('reportes/reporte_tutores', $data);
+    $this->load->view('inc_footer');
   }
 
   public function buscarvacuna()

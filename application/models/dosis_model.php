@@ -152,7 +152,7 @@ class Dosis_model extends CI_Model
     LEFT JOIN pacientevacuna pv on (pv.idDosis = d.idDosis or pv.idSiguienteDosis=d.idDosis)
     INNER JOIN paciente p on p.idPaciente = pv.idPaciente
     WHERE pv.idDosis IS NULL
-    AND CAST(pv.fechaSiguienteDosis AS Datetime)  >= '$fecha'
+    AND CAST(pv.fechaSiguienteDosis AS Datetime)  >= '$fecha' AND CAST(pv.fechaVacuna AS Datetime)  <> '$fecha'
     and pv.estado = 1
     ORDER BY (p.codigo) ASC";
 

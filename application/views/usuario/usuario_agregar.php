@@ -14,22 +14,22 @@
 
               <div class="form-group">
                 <label for="nombre" class="form-label">Nombre *</label>
-                <input id="" type="text" name="nombre" class="form-control" placeholder="Escriba el Nombre" required>
+                <input id="" type="text" name="nombre" class="form-control" placeholder="Escriba el Nombre" pattern="[A-Za-z]+" required>
               </div>
 
               <div class="form-group">
                 <label>Primer Apellido *</label>
-                <input type="text" name="primerApellido" class="form-control" placeholder="Escriba el primer apellido" required>
+                <input type="text" name="primerApellido" class="form-control" placeholder="Escriba el primer apellido" pattern="[A-Za-z]+" required>
               </div>
 
               <div class="form-group">
                 <label>Segundo Apellido</label>
-                <input type="text" name="segundoApellido" class="form-control" placeholder="Escriba el segundo apellido">
+                <input type="text" name="segundoApellido" class="form-control" placeholder="Escriba el segundo apellido" pattern="[A-Za-z]+">
               </div>
 
               <div class="form-group">
                 <label>CI *</label>
-                <input type="text" name="ci" class="form-control" placeholder="Escriba su numero de carnet de identidad" required>
+                <input type="text" name="ci" class="form-control" placeholder="Escriba su numero de carnet de identidad" minlength="6" pattern="[a-zA-Z0-9-]+"  required>
               </div>
 
               <div class="form-group">

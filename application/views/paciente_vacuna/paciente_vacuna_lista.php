@@ -52,11 +52,11 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Paciente</th>
-                    <th>Vacuna</th>
-                    <th>Dosis</th>
-                    <th>Mes</th>
-                    <th>Fecha registro vacuna</th>
+                    <th>PACIENTE</th>
+                    <th>VACUNA</th>
+                    <th>DOSIS</th>
+                    <th>EDAD DE APLICACIÓN (MESES)</th>
+                    <th>FECHA REGISTRO VACUNA</th>
                     <th></th>
                   </tr>
                 </thead>

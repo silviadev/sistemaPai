@@ -38,15 +38,15 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Nombre</th>
-                    <th>primer Apellido</th>
-                    <th>segundo Apellido</th>
+                    <th>NOMBRE</th>
+                    <th>APELLIDO PATERNO</th>
+                    <th>APELLIDO MATERNO</th>
                     <th>CI</th>
-                    <th>Direccion</th>
-                    <th>Tipo de usuario</th>
-                    <th>Nombre Usuario</th>
-                    <th>Correo</th>
-                    <th>De alta</th>
+                    <th>DIRECCION</th>
+                    <th>TIPO DE USUARIO </th>
+                    <th>NOMBRE DE USUARIO</th>
+                    <th>CORREO</th>
+                    <th>USUARIO DE ALTA</th>
                     <th></th>
                     <th></th>
                   </tr>

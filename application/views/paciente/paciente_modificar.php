@@ -8,6 +8,14 @@ foreach ($infoPaciente->result() as $row) {
       <div class="row justify-content-md-center">
         <div class="col col-lg-6">
 
+        <div class="card card-primary mt-3">
+            <div class="card-header">
+              <h3 class="card-title">Actualizar Paciente</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+
+
           <?php
           echo form_open_multipart('paciente/modificarbd');
           ?>
@@ -31,18 +39,18 @@ foreach ($infoPaciente->result() as $row) {
 
             <div class="form-group">
               <label>Nombre *</label>
-              <input type="text" name="nombre" class="form-control" value="<?php echo $row->nombre; ?>" required>
+              <input type="text" name="nombre" class="form-control" value="<?php echo $row->nombre; ?>" pattern="[A-Za-z]+" required>
               <input type="hidden" name="idPaciente" class="form-control" value="<?php echo $row->idPaciente; ?>">
             </div>
 
             <div class="form-group">
               <label>Primer Apellido *</label>
-              <input type="text" name="primerApellido" class="form-control" value="<?php echo $row->primerApellido; ?>" required>
+              <input type="text" name="primerApellido" class="form-control" value="<?php echo $row->primerApellido; ?>" pattern="[A-Za-z]+" required>
             </div>
 
             <div class="form-group">
               <label>Segundo Apellido</label>
-              <input type="text" name="segundoApellido" class="form-control" value="<?php echo $row->segundoApellido; ?>">
+              <input type="text" name="segundoApellido" class="form-control" value="<?php echo $row->segundoApellido; ?>" pattern="[A-Za-z]+">
             </div>
 
             <div class="form-group">
@@ -107,6 +115,10 @@ foreach ($infoPaciente->result() as $row) {
             echo form_close();
             ?>
           </form>
+
+          </div>
+        </div>
+
         </div>
       </div>
     </div>

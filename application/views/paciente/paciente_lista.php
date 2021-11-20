@@ -39,13 +39,13 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Nombre</th>
-                    <th>Primer Apellido</th>
-                    <th>Segundo Apellido</th>
-                    <th>Fecha de nacimiento</th>
-                    <th>Edad</th>
-                    <th>Sexo</th>
-                    <th>Codigo</th>
+                    <th>NOMBRE</th>
+                    <th>APELLIDO PATERNO</th>
+                    <th>APELLIDO MATERNO</th>
+                    <th>FECHA DE NACIMIENTO</th>
+                    <th>EDAD</th>
+                    <th>SEXO</th>
+                    <th>CODIGO</th>
                     <!-- <th>Foto</th> -->
                     <th></th>
                     <th></th>

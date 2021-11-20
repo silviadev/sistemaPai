@@ -15,7 +15,7 @@ foreach ($infoUsuario->result() as $row) {
       <div class="row justify-content-md-center">
         <div class="col col-lg-6">
 
-          <div class="card mt-3">
+          <div class="card card-primary mt-3">
             <div class="card-header">
               <h3 class="card-title">Actualizar Usuario</h3>
             </div>
@@ -25,21 +25,21 @@ foreach ($infoUsuario->result() as $row) {
               <form method="post" id="add_create" name="add_create" action="<?= site_url('usuario/modificarbd') ?>">
                 <div class="form-group">
                   <label>Nombre *</label>
-                  <input type="text" name="nombre" class="form-control" value="<?php echo $row->nombre; ?>" required>
+                  <input type="text" name="nombre" class="form-control" value="<?php echo $row->nombre; ?>" pattern="[A-Za-z]+" required>
                   <input type="hidden" name="idUsuario" class="form-control" value="<?php echo $row->idUsuario; ?>">
                 </div>
                 <div class="form-group">
                   <label>Primer Apellido *</label>
-                  <input type="text" name="primerApellido" class="form-control" value="<?php echo $row->primerApellido; ?>" required>
+                  <input type="text" name="primerApellido" class="form-control" value="<?php echo $row->primerApellido; ?>" pattern="[A-Za-z]+" required>
                 </div>
                 <div class="form-group">
                   <label>Segundo Apellido</label>
-                  <input type="text" name="segundoApellido" class="form-control" value="<?php echo $row->segundoApellido; ?>">
+                  <input type="text" name="segundoApellido" class="form-control" value="<?php echo $row->segundoApellido; ?>" pattern="[A-Za-z]+">
                 </div>
 
                 <div class="form-group">
                   <label>CI *</label>
-                  <input type="text" name="ci" class="form-control" placeholder="Escriba su numero de carnet de identidad" value="<?php echo $row->ci; ?>" required>
+                  <input type="text" name="ci" class="form-control" placeholder="Escriba su numero de carnet de identidad" value="<?php echo $row->ci; ?>" minlength="6" pattern="[a-zA-Z0-9-]+" required>
                 </div>
 
                 <div class="form-group">

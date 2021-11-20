@@ -32,15 +32,15 @@
 
               <div class="form-group">
                 <label>Nombre *</label>
-                <input type="text" name="nombre" class="form-control" placeholder="Ingrese el Nombre" required>
+                <input type="text" name="nombre" class="form-control" placeholder="Ingrese el Nombre" pattern="[A-Za-z]+" required>
               </div>
               <div class="form-group">
                 <label>Primer Apellido *</label>
-                <input type="text" name="primerApellido" class="form-control" placeholder="Ingrese el primer apellido" required>
+                <input type="text" name="primerApellido" class="form-control" placeholder="Ingrese el primer apellido" pattern="[A-Za-z]+" required>
               </div>
               <div class="form-group">
                 <label>Segundo Apellido</label>
-                <input type="text" name="segundoApellido" class="form-control" placeholder="Ingrese el segundo apellido">
+                <input type="text" name="segundoApellido" class="form-control" placeholder="Ingrese el segundo apellido" pattern="[A-Za-z]+">
               </div>
 
               <div class="form-group">

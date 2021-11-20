@@ -30,13 +30,13 @@
                 <table id="paciente-table" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th>Nombre</th>
-                      <th>Primer Apellido</th>
-                      <th>Segundo Apellido</th>
-                      <th>Código</th>
-                      <th>Fecha de Nacimiento</th>
-                      <th>Sexo</th>
-                      <th>Tutor</th>
+                      <th>NOMBRE</th>
+                      <th>APELLIDO PATERNO</th>
+                      <th>APELLIDO MATERNO</th>
+                      <th>CODIGO</th>
+                      <th>FECHA DE NACIMIENTO</th>
+                      <th>SEXO</th>
+                      <th>TUTOR</th>
                       <th></th>
                     </tr>
                   </thead>
