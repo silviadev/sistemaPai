@@ -159,4 +159,12 @@ class Usuario_model extends CI_Model {
         $this->db->where('estado', 1);
         return $this->db->get();
     }
+
+    public function verificarNombreUsuario($nonmbreUsuario) {
+        $this->db->select('*');
+        $this->db->from('usuario');
+        $this->db->where('nombreUsuario', $nonmbreUsuario);
+        $this->db->where('estado', 1);
+        return $this->db->get();
+    }
 }

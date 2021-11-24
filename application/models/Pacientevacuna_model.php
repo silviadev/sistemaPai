@@ -17,7 +17,17 @@ class PacienteVacuna_model extends CI_Model
   public function lista()
   {
     $query = $this->db->query("Select p.nombre as nombrePaciente, 
-    obtener_dosis(pv.idDosis) as dosis, obtener_vacuna(pv.idDosis) as nombreVacuna, pv.idPacienteVacuna, d.rangoMesInicial, pv.fechaVacuna
+      (SELECT concat(cd.dosis, 'via', v.nombre) as Dosis
+		  FROM dosis d 
+        INNER JOIN via v ON v.idVia = d.idVia
+        INNER JOIN categoriadosis cd ON cd.idCategoriadosis = d.idCategoriadosis
+        WHERE d.idDosis = pv.idDosis
+        ) as dosis,
+        (SELECT v.nombre as vacuna
+        FROM vacuna v
+            INNER JOIN dosis d on d.idVacuna = v.idVacuna
+            WHERE d.idDosis = pv.idDosis
+            ) as nombreVacuna, pv.idPacienteVacuna, d.rangoMesInicial, pv.fechaVacuna
     From pacientevacuna pv
     inner join paciente p on p.idPaciente=pv.idPaciente
     inner join dosis d on d.idDosis = pv.idDosis

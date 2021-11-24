@@ -26,13 +26,13 @@
                 </div>
 
                 <div class="form-group">
-                  <label>Nueva contraseña *</label>
+                  <label>Nueva Contraseña *</label>
                   <input type="password" name="nuevaContrasena" class="form-control" required>
                   <?php echo form_error('nuevaContrasena', '<div class="error">', '</div>')?>
                 </div>
 
                 <div class="form-group">
-                  <label>Confirmar contraseña *</label>
+                  <label>Confirmar Contraseña *</label>
                   <input type="password" name="confirmarContrasena" class="form-control" required>
                   <?php echo form_error('confirmarContrasena', '<div class="error">', '</div>')?>
                 </div>

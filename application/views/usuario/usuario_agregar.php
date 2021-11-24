@@ -14,12 +14,12 @@
 
               <div class="form-group">
                 <label for="nombre" class="form-label">Nombre *</label>
-                <input id="" type="text" name="nombre" class="form-control" placeholder="Escriba el Nombre" pattern="[A-Za-z]+" required>
+                <input id="nombre" type="text" name="nombre" class="form-control" placeholder="Escriba el Nombre" pattern="[A-Za-z]+" required>
               </div>
 
               <div class="form-group">
                 <label>Primer Apellido *</label>
-                <input type="text" name="primerApellido" class="form-control" placeholder="Escriba el primer apellido" pattern="[A-Za-z]+" required>
+                <input type="text" id="apellidoPaterno" name="primerApellido" class="form-control" placeholder="Escriba el primer apellido" pattern="[A-Za-z]+" required>
               </div>
 
               <div class="form-group">
@@ -54,6 +54,11 @@
                 <input type="checkbox" name="habilitado" class="form-check-input" id="habilitado">
                 <label class="form-check-label" for="habilitado">Dar de Alta</label>
               </div>
+              <div class="form-group">
+                <label>Nombre Usuario *</label>
+                <input type="text" id="nombreUsuario" name="nombreUsuario" class="form-control" placeholder="NombreUsuario" required>
+                <?php echo validation_errors('<div class="error">', '</div>'); ?>
+              </div>
               <button type="submit" class="btn btn-primary">Crear Usuario</button>
             </form>
 
@@ -64,3 +69,23 @@
     </div>
   </div>
 </div>
+
+ <!-- jQuery -->
+ <script src="<?php echo base_url(); ?>/adminLte/plugins/jquery/jquery.min.js"></script>
+<script>
+  var nombre = "";
+  nombre = $('#nombre').val();
+  $('#nombre').on('input',function(e){
+    var value = $('#nombre').val().substr(0, 1);
+    var nombre = value + "" + $("#apellidoPaterno").val();
+    $("#nombreUsuario").val(nombre.toLowerCase());
+  });
+
+  $("#apellidoPaterno").on("input", function(e) {
+    var value = $('#nombre').val().substr(0, 1);
+    var apellidoPaterno = value + "" + $("#apellidoPaterno").val();
+    $("#nombreUsuario").val(apellidoPaterno.toLowerCase());
+  });
+  var nombreUsuario = nombre.substr(0, 1) + "" + apellidoPaterno;
+  $("#nombreUsuario").val(nombreUsuario);
+</script>

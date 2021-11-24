@@ -174,7 +174,7 @@ class Reportes extends CI_Controller
 
     $this->pdf->Ln(10);
     $this->pdf->SetFont('Arial', 'B', 14);
-    $this->pdf->Cell(0, 5, 'REPORTE VACUNAS APLICADAS', 0, 1, 'C');
+    $this->pdf->Cell(0, 5, 'VACUNAS APLICADAS', 0, 1, 'C');
     $this->pdf->Ln();
     
     $this->pdf->SetFont('Arial', '', 11);
@@ -200,7 +200,7 @@ class Reportes extends CI_Controller
     $this->pdf->FancyTable($header, $pacienteDosis, "VACUNA_PENDIENTE");
     
     $this->pdf->AliasNbPages();
-    $this->pdf->Output('reporte_paciente.pdf' , 'D' );
+    $this->pdf->Output('reporte_paciente_vacuna.pdf' , 'D' );
   }
 
   public function imprimir_tutor_paciente()

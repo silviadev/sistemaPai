@@ -51,9 +51,32 @@ class Usuario extends CI_Controller
     }
 
     $data['idAuthor'] = $this->session->userdata('idUsuario');
+    $data['nombreUsuario'] = $_POST['nombreUsuario'];//substr($data['nombre'], 0, 1).$data['primerApellido'];
 
-    $this->usuario_model->agregarUsuario($data);
-    redirect('usuario/index', 'refresh');
+    //$this->load->library('form_validation');
+    $this->form_validation->set_rules('nombreUsuario', 'Nombre Usuario', 'callback_username_check');
+    $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+
+    if ($this->form_validation->run() == false) {
+      $this->agregar();
+    } else {
+      $this->usuario_model->agregarUsuario($data);
+      redirect('usuario/index', 'refresh');
+    }
+  }
+
+  public function username_check($nombreUsuario)
+  {
+    $nombreUsuarios = $this->usuario_model->verificarNombreUsuario("wveizaga");
+    if ($nombreUsuarios->num_rows() > 0) {
+      $this->form_validation->set_message('username_check', 'El {field} ya existe');
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+   
   }
 
   public function modificar()
@@ -161,7 +184,7 @@ class Usuario extends CI_Controller
     $idUsuario = $_POST['idUsuario'];
     $data['direccion'] = $_POST['direccion'];
     $data['correo'] = $_POST['correo'];
-    $data['nombreUsuario'] = $_POST['nombreUsuario'];
+    //$data['nombreUsuario'] = $_POST['nombreUsuario'];
 
     $this->usuario_model->modificarUsuario($idUsuario, $data);
     if ($_POST["tipoUsuario"] == "admin") {

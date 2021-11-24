@@ -30,10 +30,10 @@ foreach ($infoUsuario->result() as $row) {
                   <input type="email" name="correo" class="form-control" value="<?php echo $row->correo; ?>">
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label>Nombre usuario</label>
                   <input type="text" name="nombreUsuario" class="form-control" value="<?php echo $row->nombreUsuario; ?>">
-                </div>
+                </div> -->
 
                 <div class="form-group">
                   <button type="submit" class="btn btn-primary">Guardar</button>
