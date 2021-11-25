@@ -21,7 +21,7 @@
 
           <div class="card">
             <div class="row justify-content-md-center m-3">
-              <h3 id="docTitle" ><b>REPORTE DE PACIENTES Y SUS VACUNAS</b></h3>
+              <h3 id="docTitle" ><b>REPORTE DE VACUNAS</b></h3>
             </div>
             <div class="card-body">
               <div class="row">

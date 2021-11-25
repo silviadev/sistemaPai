@@ -112,17 +112,17 @@
           Reportes
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url() ?>reportes/reportevacuna" class="nav-link">
+          <a href="<?php echo base_url() ?>reportes/reportepacientevacuna" class="nav-link">
             <i class="fas fa-clipboard-list nav-icon"></i>
             <p>Reporte de vacunas</p>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a href="<?php echo base_url() ?>reportes/reportepacientevacuna" class="nav-link">
             <i class="fas fa-clipboard-list nav-icon"></i>
             <p>Pacientes con vacunas</p>
           </a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a href="<?php echo base_url() ?>reportes/reportepacientes" class="nav-link">
             <i class="fas fa-clipboard-list nav-icon"></i>
