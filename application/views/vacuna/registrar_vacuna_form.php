@@ -17,7 +17,7 @@
                 <div class="col-sm">
                   <div class="form-group">
                     <label for="nombre-vacuna" class="form-label">Nombre Vacuna*</label>
-                    <input id="nombre-vacuna" type="text" name="nombre" class="form-control" placeholder="Escriba el Nombre vacuna" pattern="[A-Za-z]+" required>
+                    <input id="nombre-vacuna" type="text" name="nombre" class="form-control" placeholder="Escriba el Nombre vacuna" required>
                   </div>
                 </div>
 
