@@ -48,11 +48,12 @@
 
                 </tbody>
               </table>
+              <div id="jhamil"></div>
             </div>
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Registrar</button>
+                  <button type="submit" class="btn btn-primary" onclick="return confirm('Usted quiere registrar la vacuna al paciente?');">Registrar</button>
                 </div>
               </div>
             </div>
@@ -113,7 +114,6 @@
                 checkedSiguienteDosis = 'checked="checked"';
                 disabledSiguienteDosis = 'disabled';
                 fechaSiguienteDosisValue = (valor.fechaSiguienteDosis) ? 'min="2021-01-01" max="2021-12-31" value="' + valor.fechaSiguienteDosis + '"' : "";
-                console.log("fechasiguienteDosis: ", valor.fechaSiguienteDosis);
               }
 
               tablaDosis.append(

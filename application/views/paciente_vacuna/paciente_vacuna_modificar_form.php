@@ -52,7 +52,7 @@
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                  <button type="submit" class="btn btn-primary" onclick="return confirm('Usted quiere actualizar los datos de vacuna a paciente?');">Guardar cambios</button>
                 </div>
               </div>
             </div>
@@ -90,7 +90,6 @@
           type: 'POST',
           dataType: 'json',
           success: function(r) {
-            console.log("jasdkfjaklsd", r);
             tablaDosis.find('tr').remove();
 
             $(r).each(function(indice, valor) {

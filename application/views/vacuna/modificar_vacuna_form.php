@@ -117,7 +117,7 @@ foreach ($infoVacuna as $row) {
                 <button type="button" class="btn btn-warning btn-sm adicional">Agregar Dosis</button>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            <button type="submit" class="btn btn-primary" onclick="return confirm('Usted esta seguro de actualizar las vacuna y sus dosis?');">Guardar cambios</button>
           </form>
           <!-- Template para crear dosis -->
           <div class="dosis-form-template">
@@ -197,13 +197,14 @@ foreach ($infoVacuna as $row) {
     });
 
     $(document).on("click", ".eliminar", function() {
-
-      var parent = $(this).parents().get(1);
-      var idDosisEliminado = $(parent).children("input[type='hidden']");
-      if (idDosisEliminado.val() !== "") {
-        $('<input type="hidden" name="idDosisEliminar[]" class="form-control">').val(idDosisEliminado.val()).appendTo("#data-dosis");
+      if (confirm('Usted esta seguro de eliminar la dosis?')) {
+        var parent = $(this).parents().get(1);
+        var idDosisEliminado = $(parent).children("input[type='hidden']");
+        if (idDosisEliminado.val() !== "") {
+          $('<input type="hidden" name="idDosisEliminar[]" class="form-control">').val(idDosisEliminado.val()).appendTo("#data-dosis");
+        }
+        $(parent).remove();
       }
-      $(parent).remove();
     });
   });
 </script>

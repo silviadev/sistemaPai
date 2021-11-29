@@ -17,7 +17,7 @@
                 <div class="col-sm">
                   <div class="form-group">
                     <label for="nombre-vacuna" class="form-label">Nombre Vacuna*</label>
-                    <input id="nombre-vacuna" type="text" name="nombre" class="form-control" placeholder="Escriba el Nombre vacuna" pattern="[A-Za-z]+" required>
+                    <input id="nombre-vacuna" type="text" name="nombre" class="form-control" placeholder="Escriba el Nombre vacuna" required>
                   </div>
                 </div>
 
@@ -37,7 +37,7 @@
               <button type="button" class="btn btn-warning btn-sm adicional">Insertar Dosis</button>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Registrar</button>
+          <button type="submit" class="btn btn-primary" onclick="return confirm('Usted quiere registrar la vacuna?');">Registrar</button>
         </form>
         <!-- Template para crear dosis -->
         <div class="dosis-form-template">

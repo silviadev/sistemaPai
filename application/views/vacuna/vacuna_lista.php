@@ -30,7 +30,7 @@
               echo form_open_multipart('vacuna/agregar');
               ?>
               <div class="form-group">
-                <button type="submit" class="btn btn-secondary btn-xs">Agregar Vacuna</button>
+                <button type="submit" class="btn btn-primary btn-xs">Agregar Vacuna</button>
               </div>
               <?php
               echo form_close();
@@ -95,7 +95,7 @@
                         echo form_open_multipart('vacuna/eliminarbd');
                         ?>
                         <input type="hidden" name="idVacuna" value="<?php echo $row['idVacuna']; ?>">
-                        <button type="submit" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>
+                        <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Usted esta seguro de eliminar la vacuna?');"><i class="fas fa-trash-alt"></i></button>
                         <?php
                         foreach ($row["dosis"] as $rw) {
                           echo '<input type="hidden" name="idDosis[]" value="'.$rw->idDosis.'">';

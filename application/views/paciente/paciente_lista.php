@@ -31,7 +31,7 @@
               echo form_open_multipart('paciente/agregar');
               ?>
               <div class="form-group">
-                <button type="submit" class="btn btn-secondary btn-xs">Agregar Paciente</button>
+                <button type="submit" class="btn btn-primary btn-xs">Agregar Paciente</button>
               </div>
               <?php
               echo form_close();
@@ -64,20 +64,6 @@
                       <td><?php echo $row->edad; ?></td>
                       <td><?php echo $row->sexo; ?></td>
                       <td><?php echo $row->codigo; ?></td>
-                      <!-- <td> -->
-                        <?php
-                        /* $foto = $row->foto;
-                        if ($foto == "") {
-                        ?>
-                          <img width="100" src="<?php echo base_url(); ?>/uploads/paciente/user_default.png">
-                        <?php
-                        } else {
-                        ?>
-                          <img width="100" src="<?php echo base_url(); ?>/uploads/paciente/<?php echo $foto; ?>">
-                        <?php
-                        } */
-                        ?>
-                      <!-- </td> -->
                       <td>
                         <?php
                         echo form_open_multipart('paciente/modificar');
@@ -95,7 +81,7 @@
                         ?>
                         <input type="hidden" name="idPaciente" value="<?php echo $row->idPaciente; ?>">
 
-                        <button type="submit" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>
+                        <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Usted esta seguro de eliminar al Paciente?');"><i class="fas fa-trash-alt"></i></button>
                         <?php
                         echo form_close();
                         ?>

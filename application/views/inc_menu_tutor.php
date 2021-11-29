@@ -6,7 +6,7 @@
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="<?php echo base_url() ?>usuario" class="nav-link">Inicio</a>
+      <a href="<?php echo base_url() ?>tutor" class="nav-link">Inicio</a>
     </li>
   </ul>
 
@@ -66,6 +66,24 @@
 
         <li>
         <div class="brand-link"></div>
+        </li>
+        <li class="nav-header">
+          Ni;os
+        </li>
+        <li class="nav-item">
+          <a href="<?php echo base_url() ?>tutor" class="nav-link">
+            <i class="fas fa-clipboard-list nav-icon"></i>
+            <p>Lista de ni;os registrados</p>
+          </a>
+        </li>
+        <li class="nav-header">
+          Reportes
+        </li>
+        <li class="nav-item">
+          <a href="<?php echo base_url() ?>reportes/reportepacientes" class="nav-link">
+            <i class="fas fa-clipboard-list nav-icon"></i>
+            <p>Pacientes</p>
+          </a>
         </li>
       </ul>
     </nav>

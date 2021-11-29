@@ -69,7 +69,7 @@ foreach ($infoUsuario->result() as $row) {
                 </div>
 
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Guardar</button>
+                  <button type="submit" class="btn btn-primary" onclick="return confirm('Usted quiere actualizar los datos de usuario?');">Guardar</button>
                   <!--               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-sm">
               Guardar
               </button> -->

@@ -32,7 +32,7 @@
                 echo form_open_multipart('pacientevacuna/registrarPacienteFormulario');
                 ?>
                 <div class="form-group pr-2">
-                  <button type="submit" class="btn btn-secondary btn-xs">Registrar vacuna a paciente</button>
+                  <button type="submit" class="btn btn-primary btn-xs">Registrar vacuna a paciente</button>
                 </div>
                 <?php
                 echo form_close();
@@ -78,7 +78,7 @@
                         echo form_open_multipart('pacientevacuna/eliminarpacientevacunabd');
                         ?>
                         <input type="hidden" name="idPacienteVacuna" value="<?php echo $row->idPacienteVacuna; ?>">
-                        <button type="submit" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>
+                        <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Usted esta seguro de eliminar la vacuna registrada?');"><i class="fas fa-trash-alt"></i></button>
                         <?php
                         echo form_close();
                         ?>

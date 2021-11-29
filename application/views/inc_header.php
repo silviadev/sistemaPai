@@ -52,6 +52,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
       background-color: #0aa5a7 !important;
     }
 
+    .error{
+      color: red;
+    }
+
   </style>
 
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminLte/plugins/jquery-ui/jquery-ui.min.css">

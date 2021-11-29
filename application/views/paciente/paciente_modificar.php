@@ -82,34 +82,9 @@ foreach ($infoPaciente->result() as $row) {
             </div>
 
             <div class="form-group">
-              <?php
-              //$foto = $row->foto;
-              //if ($foto == "") {
-              ?>
-              <!-- <img width="100" src="<?php //echo base_url(); 
-                                          ?>/uploads/paciente/user_default.png"> -->
-              <?php
-              //} else {
-              ?>
-              <!-- <img width="100" src="<?php //echo base_url(); 
-                                          ?>/uploads/paciente/<?php //echo $foto; 
-                                                                                      ?>"> -->
-              <?php
-              //}
-              ?>
             </div>
-
-            <!-- <div class="form-group">
-              <div>
-                <label>Subir Foto</label>
-                <input type="hidden" name="idPaciente" value="<?php //echo $row->idPaciente; 
-                                                              ?>" />
-                <input type="file" name="userfile" >
-              </div>
-            </div> -->
-
             <div class="form-group">
-              <button type="submit" class="btn btn-primary">Guardar</button>
+              <button type="submit" class="btn btn-primary" onclick="return confirm('Usted esta seguro de actualizar los datos del Paciente?');">Guardar</button>
             </div>
             <?php
             echo form_close();

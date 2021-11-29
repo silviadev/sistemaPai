@@ -51,9 +51,8 @@ class Usuario extends CI_Controller
     }
 
     $data['idAuthor'] = $this->session->userdata('idUsuario');
-    $data['nombreUsuario'] = $_POST['nombreUsuario'];//substr($data['nombre'], 0, 1).$data['primerApellido'];
+    $data['nombreUsuario'] = $_POST['nombreUsuario'];
 
-    //$this->load->library('form_validation');
     $this->form_validation->set_rules('nombreUsuario', 'Nombre Usuario', 'callback_username_check');
     $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
@@ -67,7 +66,7 @@ class Usuario extends CI_Controller
 
   public function username_check($nombreUsuario)
   {
-    $nombreUsuarios = $this->usuario_model->verificarNombreUsuario("wveizaga");
+    $nombreUsuarios = $this->usuario_model->verificarNombreUsuario($nombreUsuario);
     if ($nombreUsuarios->num_rows() > 0) {
       $this->form_validation->set_message('username_check', 'El {field} ya existe');
       return false;

@@ -71,7 +71,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary">Crear Paciente</button>
+                <button type="submit" class="btn btn-primary"  onclick="return confirm('Usted quiere crear un nuevo Paciente?');">Crear Paciente</button>
 
               </div>
             </form>

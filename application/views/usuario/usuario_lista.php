@@ -30,7 +30,7 @@
               echo form_open_multipart('usuario/agregar');
               ?>
               <div class="form-group">
-                <button type="submit" class="btn btn-secondary btn-xs">Agregar Usuario</button>
+                <button type="submit" class="btn btn-primary btn-xs">Agregar Usuario</button>
               </div>
               <?php
               echo form_close();
@@ -55,6 +55,7 @@
 
                   <?php
                   foreach ($usuario->result() as $row) {
+                    $deshabilitar = ($row->nombreUsuario=="admin")? "disabled" : "";
                   ?>
                     <tr>
                       <td><?php echo $row->nombre; ?></th>
@@ -72,7 +73,7 @@
                         ?>
                         <input type="hidden" name="idUsuario" value="<?php echo $row->idUsuario; ?>">
 
-                        <button type="submit" class="btn btn-primary btn-xs"><i class="far fa-edit"></i></button>
+                        <button type="submit" class="btn btn-primary btn-xs" <?php echo $deshabilitar ?>><i class="far fa-edit"></i></button>
                         <?php
                         echo form_close();
                         ?>
@@ -83,7 +84,7 @@
                         ?>
                         <input type="hidden" name="idUsuario" value="<?php echo $row->idUsuario; ?>">
                         
-                        <button type="submit" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button>
+                        <button type="submit" class="btn btn-danger btn-xs" <?php echo $deshabilitar ?> ><i class="fas fa-trash-alt"></i></button>
                         <?php
                         echo form_close();
                         ?>

@@ -86,6 +86,4 @@
     var apellidoPaterno = value + "" + $("#apellidoPaterno").val();
     $("#nombreUsuario").val(apellidoPaterno.toLowerCase());
   });
-  var nombreUsuario = nombre.substr(0, 1) + "" + apellidoPaterno;
-  $("#nombreUsuario").val(nombreUsuario);
 </script>

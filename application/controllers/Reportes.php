@@ -76,7 +76,12 @@ class Reportes extends CI_Controller
     $data['paciente'] = $lista;
 
     $this->load->view('inc_header');
-    $this->load->view('inc_menu', $data);
+    $this->load->view('inc_header');
+    if ($this->session->userdata('tipoUsuario') == "tutor") {
+      $this->load->view('inc_menu_tutor', $data);
+    }else {
+      $this->load->view('inc_menu', $data);
+    }
     $this->load->view('reportes/reporte_paciente', $data);
     $this->load->view('inc_footer');
   }
@@ -97,7 +102,12 @@ class Reportes extends CI_Controller
     $data['pacienteTutor'] = $tutor;
 
     $this->load->view('inc_header');
-    $this->load->view('inc_menu', $data);
+    if ($this->session->userdata('tipoUsuario') == "tutor") {
+      $this->load->view('inc_menu_tutor', $data);
+    }else {
+
+      $this->load->view('inc_menu', $data);
+    }
     $this->load->view('reportes/reporte_detalle_paciente', $data);
     $this->load->view('inc_footer');
   }
