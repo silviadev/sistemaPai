@@ -62,6 +62,7 @@ foreach ($infoUsuario->result() as $row) {
                 </div>
 
                 <div class="form-group form-check">
+                  <input type="hidden" name="habilitado_old" value="<?php echo $row->habilitado?>">
                   <input type="checkbox" name="habilitado" class="form-check-input" id="habilitado" <?php if (isset($row->habilitado) && $row->habilitado == 1) {
                                                                                                       echo 'checked';
                                                                                                     }  ?>>

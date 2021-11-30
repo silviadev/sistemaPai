@@ -87,8 +87,6 @@ class Usuario_model extends CI_Model {
     }
 
     public function agregarUsuario($data) {
-        $nombreUsuario = substr($data['nombre'], 0, 1).$data['primerApellido'];
-        $data['nombreUsuario'] = strtolower($nombreUsuario);
         $data['contrasena'] = md5(strtolower($data['ci']));
         $data['fechaCreacion'] =  $this->fechaCreacion;
         $data['estado'] = $this->estado;

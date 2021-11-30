@@ -16,7 +16,7 @@ class Vacunas extends REST_Controller
         header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     }
 
-    public function index_get($id = 0)
+    public function index_get()
     {
    
         $lista = $this->vacuna_model->lista();

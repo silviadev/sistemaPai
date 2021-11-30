@@ -3,6 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Usuario extends CI_Controller
 {
+ 
+  public function __construct()
+  {
+    parent::__construct();
+    $this->load->config('email');
+    $this->load->library('email');
+  }
 
   public function index()
   {
@@ -59,8 +66,27 @@ class Usuario extends CI_Controller
     if ($this->form_validation->run() == false) {
       $this->agregar();
     } else {
+      if (isset($_POST['habilitado']) && $_POST['correo']) {
+        $mensaje = "<div>Datos para acceder al sistema PAI</div><div>Nombre usuario: ".$data['nombreUsuario']."</div><div>Contrasena: ".$data['ci']."</div><div>Saludos sistemaPAI</div>";
+        $this->enviarCorreo('silvia.veizaga.lopez@gmail.com', $_POST['correo'], "Acceso al sistema PAI", $mensaje);
+      }
       $this->usuario_model->agregarUsuario($data);
       redirect('usuario/index', 'refresh');
+    }
+  }
+
+  public function enviarCorreo($from, $to, $subject, $mensaje)
+  {
+    $this->email->set_newline("\r\n");
+    $this->email->from($from);
+    $this->email->to($to);
+    $this->email->subject($subject);
+    $this->email->message($mensaje);
+
+    if ($this->email->send()) {
+        echo '';
+    } else {
+        show_error($this->email->print_debugger());
     }
   }
 
@@ -110,6 +136,13 @@ class Usuario extends CI_Controller
       $data['habilitado'] = true;
     } else {
       $data['habilitado'] = false;
+    }
+
+    if (isset($_POST['habilitado']) && $_POST['correo'] && !isset($_POST['habilitado_old'])) {
+      
+      $mensaje = "<div>Datos para acceder al sistema PAI</div><div>Nombre usuario: ".$data['nombreUsuario']."</div><div>Contrasena: ".$data['ci']."</div><div>Saludos sistemaPAI</div>";
+      $this->enviarCorreo('silvia.veizaga.lopez@gmail.com', $_POST['correo'], "Acceso al sistema PAI", $mensaje);
+
     }
 
     $data['idAuthor'] = $this->session->userdata('idUsuario');
